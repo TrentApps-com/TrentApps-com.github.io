@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trenton Scott - Full-stack engineer focused on shipping AI products fast. Building production AI systems, voice interfaces, and governance frameworks.">
+    <meta name="keywords" content="software engineer, AI, machine learning, full-stack, Python, TypeScript, Flask, React, Claude, Anthropic">
+    <meta name="author" content="Trenton Scott">
+
+    <title>Trenton Scott | Full-Stack Engineer & AI Builder</title>
+
+    <!-- Pico CSS - Minimal, elegant, classless -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+    <!-- Custom styles -->
+    <style>
+        :root {
+            --pico-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            --accent-color: #c084fc;
+            --accent-hover: #a855f7;
+        }
+
+        [data-theme="dark"] {
+            --pico-primary: var(--accent-color);
+            --pico-primary-hover: var(--accent-hover);
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(15, 15, 35, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .hero .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: #000;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        section .section-subtitle {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-item p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+        }
+
+        .project-card .badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-card .badge.production {
+            background: #22c55e;
+        }
+
+        .project-card .badge.enterprise {
+            background: #3b82f6;
+        }
+
+        .project-card .badge.ai {
+            background: #f59e0b;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .project-card p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.8);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .skills-section {
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h4 {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skill-category li {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            padding: 0.25rem 0;
+        }
+
+        .philosophy {
+            background: linear-gradient(135deg, rgba(192, 132, 252, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .philosophy h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .philosophy blockquote {
+            border-left: 3px solid var(--accent-color);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .cert-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cert-item .cert-icon {
+            font-size: 1.5rem;
+        }
+
+        .cert-item .cert-info h4 {
+            font-size: 0.9rem;
+            margin: 0 0 0.25rem;
+            color: #fff;
+        }
+
+        .cert-item .cert-info span {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 4rem 0 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">TrentApps</a>
+            <ul>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Trenton Scott</h1>
+            <p class="tagline">
+                Full-stack engineer with a <span class="highlight">bias toward shipping</span>.
+                Building production AI systems, voice interfaces, and governance frameworks
+                that translate cutting-edge capabilities into intuitive user experiences.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://github.com/TrentApps-com" class="btn-primary">View GitHub</a>
+                <a href="https://www.linkedin.com/in/tdscott2/" class="btn-secondary">LinkedIn</a>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-item">
+                <h3>15+</h3>
+                <p>Active Projects</p>
+            </div>
+            <div class="stat-item">
+                <h3>8+</h3>
+                <p>Years Experience</p>
+            </div>
+            <div class="stat-item">
+                <h3>190+</h3>
+                <p>Governance Rules Built</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Production Systems Running</p>
+            </div>
+        </section>
+
+        <div class="philosophy">
+            <h3>Building Philosophy</h3>
+            <blockquote>
+                "Ship fast, learn faster. Every prototype is an experiment, every failure is data.
+                I believe in validating with real users before over-investing, holding strong opinions
+                loosely, and building systems that are reliable, interpretable, and beneficial."
+            </blockquote>
+            <p style="color: rgba(255,255,255,0.7);">
+                From zero-to-one startup builds to enterprise governance frameworks, I focus on
+                <strong>rapid prototyping</strong>, <strong>user-centric design</strong>, and
+                <strong>responsible AI development</strong>.
+            </p>
+        </div>
+
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <p class="section-subtitle">Production systems, AI experiments, and open-source tools</p>
+
+            <div class="projects-grid">
+                <article class="project-card">
+                    <span class="badge production">Production</span>
+                    <h3>TrentApps Voice</h3>
+                    <p>
+                        Multi-user SaaS platform for AI chatbot widgets with voice and text capabilities.
+                        Features page integration (AI reading/writing DOM content), RAG document search,
+                        audio-reactive visualizations, and streaming TTS.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">OpenAI</span>
+                        <span class="tech-tag">ElevenLabs</span>
+                        <span class="tech-tag">WebGL</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="badge enterprise">Enterprise</span>
+                    <h3>Agent Supervisor (ManagerProtocol)</h3>
+                    <p>
+                        Enterprise-grade AI governance framework with 190+ business rules, risk scoring,
+                        human-in-the-loop approval workflows, and comprehensive audit logging.
+                        Built as an MCP server for Claude agents.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MCP Protocol</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">GitHub API</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="badge ai">AI/ML</span>
+                    <h3>YourStory</h3>
+                    <p>
+                        Immersive AI-powered narrative creation with GPT-4o story generation,
+                        ElevenLabs voice narration, AI-generated sound effects, and dynamic
+                        SVG illustrations that adapt to story mood.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">OpenAI</span>
+                        <span class="tech-tag">ElevenLabs</span>
+                        <span class="tech-tag">SVG</span>
+                        <span class="tech-tag">Web Audio</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="badge production">Production</span>
+                    <h3>FormFlow (Scribe)</h3>
+                    <p>
+                        Real-time AI transcription and documentation platform. Local Whisper
+                        for privacy, WebSocket streaming, intelligent template system for
+                        IT Support, Medical Visits, and Project Discovery.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Whisper</span>
+                        <span class="tech-tag">Socket.IO</span>
+                        <span class="tech-tag">OpenAI</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="badge ai">AI/ML</span>
+                    <h3>ERF - Earth Reconstruction</h3>
+                    <p>
+                        Interactive 3D visualization of Earth's geological evolution.
+                        Scrub through hundreds of thousands of years to see ice ages,
+                        sea levels, vegetation, and biome shifts rendered in WebGL.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">WebGL</span>
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Geospatial</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="badge">Tools</span>
+                    <h3>Ollama Chat</h3>
+                    <p>
+                        Web interface for local AI models with 25 built-in tools:
+                        file operations, git, code search, archive handling. Smart tool
+                        calling that works even with less capable models.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Ollama</span>
+                        <span class="tech-tag">Tool Calling</span>
+                        <span class="tech-tag">Offline-First</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="badge enterprise">Enterprise</span>
+                    <h3>Spork - Data Intelligence</h3>
+                    <p>
+                        AI-powered data analysis platform with multi-format file upload,
+                        semantic vectorization, pattern scanning, keyword generation,
+                        and related data discovery. Azure cloud-native.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">Azure Functions</span>
+                        <span class="tech-tag">Cosmos DB</span>
+                        <span class="tech-tag">AI Embeddings</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="badge">Real-Time</span>
+                    <h3>LiveTranslation</h3>
+                    <p>
+                        Real-time speech translation supporting 30+ languages.
+                        Browser-based speech recognition with instant translation,
+                        caching for API efficiency, and security-first architecture.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Azure Translator</span>
+                        <span class="tech-tag">Web Speech API</span>
+                        <span class="tech-tag">Playwright</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="badge">Game Dev</span>
+                    <h3>Cute RPG</h3>
+                    <p>
+                        Cozy web-based RPG inspired by Stardew Valley. Features farming
+                        mechanics, day/night cycles, NPC relationships, a French Bulldog
+                        pet companion, and local multiplayer networking.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Phaser 3</span>
+                        <span class="tech-tag">WebSockets</span>
+                        <span class="tech-tag">Pixel Art</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <p class="section-subtitle">Full-stack capabilities across web, cloud, and AI/ML</p>
+
+            <div class="skills-section">
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Languages</h4>
+                        <ul>
+                            <li>Python</li>
+                            <li>TypeScript / JavaScript</li>
+                            <li>C#</li>
+                            <li>SQL</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Frameworks</h4>
+                        <ul>
+                            <li>Flask / FastAPI</li>
+                            <li>Node.js / Express</li>
+                            <li>React</li>
+                            <li>Azure Functions</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>AI / ML</h4>
+                        <ul>
+                            <li>OpenAI (GPT-4, Whisper, TTS)</li>
+                            <li>Claude / Anthropic API</li>
+                            <li>ElevenLabs</li>
+                            <li>Ollama / Local Models</li>
+                            <li>RAG / Embeddings</li>
+                            <li>MCP Protocol</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Databases</h4>
+                        <ul>
+                            <li>PostgreSQL</li>
+                            <li>SQLite</li>
+                            <li>Azure Cosmos DB</li>
+                            <li>Vector Stores</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Cloud & DevOps</h4>
+                        <ul>
+                            <li>Azure (Functions, Static Web Apps)</li>
+                            <li>Docker</li>
+                            <li>GitHub Actions CI/CD</li>
+                            <li>Cloudflare</li>
+                            <li>systemd Services</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Real-Time</h4>
+                        <ul>
+                            <li>WebSockets</li>
+                            <li>Socket.IO</li>
+                            <li>Server-Sent Events</li>
+                            <li>Web Speech API</li>
+                            <li>WebGL / Three.js</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>Background</h2>
+            <p class="section-subtitle">Education, certifications, and continuous learning</p>
+
+            <p style="color: rgba(255,255,255,0.8); max-width: 700px; line-height: 1.7;">
+                Based in Springfield, Missouri. Founder of <strong>TrentApps LLC</strong> where I build
+                AI-powered applications and tools. Computer Information Systems background from
+                <strong>Missouri State University</strong> (2018) and <strong>Ozarks Technical Community College</strong> (2014).
+            </p>
+
+            <p style="color: rgba(255,255,255,0.8); max-width: 700px; line-height: 1.7; margin-top: 1rem;">
+                I thrive on uncertainty, work independently with sound judgment, and believe in
+                building reliable, interpretable AI systems that benefit users. My approach:
+                validate early, ship often, learn from everything.
+            </p>
+
+            <h3 style="margin-top: 2rem; font-size: 1.25rem;">Recent Certifications</h3>
+            <div class="certifications">
+                <div class="cert-item">
+                    <span class="cert-icon">🤖</span>
+                    <div class="cert-info">
+                        <h4>Career Essentials in Generative AI</h4>
+                        <span>Microsoft & LinkedIn - Dec 2024</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">🧠</span>
+                    <div class="cert-info">
+                        <h4>Introduction to Artificial Intelligence</h4>
+                        <span>Dec 2024</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">⚖️</span>
+                    <div class="cert-info">
+                        <h4>Ethics in the Age of Generative AI</h4>
+                        <span>Nov 2024</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">🔒</span>
+                    <div class="cert-info">
+                        <h4>Learning the OWASP Top 10</h4>
+                        <span>Jun 2023</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>Let's Connect</h2>
+            <p style="color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto;">
+                Interested in AI prototyping, full-stack development, or just want to chat
+                about building things? I'd love to hear from you.
+            </p>
+            <div class="contact-links">
+                <a href="https://github.com/TrentApps-com" class="contact-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/tdscott2/" class="contact-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="mailto:trentondanscott@gmail.com" class="contact-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/>
+                    </svg>
+                    Email
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2026 Trenton Scott / TrentApps LLC. Built with a bias toward shipping.</p>
+    </footer>
+</body>
+</html>
