@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormFlow — Trent Scott</title>
+    <meta name="description" content="FormFlow: AI-powered real-time form filling from conversations. Record any call and extract structured data automatically.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230b0b0b'/><text x='50' y='68' text-anchor='middle' font-family='Georgia,serif' font-size='52' font-weight='bold' fill='%23c9b99a'>T</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shared.css">
+    <link rel="stylesheet" href="/css/project-detail.css">
+</head>
+<body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <header class="site-header" role="banner">
+        <nav class="nav" aria-label="Main navigation">
+            <a href="/" class="nav-logo" aria-label="Home">Trent Scott</a>
+            <div class="nav-links">
+                <a href="/#projects">Work</a>
+                <a href="/#skills">Skills</a>
+                <a href="/#about">About</a>
+                <a href="/#contact">Contact</a>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" aria-label="Toggle color theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div class="mobile-menu" role="dialog" aria-label="Navigation menu" hidden>
+        <div class="mobile-menu-inner">
+            <a href="/#projects">Work</a>
+            <a href="/#skills">Skills</a>
+            <a href="/#about">About</a>
+            <a href="/#contact">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- ==================== BREADCRUMB ==================== -->
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="breadcrumb-sep">/</span>
+                <a href="/#projects">Projects</a>
+                <span class="breadcrumb-sep">/</span>
+                <span>FormFlow</span>
+            </nav>
+        </div>
+
+        <!-- ==================== PROJECT HERO ==================== -->
+        <section class="project-hero">
+            <div class="container">
+                <span class="badge badge-production">Production SaaS</span>
+                <h1 class="project-hero-title">FormFlow</h1>
+                <p class="project-hero-tagline">&ldquo;The gap between conversation and system of record should be zero.&rdquo;</p>
+                <p class="project-description">
+                    FormFlow records any conversation &mdash; phone calls, Zoom meetings, desk-side chats &mdash; and uses AI to extract structured data into form fields in real time. Audio is transcribed via Whisper in small batches; every few seconds, GPT-4 analyzes the rolling transcript against each field&rsquo;s custom extraction prompt. By the time a call ends, the data is already in the system.
+                </p>
+                <div class="tech-row" style="margin-top: 2rem;">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Whisper</span>
+                    <span class="tech-tag">GPT-4</span>
+                    <span class="tech-tag">Socket.IO</span>
+                    <span class="tech-tag">WebSockets</span>
+                    <span class="tech-tag">OpenAI</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== STICKY SUB-NAV ==================== -->
+        <div class="container">
+            <nav class="demo-subnav" aria-label="Demo sections">
+                <div class="demo-subnav-inner">
+                    <a href="#sales-discovery">Sales Discovery</a>
+                    <a href="#project-planning">Project Planning</a>
+                    <a href="#patient-intake">Patient Intake</a>
+                    <a href="#job-interview">Job Interview</a>
+                    <a href="#insurance-claim">Insurance Claim</a>
+                    <a href="#it-support">IT Support</a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- ==================== DEMO: Sales Discovery ==================== -->
+        <section id="sales-discovery" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Use Case</span>
+                <h2 class="use-case-title reveal">Sales Discovery</h2>
+                <div class="demo-video-wrapper reveal">
+                    <iframe src="https://www.youtube.com/embed/nNL5kAt_j_4" title="FormFlow Demo: AI Sales Discovery Call" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="use-case-content reveal">
+                    <p>
+                        I built something I&rsquo;ve been wanting to exist for years. FormFlow is a tool I&rsquo;ve been developing that lets you record any conversation &mdash; a phone call, a Zoom meeting, a desk-side chat &mdash; and have AI automatically extract the important details into structured form fields. In real time.
+                    </p>
+                    <p>
+                        In this demo, I&rsquo;m running a sales discovery call. While I&rsquo;m talking to a prospect and asking about their pain points, budget, timeline, and current stack &mdash; FormFlow is listening. It&rsquo;s pulling out each of those data points and dropping them into the right fields on a fully customizable form template. No copying. No post-call note scrambling. No &ldquo;let me circle back with what we discussed.&rdquo;
+                    </p>
+                    <p>
+                        The way it works: the audio is transcribed in small batches using Whisper, and every few seconds GPT-4 analyzes the rolling transcript against the form template&rsquo;s extraction instructions. Each field has its own prompt telling the AI exactly what to look for. That means a &ldquo;Budget&rdquo; field knows to look for dollar amounts and financial context. A &ldquo;Decision Maker&rdquo; field knows to listen for names and titles.
+                    </p>
+                    <p>
+                        The result is that by the time your call ends, your CRM data is already done.
+                    </p>
+                    <p>
+                        This isn&rsquo;t theoretical. This is production software running in a browser. No plugins, no downloads, no Twilio integration required. Just your mic and a browser tab.
+                    </p>
+                    <p>
+                        If your team is spending 15&ndash;20 minutes after every discovery call typing up notes, that math adds up fast. FormFlow gives that time back.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DEMO: Project Planning ==================== -->
+        <section id="project-planning" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Use Case</span>
+                <h2 class="use-case-title reveal">Project Planning</h2>
+                <div class="demo-video-wrapper reveal">
+                    <iframe src="https://www.youtube.com/embed/zY1xKeB6L38" title="FormFlow Demo: AI Project Planning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="use-case-content reveal">
+                    <p>
+                        Every team has the same meeting problem: great discussion, mediocre documentation.
+                    </p>
+                    <p>
+                        In this demo I&rsquo;m running a project planning call through FormFlow. We&rsquo;re talking through scope, milestones, task assignments, blockers, dependencies &mdash; a typical kickoff or sprint planning conversation. FormFlow is extracting it all into structured boxes: an ordered list of milestones, action items as an unordered list with owners, project risks as tagged pills, timeline as structured date fields.
+                    </p>
+                    <p>
+                        When the meeting ends, I have a couple options for what happens next.
+                    </p>
+                    <p>
+                        First &mdash; PDF export. FormFlow generates a multi-page report with a cover page showing session metadata (date, duration, participants), followed by the organized content from each box. Transcripts are color-coded by speaker. It&rsquo;s a professional deliverable, not a raw brain dump. Send it to stakeholders who weren&rsquo;t on the call and they get the full picture.
+                    </p>
+                    <p>
+                        Second &mdash; webhook integration. The structured data fires off to your project management tool. Task titles and assignees go to Jira or Azure DevOps. Meeting notes go to Confluence or Notion. Risk items go to whatever risk register your PMO uses. The payload is clean JSON with every field labeled and typed.
+                    </p>
+                    <p>
+                        Third &mdash; the session itself is saved and searchable. Go back to any previous planning session, review what was discussed, see the full transcript, and compare it against what actually got done.
+                    </p>
+                    <p>
+                        The thing I kept running into before building this was the gap between &ldquo;we talked about it&rdquo; and &ldquo;it&rsquo;s tracked somewhere.&rdquo; That gap is where things fall through the cracks. FormFlow closes it by making the conversation itself the data entry mechanism.
+                    </p>
+                    <p>
+                        Your meetings already contain the information. You just need something smart enough to pull it out.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DEMO: Patient Intake ==================== -->
+        <section id="patient-intake" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Use Case</span>
+                <h2 class="use-case-title reveal">Patient Intake</h2>
+                <div class="demo-video-wrapper reveal">
+                    <iframe src="https://www.youtube.com/embed/f_Hpymchh8k" title="FormFlow Demo: AI-Powered Patient Intake" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="use-case-content reveal">
+                    <p>
+                        Healthcare has a documentation problem that everyone knows about and nobody has solved cleanly.
+                    </p>
+                    <p>
+                        In this demo I&rsquo;m walking through a patient intake call using FormFlow. The patient is describing symptoms, medical history, current medications, allergies, insurance info &mdash; the usual intake workflow. But instead of a nurse or admin staff member toggling between an EHR and a phone, FormFlow is handling the structured capture.
+                    </p>
+                    <p>
+                        What makes this work is the template system.
+                    </p>
+                    <p>
+                        FormFlow templates are built with &ldquo;boxes&rdquo; &mdash; modular containers that each have a type and an AI extraction prompt. For patient intake, you might set up:
+                    </p>
+                    <p>
+                        A &ldquo;Chief Complaint&rdquo; box (plain text, extracted from how the patient describes their issue), a &ldquo;Current Medications&rdquo; box (unordered list, pulled from mentions of drug names and dosages), an &ldquo;Allergies&rdquo; box (pills/tags for quick visual scanning), and an &ldquo;Insurance&rdquo; box with structured input fields &mdash; policy number with an input mask, group number, provider name.
+                    </p>
+                    <p>
+                        Each box tells the AI exactly what to listen for. The extraction prompts are fully customizable per field, so a &ldquo;Date of Birth&rdquo; field knows to look for dates in context, not just any date mentioned in the conversation.
+                    </p>
+                    <p>
+                        There are 30+ field types with input masking &mdash; phone numbers, SSNs, dates, currency &mdash; so the data comes out clean and formatted. Not raw text that someone has to reformat downstream.
+                    </p>
+                    <p>
+                        The template builder is drag-and-drop, no code. An office manager can set this up. And once a template exists, every staff member in the organization can use it. Templates can be scoped to personal use or shared across an entire organizational unit.
+                    </p>
+                    <p>
+                        Documentation should happen during the conversation, not after it.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DEMO: Job Interview ==================== -->
+        <section id="job-interview" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Use Case</span>
+                <h2 class="use-case-title reveal">Job Interview</h2>
+                <div class="demo-video-wrapper reveal">
+                    <iframe src="https://www.youtube.com/embed/EYk1-SQKI-8" title="FormFlow Demo: AI-Powered Interview Scorecard" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="use-case-content reveal">
+                    <p>
+                        Hiring is one of those processes where everyone agrees the notes matter but nobody actually takes good ones.
+                    </p>
+                    <p>
+                        This demo shows FormFlow running during a job interview. The interviewer is asking behavioral questions, technical scenarios, culture fit questions &mdash; and FormFlow is extracting structured assessments in real time. Technical proficiency? Captured. Communication skills? Tagged. Red flags? Noted.
+                    </p>
+                    <p>
+                        But here&rsquo;s where it gets interesting beyond the single session.
+                    </p>
+                    <p>
+                        FormFlow has a campaigns feature. You can create a form template &mdash; say, your standard interview scorecard &mdash; and send it out as a campaign to every interviewer on the panel. Each person gets their own secure link with a unique token. They can fill it out via voice mode (FormFlow asks the questions and they respond conversationally) or traditional form entry.
+                    </p>
+                    <p>
+                        As responses come back, you get campaign-level analytics: open rates, completion rates, response rates, time-series data showing when people engaged. You can see at a glance that 4 of 5 interviewers have submitted their feedback and the fifth hasn&rsquo;t opened the link yet.
+                    </p>
+                    <p>
+                        All that data can fire to a webhook &mdash; meaning your ATS gets the structured feedback automatically. No chasing people for written summaries. No inconsistent formats across interviewers. Everyone uses the same template, the same scoring criteria, and the data rolls up cleanly.
+                    </p>
+                    <p>
+                        FormFlow turns interviews from &ldquo;we&rsquo;ll get back to you&rdquo; into &ldquo;we already have everything we need.&rdquo;
+                    </p>
+                    <p>
+                        This applies to any workflow where you need structured input from multiple people: 360 reviews, incident reports, site inspections, compliance audits. Campaigns scale the collection.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DEMO: Insurance Claim ==================== -->
+        <section id="insurance-claim" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Use Case</span>
+                <h2 class="use-case-title reveal">Insurance Claim</h2>
+                <div class="demo-video-wrapper reveal">
+                    <iframe src="https://www.youtube.com/embed/T47JbsmzALg" title="FormFlow Demo: AI Insurance Claim Intake" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="use-case-content reveal">
+                    <p>
+                        One of the most common questions I get about FormFlow: &ldquo;Cool, but how does the data actually get into our system?&rdquo;
+                    </p>
+                    <p>
+                        This demo answers that.
+                    </p>
+                    <p>
+                        Here I&rsquo;m simulating an insurance claim intake call. An agent is on the phone with a claimant walking through the details &mdash; date of incident, policy number, damage description, parties involved &mdash; and FormFlow is capturing and structuring all of it live.
+                    </p>
+                    <p>
+                        But the real story here is what happens after the call ends.
+                    </p>
+                    <p>
+                        Every FormFlow template can be configured with a custom webhook endpoint. When a form is saved or submitted, the structured data fires off as a JSON payload to whatever URL you point it at. Your claims management system. A ServiceNow ticket. A Salesforce record. A Slack channel. An internal API that kicks off an adjuster workflow. Whatever your stack looks like.
+                    </p>
+                    <p>
+                        You configure the HTTP method, custom headers for auth, retry logic if the endpoint is flaky, and timeout thresholds. There&rsquo;s SSRF protection built in so you&rsquo;re not opening up security holes. Payload includes the form data, respondent info, and session metadata &mdash; all structured and ready for your downstream system to consume.
+                    </p>
+                    <p>
+                        What this means practically: an insurance agent finishes a call and the claim is already in the system. No double-entry. No swivel-chair integration. No &ldquo;I&rsquo;ll file this after lunch&rdquo; backlog.
+                    </p>
+                    <p>
+                        The gap between conversation and system of record should be zero. That&rsquo;s what this does.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DEMO: IT Support ==================== -->
+        <section id="it-support" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Use Case</span>
+                <h2 class="use-case-title reveal">IT Support</h2>
+                <div class="demo-video-wrapper reveal">
+                    <iframe src="https://www.youtube.com/embed/kOL-OCYeEt4" title="FormFlow Demo: AI IT Support Ticket Creation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="use-case-content reveal">
+                    <p>
+                        FormFlow handles IT support ticket creation by extracting structured data from help desk calls. As a user describes their issue &mdash; device type, error messages, steps already tried, urgency level &mdash; the system captures and categorizes everything into a structured ticket format. By the time the call ends, the ticket is ready to route to the right team.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FEATURES GRID ==================== -->
+        <section class="detail-features">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Capabilities</span>
+                    <h2 class="section-title">Features</h2>
+                </div>
+                <div class="features-grid reveal">
+                    <div class="feature-item">
+                        <h4>Real-Time Extraction</h4>
+                        <p>Whisper transcribes audio in small batches. GPT-4 matches the rolling transcript against template extraction instructions every few seconds.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>30+ Field Types</h4>
+                        <p>Input masking for phone numbers, SSNs, dates, currency. Pills, ordered lists, free text &mdash; each with custom AI extraction prompts.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Webhook Integration</h4>
+                        <p>Fires structured JSON to any endpoint &mdash; Salesforce, ServiceNow, Slack, Jira. Custom auth headers, retry logic, SSRF protection built in.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Campaigns</h4>
+                        <p>Distribute forms to multiple respondents via secure-token links. Voice mode or traditional entry. Campaign-level analytics and completion tracking.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Voice Mode</h4>
+                        <p>AI asks the form questions conversationally. Respondent answers naturally. Structured data extracted automatically from the dialogue.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>PDF Export</h4>
+                        <p>Multi-page professional reports with cover page, session metadata, organized content per section, and color-coded speaker transcripts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PREV / NEXT NAV ==================== -->
+        <div class="container">
+            <nav class="project-nav" aria-label="Project navigation">
+                <a href="/#projects" class="project-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                    All Projects
+                </a>
+                <a href="/projects/manager-protocol.html" class="project-nav-link project-nav-link--next">
+                    Next: ManagerProtocol
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                </a>
+            </nav>
+        </div>
+    </main>
+
+    <footer class="site-footer"><div class="container"><p>&copy; 2026 Trent Scott &middot; TrentApps LLC</p></div></footer>
+    <script src="/js/shared.js"></script>
+</body>
+</html>

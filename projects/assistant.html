@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant — Trent Scott</title>
+    <meta name="description" content="A Python voice assistant powered by GPT-4 and OpenAI text-to-speech. Wake-word activation, configurable persona system, and continuous listening with auto-timeout.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230b0b0b'/><text x='50' y='68' text-anchor='middle' font-family='Georgia,serif' font-size='52' font-weight='bold' fill='%23c9b99a'>T</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shared.css">
+    <link rel="stylesheet" href="/css/project-detail.css">
+</head>
+<body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <header class="site-header" role="banner">
+        <nav class="nav" aria-label="Main navigation">
+            <a href="/" class="nav-logo" aria-label="Home">Trent Scott</a>
+            <div class="nav-links">
+                <a href="/#projects">Work</a>
+                <a href="/#skills">Skills</a>
+                <a href="/#about">About</a>
+                <a href="/#contact">Contact</a>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" aria-label="Toggle color theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div class="mobile-menu" role="dialog" aria-label="Navigation menu" hidden>
+        <div class="mobile-menu-inner">
+            <a href="/#projects">Work</a>
+            <a href="/#skills">Skills</a>
+            <a href="/#about">About</a>
+            <a href="/#contact">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/#projects">Portfolio</a>
+                <span class="breadcrumb-sep">/</span>
+                <span>Voice Assistant</span>
+            </nav>
+
+            <section class="project-hero">
+                <span class="badge badge-open">Open Source</span>
+                <h1 class="project-hero-title">Voice Assistant</h1>
+                <p class="project-hero-tagline">Wake-word activated AI voice assistant</p>
+                <div class="project-hero-links">
+                    <a href="https://github.com/TrentApps-com/OpenAI-CustomVoiceAssistant" class="project-hero-link" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        View on GitHub
+                    </a>
+                </div>
+                <p class="project-description">
+                    A Python voice assistant powered by GPT-4 and OpenAI text-to-speech. Uses wake-word activation to listen for commands, processes natural language through GPT-4 for intelligent responses, and speaks back using high-quality TTS. Features a configurable persona system, continuous listening with auto-timeout, and a clean conversational interface.
+                </p>
+                <div class="tech-row" style="margin-top: 2rem;">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">GPT-4</span>
+                    <span class="tech-tag">OpenAI TTS</span>
+                </div>
+            </section>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <section class="detail-features">
+            <div class="container">
+                <div class="features-grid reveal">
+                    <div class="feature-item">
+                        <h4>Wake-Word Activation</h4>
+                        <p>Custom wake-word detection triggers the assistant without requiring button presses. Always listening, activates on command, respects privacy when idle.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>GPT-4 Intelligence</h4>
+                        <p>Natural language processing through GPT-4 enables complex queries, multi-turn conversations, and contextual understanding that goes beyond simple command matching.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>OpenAI TTS</h4>
+                        <p>High-quality text-to-speech output provides natural, expressive voice responses. Multiple voice options and adjustable speech parameters.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Configurable Persona</h4>
+                        <p>Customize the assistant's personality, knowledge domain, and response style. Create specialized assistants for different use cases &mdash; from technical support to casual conversation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <nav class="project-nav reveal" aria-label="Project navigation">
+                <a href="/projects/claude-code-mobile-ui.html" class="project-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Claude Code Mobile UI
+                </a>
+                <a href="/#projects" class="project-nav-link project-nav-link--next">
+                    All Projects
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </nav>
+        </div>
+    </main>
+
+    <footer class="site-footer"><div class="container"><p>&copy; 2026 Trent Scott &middot; TrentApps LLC</p></div></footer>
+    <script src="/js/shared.js"></script>
+</body>
+</html>

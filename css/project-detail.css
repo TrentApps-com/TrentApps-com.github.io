@@ -1,0 +1,319 @@
+/* ============================================
+   PROJECT DETAIL PAGES
+   ============================================ */
+
+/* Breadcrumb */
+.breadcrumb {
+    padding-top: 80px;
+    font-size: 0.78rem;
+    color: var(--c-text-3);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.breadcrumb a {
+    color: var(--c-text-3);
+    transition: color var(--duration-fast);
+}
+
+.breadcrumb a:hover {
+    color: var(--c-accent);
+}
+
+.breadcrumb-sep {
+    color: var(--c-text-3);
+    opacity: 0.5;
+}
+
+/* Project Hero */
+.project-hero {
+    padding: 2.5rem 0 var(--s-section);
+}
+
+.project-hero .badge {
+    margin-bottom: 1rem;
+}
+
+.project-hero-title {
+    font-family: var(--f-serif);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+}
+
+.project-hero-tagline {
+    font-family: var(--f-serif);
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--c-text-2);
+    margin-bottom: 2rem;
+}
+
+.project-hero-links {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.project-hero-link {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--c-accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: opacity 0.2s;
+}
+.project-hero-link:hover { opacity: 0.7; }
+.project-hero-link svg { width: 14px; height: 14px; }
+
+.project-description {
+    font-size: 1.05rem;
+    color: var(--c-text-2);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 720px;
+}
+
+/* Project Hero Tech Row */
+.project-hero .tech-row {
+    margin-top: 2rem;
+}
+
+/* ============================================
+   VIDEO PLAYER
+   ============================================ */
+
+.demo-video-wrapper {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--c-border);
+    background: #000;
+    margin: 2rem 0;
+    aspect-ratio: 16 / 9;
+}
+
+.demo-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.demo-video-wrapper--short {
+    aspect-ratio: 9 / 16;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.demo-video {
+    width: 100%;
+    display: block;
+    border-radius: var(--radius);
+}
+
+/* ============================================
+   DEMO SECTIONS
+   ============================================ */
+
+.demo-section {
+    margin-bottom: 3rem;
+}
+
+.demo-section-title {
+    font-family: var(--f-serif);
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.demo-section-desc {
+    font-size: 0.95rem;
+    color: var(--c-text-2);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 720px;
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================
+   FORMFLOW SUB-NAV (sticky tabs)
+   ============================================ */
+
+.demo-subnav {
+    position: sticky;
+    top: 64px;
+    z-index: 100;
+    background: var(--c-bg);
+    border-bottom: 1px solid var(--c-border);
+    padding: 0.75rem 0;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.demo-subnav-inner {
+    display: flex;
+    gap: 0.25rem;
+    min-width: max-content;
+}
+
+.demo-subnav a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-pill);
+    color: var(--c-text-2);
+    white-space: nowrap;
+    transition: all var(--duration-fast);
+}
+
+.demo-subnav a:hover {
+    background: var(--c-accent-soft);
+    color: var(--c-accent-text);
+}
+
+.demo-subnav a.active {
+    background: var(--c-accent-soft);
+    color: var(--c-accent-text);
+}
+
+/* ============================================
+   USE CASE SECTION (FormFlow sub-demos)
+   ============================================ */
+
+.use-case {
+    padding: var(--s-section) 0;
+    border-bottom: 1px solid var(--c-border);
+}
+
+.use-case:last-of-type {
+    border-bottom: none;
+}
+
+.use-case-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-accent);
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.use-case-title {
+    font-family: var(--f-serif);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.use-case-content {
+    font-size: 0.95rem;
+    color: var(--c-text-2);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 720px;
+}
+
+.use-case-content p + p {
+    margin-top: 1.2rem;
+}
+
+/* ============================================
+   PROJECT NAVIGATION (prev/next)
+   ============================================ */
+
+.project-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--c-border);
+    margin-top: var(--s-section);
+    gap: 1rem;
+}
+
+.project-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--c-text-2);
+    padding: 0.65rem 1.2rem;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-pill);
+    transition: all var(--duration-fast);
+}
+
+.project-nav-link:hover {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+}
+
+.project-nav-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+.project-nav-link--next {
+    margin-left: auto;
+}
+
+/* ============================================
+   DETAIL PAGE FEATURES GRID (expanded)
+   ============================================ */
+
+.detail-features {
+    padding: var(--s-section) 0;
+}
+
+.detail-features .features-grid {
+    margin-bottom: 0;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .project-hero-title {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+
+    .project-nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .project-nav-link {
+        justify-content: center;
+    }
+
+    .project-nav-link--next {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .demo-subnav {
+        padding: 0.5rem 0;
+    }
+
+    .demo-subnav a {
+        font-size: 0.72rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
