@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiroi — AI Assistants for Every Website | Trent Scott</title>
+    <meta name="description" content="Hiroi is an embeddable AI assistant platform with voice and text chat, page-aware intelligence, voice cloning, guided tours, RAG documents, and analytics. Deploys with one script tag.">
+    <meta name="keywords" content="Hiroi, hiroi.ai, AI assistant, embeddable AI, chatbot, voice AI, voice cloning, page-aware AI, RAG, guided tours, website assistant, Trent Scott">
+    <link rel="canonical" href="https://trentapps.com/projects/hiroi.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Hiroi — AI Assistants for Every Website">
+    <meta property="og:description" content="Embeddable AI assistant platform with voice & text chat, page-aware intelligence, voice cloning, guided tours, and RAG. One script tag deployment.">
+    <meta property="og:url" content="https://trentapps.com/projects/hiroi.html">
+    <meta property="og:site_name" content="Trent Scott">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Hiroi — AI Assistants for Every Website">
+    <meta name="twitter:description" content="Embeddable AI assistant platform with voice & text chat, page-aware intelligence, voice cloning, guided tours, and RAG. One script tag deployment.">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Hiroi",
+        "url": "https://hiroi.ai",
+        "description": "Embeddable AI assistant platform with voice and text chat, page-aware intelligence, voice cloning, guided tours, RAG document retrieval, and analytics. Deploys via a single script tag.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": [
+            { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+            { "@type": "Offer", "name": "Starter", "price": "19", "priceCurrency": "USD" },
+            { "@type": "Offer", "name": "Pro", "price": "49", "priceCurrency": "USD" },
+            { "@type": "Offer", "name": "Scale", "price": "99", "priceCurrency": "USD" }
+        ],
+        "author": {
+            "@type": "Person",
+            "name": "Trent Scott",
+            "url": "https://trentapps.com"
+        },
+        "featureList": [
+            "Voice & text chat",
+            "Page-aware intelligence",
+            "Voice cloning via ElevenLabs",
+            "Guided tours & demos",
+            "Knowledge documents (RAG)",
+            "Analytics & user feedback",
+            "Full customization & white-label",
+            "Organizations & teams",
+            "Security (domain safelist, HMAC, CORS, HSTS)"
+        ]
+    }
+    </script>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230b0b0b'/><text x='50' y='68' text-anchor='middle' font-family='Georgia,serif' font-size='52' font-weight='bold' fill='%23c9b99a'>T</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shared.css">
+    <link rel="stylesheet" href="/css/project-detail.css">
+    <style>
+        /* Pricing grid — Hiroi detail page only */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--c-border);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-tier {
+            padding: 1.5rem;
+            background: var(--c-surface);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-tier--highlight {
+            background: var(--c-accent-soft);
+        }
+
+        .pricing-tier-name {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--c-accent);
+            margin-bottom: 0.4rem;
+        }
+
+        .pricing-tier-price {
+            font-family: var(--f-serif);
+            font-size: clamp(1.6rem, 2.5vw, 2rem);
+            color: var(--c-text);
+            margin-bottom: 0.75rem;
+            line-height: 1.1;
+        }
+
+        .pricing-tier-price span {
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: var(--c-text-3);
+            font-family: var(--f-sans);
+        }
+
+        .pricing-tier-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            font-size: 0.78rem;
+            color: var(--c-text-2);
+            font-weight: 300;
+            line-height: 1.45;
+        }
+
+        .pricing-tier-details strong {
+            color: var(--c-text);
+            font-weight: 500;
+        }
+
+        /* Integration code block */
+        .code-block {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .code-block code {
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 0.82rem;
+            color: var(--c-accent);
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        .code-block .code-comment {
+            color: var(--c-text-3);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <header class="site-header" role="banner">
+        <nav class="nav" aria-label="Main navigation">
+            <a href="/" class="nav-logo" aria-label="Home">Trent Scott</a>
+            <div class="nav-links">
+                <a href="/#projects">Work</a>
+                <a href="/#skills">Skills</a>
+                <a href="/#about">About</a>
+                <a href="/#contact">Contact</a>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" aria-label="Toggle color theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div class="mobile-menu" role="dialog" aria-label="Navigation menu" hidden>
+        <div class="mobile-menu-inner">
+            <a href="/#projects">Work</a>
+            <a href="/#skills">Skills</a>
+            <a href="/#about">About</a>
+            <a href="/#contact">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- ==================== BREADCRUMB ==================== -->
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="breadcrumb-sep">/</span>
+                <a href="/#projects">Projects</a>
+                <span class="breadcrumb-sep">/</span>
+                <span>Hiroi</span>
+            </nav>
+        </div>
+
+        <!-- ==================== PROJECT HERO ==================== -->
+        <section class="project-hero">
+            <div class="container">
+                <span class="badge badge-production">Closed Beta</span>
+                <h1 class="project-hero-title">Hiroi</h1>
+                <p class="project-hero-tagline">AI assistants that live on your site</p>
+                <div class="project-hero-links">
+                    <a href="https://hiroi.ai" class="project-hero-link" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        hiroi.ai
+                    </a>
+                </div>
+                <p class="project-description">
+                    Hiroi is an embeddable AI assistant platform that deploys to any website with a single <code>&lt;script&gt;</code> tag. Build conversational AI widgets in minutes &mdash; voice and text chat, voice cloning, page-aware intelligence, guided tours, user feedback &mdash; all embedded with one line of code. No npm packages, no build steps, no backend changes.
+                </p>
+                <div class="tech-row" style="margin-top: 2rem;">
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">OpenAI</span>
+                    <span class="tech-tag">ElevenLabs</span>
+                    <span class="tech-tag">RAG</span>
+                    <span class="tech-tag">WebGL</span>
+                    <span class="tech-tag">Voice AI</span>
+                    <span class="tech-tag">Playwright</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== STICKY SUB-NAV ==================== -->
+        <div class="container">
+            <nav class="demo-subnav" aria-label="Feature sections">
+                <div class="demo-subnav-inner">
+                    <a href="#voice-text">Voice & Text</a>
+                    <a href="#page-intelligence">Page Intelligence</a>
+                    <a href="#voice-cloning">Voice Cloning</a>
+                    <a href="#tours">Guided Tours</a>
+                    <a href="#knowledge">Knowledge (RAG)</a>
+                    <a href="#analytics">Analytics</a>
+                    <a href="#security">Security</a>
+                    <a href="#integration">Integration</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- ==================== VOICE & TEXT ==================== -->
+        <section id="voice-text" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Core Feature</span>
+                <h2 class="use-case-title reveal">Voice &amp; Text Chat</h2>
+                <div class="use-case-content reveal">
+                    <p>
+                        Every Hiroi assistant supports both voice and text interaction out of the box. Real-time speech recognition captures what visitors say; text-to-speech delivers natural responses. Users can seamlessly switch between modes &mdash; type when they&rsquo;re in a meeting, speak when they&rsquo;re on the go.
+                    </p>
+                    <p>
+                        The voice pipeline handles noise cancellation, silence detection, and streaming synthesis so responses feel conversational rather than robotic. Text mode supports rich formatting, code blocks, and interactive elements for technical content.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE INTELLIGENCE ==================== -->
+        <section id="page-intelligence" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Core Feature</span>
+                <h2 class="use-case-title reveal">Page-Aware Intelligence</h2>
+                <div class="use-case-content reveal">
+                    <p>
+                        This is what sets Hiroi apart from a standard chatbot. The assistant doesn&rsquo;t just live alongside your page &mdash; it understands it. It reads visible content, highlights relevant sections, scrolls to referenced areas, and can suggest edits or interactions based on what users are looking at.
+                    </p>
+                    <p>
+                        Ask &ldquo;What does this pricing plan include?&rdquo; and the assistant highlights the relevant pricing card while explaining it. Ask &ldquo;Help me fill out this form&rdquo; and it walks through each field. The page itself becomes part of the conversation context, not just the knowledge base.
+                    </p>
+                    <p>
+                        Page integration supports workflows too &mdash; triggering actions, navigating between pages, and interacting with interactive elements on the page. It&rsquo;s a co-pilot that actually knows where it is.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== VOICE CLONING ==================== -->
+        <section id="voice-cloning" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Pro Feature</span>
+                <h2 class="use-case-title reveal">Voice Cloning</h2>
+                <div class="use-case-content reveal">
+                    <p>
+                        On Pro plans and above, Hiroi integrates with ElevenLabs instant voice cloning. Upload a single audio recording of your voice (or your brand spokesperson&rsquo;s voice) and the assistant speaks in that voice for every interaction.
+                    </p>
+                    <p>
+                        Multiple voice profiles can be configured per assistant &mdash; a welcome voice, a support voice, different voices for different languages. The Voice Studio in the dashboard provides playback, quality assessment, and management of all cloned profiles.
+                    </p>
+                    <p>
+                        For brands that invest in voice identity, this means your AI assistant sounds like your company, not like a generic TTS engine.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== GUIDED TOURS ==================== -->
+        <section id="tours" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Core Feature</span>
+                <h2 class="use-case-title reveal">Guided Tours &amp; Demos</h2>
+                <div class="use-case-content reveal">
+                    <p>
+                        Record interactive walkthroughs that guide users through your product or website. Spotlight effects draw attention to specific UI elements. Narration plays at each step. Click-through steps let users progress at their own pace.
+                    </p>
+                    <p>
+                        No code required &mdash; tours are built in the Hiroi dashboard with a visual recorder. Point, click, annotate, and publish. New users see the tour on their first visit, or you can trigger it from the assistant chat.
+                    </p>
+                    <p>
+                        For SaaS products, this replaces the &ldquo;watch a 10-minute onboarding video&rdquo; pattern with an interactive, contextual experience that meets users where they are in the actual product.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== KNOWLEDGE DOCS ==================== -->
+        <section id="knowledge" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Core Feature</span>
+                <h2 class="use-case-title reveal">Knowledge Documents (RAG)</h2>
+                <div class="use-case-content reveal">
+                    <p>
+                        Upload PDFs, DOCX, TXT, or Markdown files as knowledge sources. Hiroi processes them with semantic embeddings and makes the content available to the assistant through retrieval-augmented generation.
+                    </p>
+                    <p>
+                        When a visitor asks a question, the assistant searches uploaded documents, finds the most relevant passages, and references them in its response. This means your assistant can answer questions about product documentation, policies, FAQs, or any other content without you having to manually script every response.
+                    </p>
+                    <p>
+                        Free plans include 3 documents. Scale plans support up to 200. Documents can be updated or replaced at any time without retraining &mdash; the embeddings regenerate automatically.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ANALYTICS ==================== -->
+        <section id="analytics" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Core Feature</span>
+                <h2 class="use-case-title reveal">Analytics &amp; Feedback</h2>
+                <div class="use-case-content reveal">
+                    <p>
+                        The analytics dashboard tracks everything: conversation volume, token usage, costs, session duration, satisfaction rates, and usage patterns over time. You see what visitors are asking, where the assistant succeeds, and where it falls short.
+                    </p>
+                    <p>
+                        Visitors can like or dislike individual responses, giving you direct signal on answer quality. Pro plans unlock advanced analytics with export capabilities &mdash; CSV, JSON, or API access &mdash; for integration with your own reporting tools.
+                    </p>
+                    <p>
+                        Full audit logging captures every interaction for compliance and quality assurance. Every conversation is stored with timestamps, message content, token counts, and user feedback.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECURITY ==================== -->
+        <section id="security" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Architecture</span>
+                <h2 class="use-case-title reveal">Security</h2>
+                <div class="use-case-content reveal">
+                    <p>
+                        Hiroi is secure by default. No API keys are exposed to the browser. Authentication is handled through either domain safelist (Free and above) or HMAC-signed session tokens (Starter and above) &mdash; so only your website can invoke your assistant.
+                    </p>
+                    <p>
+                        The infrastructure includes rate limiting per session and per domain, CORS validation, HSTS headers, and full audit logging of every request. All data is encrypted in transit and at rest.
+                    </p>
+                    <p>
+                        For organizations with stricter requirements, Pro and Scale plans include role-based access control (owner, admin, member, viewer), team management, and configurable data retention policies.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== INTEGRATION ==================== -->
+        <section id="integration" class="use-case">
+            <div class="container">
+                <span class="use-case-label reveal">Setup</span>
+                <h2 class="use-case-title reveal">Integration</h2>
+                <div class="use-case-content reveal">
+                    <p>
+                        Adding Hiroi to your website takes one line of code. No npm packages, no build pipeline changes, no backend modifications. Paste the script tag before <code>&lt;/body&gt;</code> and you&rsquo;re live.
+                    </p>
+                </div>
+                <div class="code-block reveal">
+                    <code><span class="code-comment">&lt;!-- Add Hiroi to your site --&gt;</span>
+&lt;script src="https://hiroi.ai/embed.js" data-site-id="<span style="color: var(--c-text-3);">your-site-id</span>"&gt;&lt;/script&gt;</code>
+                </div>
+                <div class="use-case-content reveal">
+                    <p>
+                        The widget loads asynchronously and doesn&rsquo;t block page rendering. Customization &mdash; colors, fonts, position, sizing, light/dark mode &mdash; is configured in the Hiroi dashboard and delivered with the embed. White-label (remove Hiroi branding) is available on Pro plans.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PRICING ==================== -->
+        <section id="pricing" class="detail-features">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Plans</span>
+                    <h2 class="section-title">Pricing</h2>
+                    <p class="section-subtitle">Credit-based pricing that scales with usage. Additional credits available at $4.99 / 500.</p>
+                </div>
+                <div class="pricing-grid reveal">
+                    <div class="pricing-tier">
+                        <div class="pricing-tier-name">Free</div>
+                        <div class="pricing-tier-price">$0 <span>/mo</span></div>
+                        <div class="pricing-tier-details">
+                            <span><strong>100</strong> credits/mo</span>
+                            <span><strong>1</strong> assistant</span>
+                            <span>Voice &amp; text chat</span>
+                            <span>Domain safelist auth</span>
+                            <span>Basic analytics</span>
+                            <span>3 knowledge docs</span>
+                        </div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="pricing-tier-name">Starter</div>
+                        <div class="pricing-tier-price">$19 <span>/mo</span></div>
+                        <div class="pricing-tier-details">
+                            <span><strong>2,000</strong> credits/mo</span>
+                            <span><strong>3</strong> assistants</span>
+                            <span>Session signed auth</span>
+                            <span>Custom branding</span>
+                            <span>10 knowledge docs</span>
+                            <span>Full audit logs</span>
+                        </div>
+                    </div>
+                    <div class="pricing-tier pricing-tier--highlight">
+                        <div class="pricing-tier-name">Pro</div>
+                        <div class="pricing-tier-price">$49 <span>/mo</span></div>
+                        <div class="pricing-tier-details">
+                            <span><strong>6,000</strong> credits/mo</span>
+                            <span><strong>10</strong> assistants</span>
+                            <span>Voice cloning (ElevenLabs)</span>
+                            <span>Page integration &amp; workflows</span>
+                            <span>White-label</span>
+                            <span>1 org / 5 members</span>
+                            <span>50 knowledge docs</span>
+                            <span>Advanced analytics &amp; export</span>
+                        </div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="pricing-tier-name">Scale</div>
+                        <div class="pricing-tier-price">$99 <span>/mo</span></div>
+                        <div class="pricing-tier-details">
+                            <span><strong>15,000</strong> credits/mo</span>
+                            <span><strong>25</strong> assistants</span>
+                            <span>Custom TTS endpoints</span>
+                            <span>3 orgs / 20 members</span>
+                            <span>200 knowledge docs</span>
+                            <span>Priority support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FEATURES GRID ==================== -->
+        <section class="detail-features">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Capabilities</span>
+                    <h2 class="section-title">All Features</h2>
+                </div>
+                <div class="features-grid reveal">
+                    <div class="feature-item">
+                        <h4>Voice &amp; Text Chat</h4>
+                        <p>Real-time speech recognition and synthesis. Seamlessly switch between voice and text modes. Natural conversational interface for any website visitor.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Page-Aware Intelligence</h4>
+                        <p>The assistant reads, highlights, scrolls, and suggests edits to page content. It understands what users are looking at and can interact with the page directly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Voice Cloning (Pro)</h4>
+                        <p>Clone your own voice via ElevenLabs instant voice cloning from a single audio recording. Multiple voice profiles per assistant for branded experiences.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Guided Tours &amp; Demos</h4>
+                        <p>Record interactive walkthroughs with spotlight effects, narration, and click-through steps. No code required. Onboard users visually.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Knowledge Documents (RAG)</h4>
+                        <p>Upload PDFs, DOCX, TXT, or Markdown files. The assistant searches and references them using semantic embeddings for accurate responses.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Analytics &amp; Feedback</h4>
+                        <p>Track conversations, satisfaction rates, usage patterns. Visitors can like or dislike responses. Export data and advanced analytics on Pro plans.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Full Customization</h4>
+                        <p>Custom colors, fonts, position, sizing. Light and dark mode. White-label (remove Hiroi branding) on Pro plans.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Organizations &amp; Teams</h4>
+                        <p>Invite team members, manage roles (owner, admin, member, viewer), share conversations. Pro and Scale plans.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Secure by Default</h4>
+                        <p>Domain safelist or HMAC-signed session tokens. No API keys in the browser. Rate limiting, CORS validation, HSTS, and full audit logging.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PREV / NEXT NAV ==================== -->
+        <div class="container">
+            <nav class="project-nav" aria-label="Project navigation">
+                <a href="/#projects" class="project-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                    All Projects
+                </a>
+                <a href="/projects/formflow.html" class="project-nav-link project-nav-link--next">
+                    Next: FormFlow
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                </a>
+            </nav>
+        </div>
+    </main>
+
+    <footer class="site-footer"><div class="container"><p>&copy; 2026 Trent Scott &middot; TrentApps LLC</p></div></footer>
+    <script src="/js/shared.js"></script>
+</body>
+</html>
