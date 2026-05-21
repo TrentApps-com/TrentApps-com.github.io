@@ -21,4 +21,4 @@ Static site hosted on GitHub Pages. Built with vanilla HTML, CSS, and JavaScript
 
 - [GitHub](https://github.com/TrentApps-com)
 - [LinkedIn](https://www.linkedin.com/in/tdscott2/)
-- [Email](mailto:trentondanscott@gmail.com)
+- [Email](mailto:trent@trentapps.com)
