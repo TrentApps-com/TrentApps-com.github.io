@@ -928,14 +928,23 @@
     <!-- Maya — TrentApps AI assistant (Hiroi, wave mode). Live assistant; renders on trentapps.com. -->
     <script src="https://hiroi.ai/static/va-wave-widget.js" data-site-id="d9ccd2067a1841649ddb37ac919b43fc"></script>
     <script>
-        // "Talk to Maya" buttons just trigger Maya's own launcher — identical to
-        // the visitor tapping the widget pill, so the assistant opens normally.
+        // "Talk to Maya" buttons trigger Maya's own visible control so the
+        // assistant opens its normal conversation — clicking the real widget
+        // button gives identical native behavior across her widget modes.
         (function () {
+            function visible(el) {
+                if (!el) return false;
+                var r = el.getBoundingClientRect();
+                return r.width > 0 && r.height > 0;
+            }
             function openMaya() {
-                var launcher = document.querySelector('.va-launcher')
-                    || document.querySelector('.va-fs-trigger');
-                if (launcher) { launcher.click(); return true; }
+                var sels = ['.va-vc-chat', '.va-launcher', '.va-fs-trigger'];
+                for (var i = 0; i < sels.length; i++) {
+                    var el = document.querySelector(sels[i]);
+                    if (visible(el)) { el.click(); return true; }
+                }
                 var w = window.VAWaveWidget;
+                if (w && typeof w.activateChat === 'function') { w.activateChat(); return true; }
                 if (w && typeof w.expand === 'function') { w.expand(); return true; }
                 return false;
             }
