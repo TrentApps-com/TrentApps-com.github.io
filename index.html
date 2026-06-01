@@ -928,17 +928,15 @@
     <!-- Maya — TrentApps AI assistant (Hiroi, wave mode). Live assistant; renders on trentapps.com. -->
     <script src="https://hiroi.ai/static/va-wave-widget.js" data-site-id="d9ccd2067a1841649ddb37ac919b43fc"></script>
     <script>
-        // "Talk to Maya" buttons open the live Hiroi widget (fullscreen wave mode).
+        // "Talk to Maya" buttons just trigger Maya's own launcher — identical to
+        // the visitor tapping the widget pill, so the assistant opens normally.
         (function () {
             function openMaya() {
+                var launcher = document.querySelector('.va-launcher')
+                    || document.querySelector('.va-fs-trigger');
+                if (launcher) { launcher.click(); return true; }
                 var w = window.VAWaveWidget;
-                try {
-                    if (w && typeof w.expandToFullscreen === 'function') { w.expandToFullscreen('chat'); return true; }
-                    if (w && typeof w.expand === 'function') { w.expand(); return true; }
-                    if (w && typeof w.toggle === 'function') { w.toggle(); return true; }
-                } catch (e) {}
-                var trigger = document.querySelector('.va-fs-trigger') || document.querySelector('.va-launcher');
-                if (trigger) { trigger.click(); return true; }
+                if (w && typeof w.expand === 'function') { w.expand(); return true; }
                 return false;
             }
             document.querySelectorAll('[data-maya-open]').forEach(function (el) {
