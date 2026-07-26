@@ -247,6 +247,35 @@ ul, ol { list-style: none; }
     gap: 0.5rem;
 }
 
+/* Email CTA — the studio's front door, present in the nav on every page */
+.nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-pill);
+    color: var(--c-text);
+    transition: border-color var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.nav-cta:hover {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+}
+
+.nav-cta svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 860px) {
+    .nav-cta { display: none; }
+}
+
 .theme-toggle {
     width: 36px;
     height: 36px;
@@ -333,6 +362,7 @@ ul, ol { list-style: none; }
 .mobile-menu.active .mobile-menu-inner a:nth-child(2) { transition-delay: 0.15s; }
 .mobile-menu.active .mobile-menu-inner a:nth-child(3) { transition-delay: 0.2s; }
 .mobile-menu.active .mobile-menu-inner a:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu.active .mobile-menu-inner a:nth-child(5) { transition-delay: 0.3s; }
 .mobile-menu-inner a:hover { color: var(--c-accent); }
 
 @media (max-width: 640px) {
