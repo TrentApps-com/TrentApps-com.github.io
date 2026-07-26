@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrentApps — A Software Studio Shipping Production AI & Custom Software | Springfield, MO</title>
-    <meta name="description" content="TrentApps is a Springfield, MO software studio shipping production software: Hiroi (embeddable AI assistants with voice), FormFlow (real-time conversation-to-data), ManagerProtocol (AI agent governance), and the modern websites, ordering, and AI tools local businesses run on.">
-    <meta name="keywords" content="TrentApps, software studio Springfield MO, custom software, production AI, Hiroi, FormFlow, ManagerProtocol, AuditAI, embeddable AI assistant, voice AI, real-time systems, iOS app development, web development, online ordering, AI chat assistant, Trent Scott">
+    <title>TrentApps LLC — A Software Studio Building Custom Software | Springfield, MO</title>
+    <meta name="description" content="TrentApps LLC is a software studio. We build custom software for small and medium businesses, and we build hiroi — a suite of AI apps (Assistant live in beta, Campaigns and Presents coming soon). Start a project: maya@trentapps.com">
+    <meta name="keywords" content="TrentApps LLC, software studio, custom software development, Springfield MO, hiroi, hiroi Assistant, AI assistant for business, small business software, custom web app, iOS app development, Trent Scott">
     <meta name="author" content="Trent Scott">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://trentapps.com">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="TrentApps — Production AI & Custom Software, Shipped">
-    <meta property="og:description" content="A Springfield software studio shipping real production software — AI assistant platforms, real-time and mobile apps, and the modern tools local businesses run on.">
+    <meta property="og:title" content="TrentApps LLC — A Software Studio">
+    <meta property="og:description" content="Custom software for small and medium businesses — plus hiroi, our own suite of AI apps. Start a project: maya@trentapps.com">
     <meta property="og:url" content="https://trentapps.com">
     <meta property="og:site_name" content="TrentApps">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="TrentApps — Production AI & Custom Software, Shipped">
-    <meta name="twitter:description" content="A Springfield software studio shipping real production software — AI platforms, real-time and mobile apps, and the tools local businesses run on.">
+    <meta name="twitter:title" content="TrentApps LLC — A Software Studio">
+    <meta name="twitter:description" content="Custom software for small and medium businesses — plus hiroi, our own suite of AI apps.">
 
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230b0b0b'/><text x='50' y='68' text-anchor='middle' font-family='Georgia,serif' font-size='52' font-weight='bold' fill='%23c9b99a'>T</text></svg>">
@@ -34,14 +34,16 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "TrentApps",
-        "alternateName": "TrentApps LLC",
+        "@type": "ProfessionalService",
+        "name": "TrentApps LLC",
+        "alternateName": "TrentApps",
         "url": "https://trentapps.com",
-        "description": "Software studio shipping production AI platforms, real-time and mobile apps, and custom software for businesses.",
+        "description": "A software studio building custom software for small and medium businesses, and the hiroi suite of AI apps.",
         "founder": { "@type": "Person", "name": "Trent Scott" },
-        "foundingLocation": { "@type": "City", "name": "Springfield, Missouri" },
-        "email": "trent@trentapps.com",
+        "areaServed": "United States",
+        "address": { "@type": "PostalAddress", "addressLocality": "Springfield", "addressRegion": "MO", "addressCountry": "US" },
+        "email": "maya@trentapps.com",
+        "knowsAbout": ["Custom software development", "AI assistants", "Voice AI", "Web applications", "iOS applications", "Real-time systems"],
         "sameAs": [
             "https://github.com/TrentApps-com",
             "https://www.linkedin.com/in/tdscott2/",
@@ -53,11 +55,11 @@
     {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "Software shipped by TrentApps",
+        "name": "The hiroi suite by TrentApps LLC",
         "itemListElement": [
-            { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "Hiroi", "url": "https://hiroi.ai", "applicationCategory": "BusinessApplication", "operatingSystem": "Web" } },
-            { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "FormFlow", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, iOS" } },
-            { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "ManagerProtocol", "applicationCategory": "DeveloperApplication", "operatingSystem": "Cross-platform" } }
+            { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "hiroi Assistant", "url": "https://assistant.hiroi.ai", "applicationCategory": "BusinessApplication", "operatingSystem": "Web" } },
+            { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "hiroi Campaigns", "url": "https://hiroi.ai", "applicationCategory": "BusinessApplication", "operatingSystem": "Web" } },
+            { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "hiroi Presents", "url": "https://hiroi.ai", "applicationCategory": "BusinessApplication", "operatingSystem": "Web" } }
         ]
     }
     </script>
@@ -65,350 +67,260 @@
     <link rel="stylesheet" href="/css/shared.css">
     <style>
         /* ============================================
-           HERO
+           BUTTONS
            ============================================ */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding: 96px 0 64px;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: clamp(400px, 60vw, 860px);
-            height: clamp(400px, 60vw, 860px);
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--c-hero-orb-1) 0%, transparent 70%);
-            top: -10%;
-            right: -14%;
-            animation: heroFloat 25s ease-in-out infinite alternate;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: clamp(300px, 40vw, 620px);
-            height: clamp(300px, 40vw, 620px);
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--c-hero-orb-2) 0%, transparent 70%);
-            bottom: 2%;
-            left: -8%;
-            animation: heroFloat 20s ease-in-out infinite alternate-reverse;
-        }
-        @keyframes heroFloat { 0% { transform: translate(0,0); } 100% { transform: translate(30px,-20px); } }
-
-        .hero-grid {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: clamp(2rem, 5vw, 4.5rem);
-            align-items: center;
-        }
-        .hero-eyebrow {
-            display: inline-flex; align-items: center; gap: 0.55rem;
-            font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--c-accent); margin-bottom: 1.4rem;
-            opacity: 0; transform: translateY(16px);
-            animation: heroReveal 0.8s var(--ease-out) 0.15s forwards;
-        }
-        .hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c-badge-production); box-shadow: 0 0 0 4px var(--c-badge-production-bg); }
-        .hero-headline {
-            font-family: var(--f-serif);
-            font-size: clamp(2.8rem, 6vw, 4.7rem);
-            font-weight: 400; line-height: 1.03; letter-spacing: -0.025em;
-            margin-bottom: 1.5rem;
-            opacity: 0; transform: translateY(20px);
-            animation: heroReveal 0.85s var(--ease-out) 0.3s forwards;
-        }
-        .hero-headline em { font-style: italic; color: var(--c-accent); }
-        .hero-sub {
-            font-size: clamp(1rem, 1.6vw, 1.18rem); color: var(--c-text-2);
-            line-height: 1.7; max-width: 560px; margin-bottom: 2.2rem; font-weight: 300;
-            opacity: 0; transform: translateY(16px);
-            animation: heroReveal 0.85s var(--ease-out) 0.45s forwards;
-        }
-        .hero-sub strong { color: var(--c-text); font-weight: 500; }
-        .hero-cta-row {
-            display: flex; gap: 0.85rem; flex-wrap: wrap;
-            opacity: 0; transform: translateY(16px);
-            animation: heroReveal 0.85s var(--ease-out) 0.6s forwards;
-        }
-        @keyframes heroReveal { to { opacity: 1; transform: translateY(0); } }
-
         .btn {
             display: inline-flex; align-items: center; gap: 0.55rem;
             font-size: 0.92rem; font-weight: 600; padding: 0.85rem 1.7rem;
             border-radius: var(--radius-pill); transition: all var(--duration-fast) ease;
         }
-        .btn svg { width: 17px; height: 17px; }
+        .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
         .btn-primary { background: var(--c-accent); color: #1a1208; }
         [data-theme="light"] .btn-primary { color: #fff; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--c-accent-soft); filter: brightness(1.06); }
         .btn-ghost { border: 1px solid var(--c-border-strong); color: var(--c-text); }
         .btn-ghost:hover { border-color: var(--c-accent); color: var(--c-accent); transform: translateY(-2px); }
+        .btn-sm { font-size: 0.82rem; padding: 0.6rem 1.2rem; }
 
-        .hero-visual {
-            opacity: 0; transform: translateY(28px) scale(0.98);
-            animation: heroReveal 1s var(--ease-out) 0.65s forwards;
+        /* Email button in nav */
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            font-size: 0.8rem; font-weight: 600; padding: 0.5rem 1.1rem;
+            border: 1px solid var(--c-border-strong); border-radius: var(--radius-pill);
+            color: var(--c-text); transition: all var(--duration-fast) ease;
         }
-        @media (max-width: 900px) {
-            .hero-grid { grid-template-columns: 1fr; }
-            .hero-visual { max-width: 420px; margin: 0 auto; }
-        }
-
-        /* ============================================
-           STATS STRIP
-           ============================================ */
-        .stats-strip {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            border: 1px solid var(--c-border); border-radius: var(--radius);
-            overflow: hidden; background: var(--c-border); gap: 1px;
-        }
-        .stat-cell { background: var(--c-surface); padding: 1.6rem 1.4rem; text-align: center; }
-        .stat-num { font-family: var(--f-serif); font-size: clamp(1.7rem, 3vw, 2.3rem); color: var(--c-accent); line-height: 1; margin-bottom: 0.4rem; }
-        .stat-lab { font-size: 0.78rem; color: var(--c-text-2); font-weight: 300; line-height: 1.4; }
-        @media (max-width: 700px) { .stats-strip { grid-template-columns: repeat(2, 1fr); } }
+        .nav-cta:hover { border-color: var(--c-accent); color: var(--c-accent); }
+        .nav-cta svg { width: 14px; height: 14px; }
+        @media (max-width: 860px) { .nav-cta { display: none; } }
 
         /* ============================================
-           WORK — shipped products
+           HERO
            ============================================ */
-        .flagship {
+        .hero {
+            min-height: min(88vh, 780px);
+            display: flex; align-items: center;
+            position: relative; overflow: hidden;
+            padding: 140px 0 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: clamp(400px, 62vw, 900px); height: clamp(400px, 62vw, 900px);
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--c-hero-orb-1) 0%, transparent 70%);
+            top: -18%; right: -12%;
+            animation: heroFloat 25s ease-in-out infinite alternate;
+        }
+        @keyframes heroFloat { 0% { transform: translate(0,0); } 100% { transform: translate(30px,-20px); } }
+        @media (prefers-reduced-motion: reduce) { .hero::before { animation: none; } }
+
+        .hero-inner { position: relative; z-index: 1; max-width: 780px; }
+        .hero-eyebrow {
+            display: block; max-width: 34ch;
+            font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            line-height: 1.7; color: var(--c-accent); margin-bottom: 1.6rem;
+            opacity: 0; transform: translateY(16px);
+            animation: heroReveal 0.8s var(--ease-out) 0.1s forwards;
+        }
+        /* Inline-block, not a flex item — as a flex item the label wraps as one
+           unit and abandons the dot on a line of its own. */
+        .hero-eyebrow .dot {
+            display: inline-block; vertical-align: middle;
+            width: 7px; height: 7px; margin: -2px 0.75rem 0 0; border-radius: 50%;
+            background: var(--c-badge-production); box-shadow: 0 0 0 4px var(--c-badge-production-bg);
+        }
+        .hero-headline {
+            font-family: var(--f-serif);
+            font-size: clamp(2.9rem, 7vw, 5.1rem);
+            font-weight: 400; line-height: 1.02; letter-spacing: -0.03em;
+            margin-bottom: 1.6rem;
+            opacity: 0; transform: translateY(20px);
+            animation: heroReveal 0.85s var(--ease-out) 0.22s forwards;
+        }
+        .hero-headline em { font-style: italic; color: var(--c-accent); }
+        .hero-sub {
+            font-size: clamp(1.02rem, 1.7vw, 1.22rem); color: var(--c-text-2);
+            line-height: 1.7; max-width: 620px; margin-bottom: 2.4rem; font-weight: 300;
+            opacity: 0; transform: translateY(16px);
+            animation: heroReveal 0.85s var(--ease-out) 0.34s forwards;
+        }
+        .hero-sub strong { color: var(--c-text); font-weight: 500; }
+        .hero-cta-row {
+            display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center;
+            opacity: 0; transform: translateY(16px);
+            animation: heroReveal 0.85s var(--ease-out) 0.46s forwards;
+        }
+        @keyframes heroReveal { to { opacity: 1; transform: translateY(0); } }
+
+        .hero-facts {
+            display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem;
+            margin-top: 3rem; padding-top: 1.6rem;
+            border-top: 1px solid var(--c-border);
+            opacity: 0; transform: translateY(16px);
+            animation: heroReveal 0.85s var(--ease-out) 0.6s forwards;
+        }
+        .hero-fact { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--c-text-2); font-weight: 300; }
+        .hero-fact strong { color: var(--c-text); font-weight: 500; }
+        .hero-fact .fdot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+        .fdot-live { background: var(--c-badge-production); }
+        .fdot-soon { background: var(--c-badge-ai); }
+        .fdot-ship { background: var(--c-accent); }
+
+        /* ============================================
+           TWO DOORS
+           ============================================ */
+        .fork-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .fork-card {
+            display: flex; flex-direction: column;
             background: var(--c-surface); border: 1px solid var(--c-border);
-            border-radius: var(--radius); padding: clamp(1.75rem, 3vw, 2.75rem);
-            margin-bottom: 1.5rem; overflow: hidden;
+            border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.4rem);
             transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
         }
-        .flagship:hover { border-color: var(--c-border-strong); box-shadow: var(--c-card-shadow-hover); }
-        .flagship-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: clamp(1.75rem, 3.5vw, 3.5rem); align-items: center; }
-        .flagship .badge { margin-bottom: 0.9rem; }
-        .flagship h3 { font-family: var(--f-serif); font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.3rem; }
-        .flagship .tag { font-family: var(--f-serif); font-style: italic; font-size: 1.1rem; color: var(--c-text-2); margin-bottom: 1.1rem; }
-        .flagship p { color: var(--c-text-2); font-weight: 300; line-height: 1.7; margin-bottom: 1.4rem; }
-        .flagship .tech-row { margin-bottom: 1.6rem; }
-        .flagship-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        @media (max-width: 820px) { .flagship-grid { grid-template-columns: 1fr; } }
+        .fork-card:hover { border-color: var(--c-border-strong); box-shadow: var(--c-card-shadow-hover); }
+        .fork-num { font-family: var(--f-serif); font-size: 0.95rem; color: var(--c-accent); letter-spacing: 0.08em; margin-bottom: 1rem; }
+        .fork-card h3 { font-family: var(--f-serif); font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+        .fork-card > p { color: var(--c-text-2); font-weight: 300; line-height: 1.7; margin-bottom: 1.5rem; }
+        .fork-list { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; }
+        .fork-list li { display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.89rem; color: var(--c-text-2); font-weight: 300; line-height: 1.5; }
+        .fork-list svg { width: 16px; height: 16px; color: var(--c-accent); flex-shrink: 0; margin-top: 3px; }
+        .fork-list strong { color: var(--c-text); font-weight: 500; }
+        .fork-foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }
+        .fork-note { font-size: 0.78rem; color: var(--c-text-3); font-weight: 300; }
+        @media (max-width: 820px) { .fork-grid { grid-template-columns: 1fr; } }
 
-        .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-        .work-card {
-            background: var(--c-surface); border: 1px solid var(--c-border);
-            border-radius: var(--radius); padding: 1.6rem;
-            display: flex; flex-direction: column;
-            transition: border-color var(--duration-fast) ease, transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+        /* ============================================
+           HIROI ROSTER
+           ============================================ */
+        .hiroi-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: clamp(2rem, 3.5vw, 3rem); }
+        .hiroi-head .section-header { margin-bottom: 0; }
+        .wordmark { font-family: var(--f-serif); font-size: clamp(2rem, 4vw, 2.6rem); color: var(--c-text); letter-spacing: -0.02em; }
+
+        .roster { border-top: 1px solid var(--c-border); }
+        .roster-row {
+            display: grid; grid-template-columns: 2.4rem minmax(150px, 1fr) 2fr auto;
+            align-items: center; gap: 1.25rem;
+            padding: 1.5rem 0.5rem 1.5rem 0;
+            border-bottom: 1px solid var(--c-border);
+            transition: background-color var(--duration-fast) ease, padding-left var(--duration-fast) ease;
         }
-        .work-card:hover { border-color: var(--c-border-strong); transform: translateY(-3px); box-shadow: var(--c-card-shadow-hover); }
-        .work-card .badge { margin-bottom: 0.85rem; align-self: flex-start; }
-        .work-card h4 { font-family: var(--f-serif); font-size: 1.35rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 0.3rem; }
-        .work-card .tagline { font-family: var(--f-serif); font-style: italic; font-size: 0.9rem; color: var(--c-text-3); margin-bottom: 0.7rem; }
-        .work-card p { font-size: 0.86rem; color: var(--c-text-2); line-height: 1.6; font-weight: 300; margin-bottom: 1.1rem; }
-        .work-card .tech-row { margin-top: auto; margin-bottom: 1rem; }
-        .work-link { font-size: 0.78rem; font-weight: 600; color: var(--c-accent); display: inline-flex; align-items: center; gap: 0.35rem; transition: gap var(--duration-fast) ease; align-self: flex-start; }
-        .work-link:hover { gap: 0.6rem; }
-        .work-link svg { width: 13px; height: 13px; }
-        @media (max-width: 900px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 560px) { .work-grid { grid-template-columns: 1fr; } }
-
-        /* ============================================
-           TECH MARQUEE
-           ============================================ */
-        .marquee {
-            position: relative; overflow: hidden;
-            border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);
-            padding: 1.6rem 0; margin: 0;
-            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-        }
-        .marquee-track { display: flex; gap: 2.5rem; width: max-content; animation: marquee 38s linear infinite; }
-        .marquee:hover .marquee-track { animation-play-state: paused; }
-        .marquee-item { font-family: var(--f-serif); font-size: 1.3rem; color: var(--c-text-3); white-space: nowrap; display: inline-flex; align-items: center; gap: 2.5rem; }
-        .marquee-item::after { content: '·'; color: var(--c-accent); }
-        @keyframes marquee { to { transform: translateX(-50%); } }
-        @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
-
-        /* ============================================
-           CAPABILITIES
-           ============================================ */
-        .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-        .cap-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1.75rem; transition: border-color var(--duration-fast) ease, transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease; }
-        .cap-card:hover { border-color: var(--c-border-strong); transform: translateY(-3px); box-shadow: var(--c-card-shadow-hover); }
-        .cap-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); background: var(--c-accent-soft); color: var(--c-accent); margin-bottom: 1.1rem; }
-        .cap-icon svg { width: 22px; height: 22px; }
-        .cap-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .cap-card p { font-size: 0.88rem; color: var(--c-text-2); line-height: 1.65; font-weight: 300; }
-        @media (max-width: 880px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 540px) { .cap-grid { grid-template-columns: 1fr; } }
-
-        /* ============================================
-           SHOWCASE (mockups)
-           ============================================ */
-        .showcase-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 4rem); align-items: center; margin-bottom: clamp(3.5rem, 6vw, 6rem); }
-        .showcase-row:last-child { margin-bottom: 0; }
-        .showcase-row.reverse .showcase-copy { order: 2; }
-        .showcase-copy .badge { margin-bottom: 1rem; }
-        .showcase-copy h3 { font-family: var(--f-serif); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.9rem; }
-        .showcase-copy p { color: var(--c-text-2); line-height: 1.7; font-weight: 300; margin-bottom: 1.25rem; max-width: 460px; }
-        .showcase-list { display: flex; flex-direction: column; gap: 0.6rem; }
-        .showcase-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; color: var(--c-text-2); font-weight: 300; }
-        .showcase-list svg { width: 17px; height: 17px; color: var(--c-accent); flex-shrink: 0; margin-top: 2px; }
-        @media (max-width: 880px) {
-            .showcase-row, .showcase-row.reverse { grid-template-columns: 1fr; }
-            .showcase-row.reverse .showcase-copy { order: 0; }
-            .showcase-stage { max-width: 440px; margin: 0 auto; width: 100%; }
+        a.roster-row:hover { background: var(--c-accent-soft); padding-left: 0.9rem; }
+        .roster-idx { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; color: var(--c-text-3); }
+        .roster-name { display: flex; align-items: center; gap: 0.6rem; font-family: var(--f-serif); font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.01em; }
+        .roster-name .adot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        .adot-assistant { background: var(--c-badge-realtime); }
+        .adot-campaigns { background: var(--c-badge-ai); }
+        .adot-presents { background: var(--c-badge-open); }
+        .roster-role { font-size: 0.92rem; color: var(--c-text-2); font-weight: 300; line-height: 1.55; }
+        .roster-end { display: flex; align-items: center; gap: 0.9rem; justify-content: flex-end; }
+        .roster-end svg { width: 15px; height: 15px; color: var(--c-accent); transition: transform var(--duration-fast) ease; }
+        a.roster-row:hover .roster-end svg { transform: translateX(3px); }
+        .roster-row.is-soon .roster-name, .roster-row.is-soon .roster-role { color: var(--c-text-3); }
+        @media (max-width: 760px) {
+            /* Index gutter stays column 1; name, role and status stack in column 2.
+               Without the explicit span, .roster-end auto-places into the 1.9rem
+               gutter and the badge overflows off-canvas. */
+            .roster-row { grid-template-columns: 1.9rem 1fr; row-gap: 0.6rem; }
+            .roster-role, .roster-end { grid-column: 2 / -1; }
+            .roster-end { justify-content: flex-start; }
         }
 
-        /* Browser mockup */
-        .mock-browser { border: 1px solid var(--c-border-strong); border-radius: 12px; overflow: hidden; background: var(--c-surface); box-shadow: var(--c-card-shadow-hover); }
-        .mb-bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.65rem 0.85rem; background: var(--c-bg-alt); border-bottom: 1px solid var(--c-border); }
-        .mb-dots { display: flex; gap: 6px; }
-        .mb-dots span { width: 11px; height: 11px; border-radius: 50%; background: var(--c-border-strong); }
-        .mb-url { flex: 1; margin-left: 0.5rem; font-size: 0.7rem; color: var(--c-text-3); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-pill); padding: 0.3rem 0.85rem; text-align: center; }
-        .mb-body { padding: 0; background: linear-gradient(160deg, #1c2419, #0f140d); }
-        [data-theme="light"] .mb-body { background: linear-gradient(160deg, #f4efe6, #fbf9f4); }
-        .site-nav { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        [data-theme="light"] .site-nav { border-bottom-color: rgba(0,0,0,0.06); }
-        .site-nav .logo { font-family: var(--f-serif); font-size: 1.05rem; color: #e9dcc2; }
-        [data-theme="light"] .site-nav .logo { color: #5a4a32; }
-        .site-nav .links { display: flex; gap: 0.85rem; }
-        .site-nav .links span { width: 34px; height: 6px; border-radius: 3px; background: rgba(233,220,194,0.25); }
-        .site-hero { padding: 2rem 1.2rem 2.2rem; text-align: center; }
-        .site-hero .kicker { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #c2a878; margin-bottom: 0.7rem; }
-        .site-hero h4 { font-family: var(--f-serif); font-size: 1.7rem; line-height: 1.15; color: #f0e7d4; margin-bottom: 0.7rem; }
-        [data-theme="light"] .site-hero h4 { color: #3a2f1d; }
-        .site-hero .lead { width: 70%; height: 7px; border-radius: 4px; background: rgba(233,220,194,0.2); margin: 0 auto 0.5rem; }
-        .site-hero .lead.short { width: 50%; margin-bottom: 1.2rem; }
-        .site-hero .pill-btn { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.5rem 1.3rem; border-radius: var(--radius-pill); background: #c2a878; color: #1a1208; }
-        .site-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; padding: 0 1.2rem 1.4rem; }
-        .site-cards .sc { height: 56px; border-radius: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
-        [data-theme="light"] .site-cards .sc { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.06); }
-
-        /* Phone mockup */
-        .mock-phone { width: 270px; margin: 0 auto; border: 9px solid #1d1d1d; border-radius: 38px; background: #1d1d1d; box-shadow: var(--c-card-shadow-hover); position: relative; }
-        [data-theme="light"] .mock-phone { border-color: #2a2a2a; }
-        .mock-phone::before { content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 90px; height: 18px; background: #1d1d1d; border-radius: 0 0 12px 12px; z-index: 3; }
-        .phone-screen { border-radius: 30px; overflow: hidden; background: var(--c-bg-alt); height: 500px; display: flex; flex-direction: column; }
-        .ph-top { background: linear-gradient(135deg, #7a3b1f, #b8632e); padding: 2rem 1.1rem 1rem; color: #fff; }
-        .ph-top .shop { font-family: var(--f-serif); font-size: 1.25rem; }
-        .ph-top .tag { font-size: 0.7rem; opacity: 0.85; }
-        .ph-tabs { display: flex; gap: 1rem; padding: 0.7rem 1.1rem; border-bottom: 1px solid var(--c-border); font-size: 0.72rem; color: var(--c-text-3); }
-        .ph-tabs .on { color: var(--c-accent); font-weight: 600; border-bottom: 2px solid var(--c-accent); padding-bottom: 0.3rem; }
-        .ph-menu { flex: 1; overflow: hidden; padding: 0.6rem 0; }
-        .ph-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 1.1rem; }
-        .ph-item .thumb { width: 42px; height: 42px; border-radius: 8px; background: linear-gradient(135deg, #c08850, #8a5a30); flex-shrink: 0; }
-        .ph-item .info { flex: 1; }
-        .ph-item .info .nm { font-size: 0.82rem; font-weight: 600; color: var(--c-text); }
-        .ph-item .info .pr { font-size: 0.74rem; color: var(--c-text-3); }
-        .ph-item .add { width: 26px; height: 26px; border-radius: 50%; background: var(--c-accent-soft); color: var(--c-accent); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 600; line-height: 1; }
-        .ph-cart { margin: 0.5rem 0.9rem 0.9rem; background: var(--c-accent); color: #1a1208; border-radius: 12px; padding: 0.8rem 1rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; font-weight: 600; }
-        [data-theme="light"] .ph-cart { color: #fff; }
-        .ph-cart .badge-n { background: rgba(0,0,0,0.2); border-radius: var(--radius-pill); padding: 0.05rem 0.55rem; font-size: 0.72rem; }
-
-        /* Chat mockup */
-        .mock-chat { border: 1px solid var(--c-border-strong); border-radius: 18px; overflow: hidden; background: var(--c-surface); box-shadow: var(--c-card-shadow-hover); max-width: 380px; margin: 0 auto; }
-        .chat-head { display: flex; align-items: center; gap: 0.7rem; padding: 0.9rem 1.1rem; background: var(--c-bg-alt); border-bottom: 1px solid var(--c-border); }
-        .chat-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--c-accent), #9a7d4f); display: flex; align-items: center; justify-content: center; font-family: var(--f-serif); font-size: 1.1rem; color: #1a1208; flex-shrink: 0; }
-        .chat-head .who { flex: 1; }
-        .chat-head .who .nm { font-size: 0.88rem; font-weight: 600; }
-        .chat-head .who .st { font-size: 0.7rem; color: var(--c-badge-production); display: flex; align-items: center; gap: 0.3rem; }
-        .chat-head .who .st::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--c-badge-production); }
-        .chat-body { padding: 1.1rem; display: flex; flex-direction: column; gap: 0.7rem; }
-        .bubble { font-size: 0.84rem; line-height: 1.5; padding: 0.65rem 0.9rem; border-radius: 14px; max-width: 82%; }
-        .bubble.in { align-self: flex-end; background: var(--c-accent); color: #1a1208; border-bottom-right-radius: 4px; }
-        [data-theme="light"] .bubble.in { color: #fff; }
-        .bubble.out { align-self: flex-start; background: var(--c-bg-alt); color: var(--c-text); border: 1px solid var(--c-border); border-bottom-left-radius: 4px; }
-        .typing { display: flex; gap: 4px; align-self: flex-start; padding: 0.7rem 0.9rem; background: var(--c-bg-alt); border: 1px solid var(--c-border); border-radius: 14px; }
-        .typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--c-text-3); animation: typingBounce 1.2s infinite ease-in-out; }
-        .typing span:nth-child(2) { animation-delay: 0.15s; }
-        .typing span:nth-child(3) { animation-delay: 0.3s; }
-        @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-4px); opacity: 1; } }
-        .chat-input { display: flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.1rem; border-top: 1px solid var(--c-border); }
-        .chat-input .field { flex: 1; font-size: 0.78rem; color: var(--c-text-3); background: var(--c-bg-alt); border: 1px solid var(--c-border); border-radius: var(--radius-pill); padding: 0.5rem 0.95rem; }
-        .chat-input .send { width: 32px; height: 32px; border-radius: 50%; background: var(--c-accent); color: #1a1208; display: flex; align-items: center; justify-content: center; }
-        .chat-input .send svg { width: 15px; height: 15px; }
-
-        /* Voice mockup */
-        .mock-voice { border: 1px solid var(--c-border-strong); border-radius: 18px; background: radial-gradient(circle at 50% 0%, var(--c-accent-soft), var(--c-surface) 60%); box-shadow: var(--c-card-shadow-hover); padding: 2.2rem 1.5rem 1.8rem; text-align: center; max-width: 380px; margin: 0 auto; }
-        .voice-orb { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 1.4rem; background: linear-gradient(135deg, var(--c-accent), #9a7d4f); display: flex; align-items: center; justify-content: center; font-family: var(--f-serif); font-size: 2.2rem; color: #1a1208; position: relative; }
-        .voice-orb::before, .voice-orb::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--c-accent); animation: voiceRing 2.4s ease-out infinite; }
-        .voice-orb::after { animation-delay: 1.2s; }
-        @keyframes voiceRing { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.7); opacity: 0; } }
-        .voice-wave { display: flex; align-items: center; justify-content: center; gap: 4px; height: 38px; margin-bottom: 1.1rem; }
-        .voice-wave span { width: 4px; border-radius: 2px; background: var(--c-accent); animation: waveBar 1s ease-in-out infinite; }
-        .voice-wave span:nth-child(1) { animation-delay: 0s; }
-        .voice-wave span:nth-child(2) { animation-delay: 0.12s; }
-        .voice-wave span:nth-child(3) { animation-delay: 0.24s; }
-        .voice-wave span:nth-child(4) { animation-delay: 0.36s; }
-        .voice-wave span:nth-child(5) { animation-delay: 0.48s; }
-        .voice-wave span:nth-child(6) { animation-delay: 0.30s; }
-        .voice-wave span:nth-child(7) { animation-delay: 0.18s; }
-        .voice-wave span:nth-child(8) { animation-delay: 0.06s; }
-        @keyframes waveBar { 0%, 100% { height: 8px; } 50% { height: 34px; } }
-        .voice-state { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 0.6rem; }
-        .voice-caption { font-size: 0.92rem; color: var(--c-text); line-height: 1.5; font-weight: 300; font-style: italic; max-width: 290px; margin: 0 auto 1.4rem; }
-        .voice-mic { width: 52px; height: 52px; border-radius: 50%; background: var(--c-accent); color: #1a1208; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 18px var(--c-accent-soft); }
-        .voice-mic svg { width: 22px; height: 22px; }
-
-        /* ============================================
-           PROCESS / PIPELINE
-           ============================================ */
-        .process-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
-        .process-step { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1.5rem 1.3rem; }
-        .process-step .num { font-family: var(--f-serif); font-size: 1.5rem; color: var(--c-accent); margin-bottom: 0.6rem; }
-        .process-step h3 { font-size: 0.98rem; font-weight: 600; margin-bottom: 0.4rem; }
-        .process-step p { font-size: 0.82rem; color: var(--c-text-2); line-height: 1.55; font-weight: 300; }
-        @media (max-width: 900px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 460px) { .process-grid { grid-template-columns: 1fr; } }
-
-        .pipe-panel { margin-top: clamp(2rem, 4vw, 3rem); display: grid; grid-template-columns: 1fr 0.85fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: center; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: clamp(1.75rem, 3vw, 2.75rem); }
-        .pipe-panel h3 { font-family: var(--f-serif); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 400; line-height: 1.2; margin-bottom: 0.9rem; }
-        .pipe-panel p { color: var(--c-text-2); line-height: 1.7; font-weight: 300; margin-bottom: 1.2rem; }
-        .pipe-flow { display: flex; flex-direction: column; gap: 0.7rem; }
-        .pf-row { display: flex; align-items: center; gap: 0.85rem; background: var(--c-bg-alt); border: 1px solid var(--c-border); border-radius: 12px; padding: 0.8rem 1rem; font-size: 0.84rem; }
-        .pf-row .pf-ic { width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--c-accent-soft); color: var(--c-accent); }
-        .pf-row .pf-ic svg { width: 16px; height: 16px; }
-        .pf-row .pf-tx { flex: 1; }
-        .pf-row .pf-tx strong { display: block; font-weight: 600; color: var(--c-text); }
-        .pf-row .pf-tx span { color: var(--c-text-3); font-size: 0.76rem; }
-        .pf-row .pf-time { font-size: 0.7rem; color: var(--c-accent); font-weight: 600; white-space: nowrap; }
-        @media (max-width: 760px) { .pipe-panel { grid-template-columns: 1fr; } }
-
-        /* ============================================
-           MAYA CTA
-           ============================================ */
-        .maya-panel { background: radial-gradient(circle at 80% 20%, var(--c-accent-soft), var(--c-surface) 55%); border: 1px solid var(--c-border); border-radius: var(--radius); padding: clamp(2.25rem, 5vw, 4rem); text-align: center; }
-        .maya-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 1.1rem; }
-        .maya-panel h2 { font-family: var(--f-serif); font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 400; line-height: 1.15; margin-bottom: 1rem; }
-        .maya-panel p { color: var(--c-text-2); font-weight: 300; line-height: 1.7; max-width: 560px; margin: 0 auto 2rem; }
-        .maya-panel .btn { margin: 0 auto; }
-
-        /* ============================================
-           STUDIO / ABOUT
-           ============================================ */
-        .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(2rem, 4vw, 4rem); align-items: start; }
-        .about-text p { color: var(--c-text-2); line-height: 1.8; font-weight: 300; }
-        .about-text p + p { margin-top: 1.2rem; }
-        .about-text strong { color: var(--c-text); font-weight: 500; }
-        .about-details { display: flex; flex-direction: column; gap: 1.5rem; }
-        .about-detail { padding: 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-sm); }
-        .about-detail-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-text-3); margin-bottom: 0.5rem; }
-        .about-detail-value { font-size: 0.95rem; color: var(--c-text); font-weight: 400; line-height: 1.5; }
-        @media (max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr; }
-            .about-details { flex-direction: row; flex-wrap: wrap; }
-            .about-detail { flex: 1 1 calc(50% - 0.75rem); min-width: 160px; }
+        .hiroi-foot {
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem;
+            margin-top: 2.25rem;
         }
+        .hiroi-foot p { font-size: 0.9rem; color: var(--c-text-2); font-weight: 300; max-width: 520px; line-height: 1.65; }
+
+        /* ============================================
+           WORK INDEX
+           ============================================ */
+        .band { margin-bottom: 2.75rem; }
+        .band:last-child { margin-bottom: 0; }
+        .band-label {
+            display: flex; align-items: center; gap: 0.85rem;
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--c-text-3); margin-bottom: 0.35rem;
+        }
+        .band-label::after { content: ''; flex: 1; height: 1px; background: var(--c-border); }
+
+        .wi-row {
+            display: grid; grid-template-columns: minmax(140px, 0.85fr) 2fr auto;
+            align-items: baseline; gap: 0.4rem 1.5rem;
+            padding: 1.15rem 0.5rem 1.15rem 0;
+            border-bottom: 1px solid var(--c-border);
+            transition: background-color var(--duration-fast) ease, padding-left var(--duration-fast) ease;
+        }
+        a.wi-row:hover { background: var(--c-accent-soft); padding-left: 0.9rem; }
+        .wi-name { font-family: var(--f-serif); font-size: 1.28rem; letter-spacing: -0.01em; line-height: 1.25; }
+        a.wi-row:hover .wi-name { color: var(--c-accent); }
+        .wi-desc { font-size: 0.89rem; color: var(--c-text-2); font-weight: 300; line-height: 1.6; }
+        .wi-desc .wi-tech { color: var(--c-text-3); }
+        .wi-end { display: flex; align-items: center; gap: 0.8rem; justify-content: flex-end; }
+        .wi-end svg { width: 14px; height: 14px; color: var(--c-accent); transition: transform var(--duration-fast) ease; }
+        a.wi-row:hover .wi-end svg { transform: translate(2px, -2px); }
+        @media (max-width: 720px) {
+            .wi-row { grid-template-columns: 1fr auto; }
+            .wi-desc { grid-column: 1 / -1; }
+        }
+
+        /* ============================================
+           PROCESS
+           ============================================ */
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .step { border-top: 2px solid var(--c-accent); padding-top: 1.25rem; }
+        .step .num { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 0.7rem; }
+        .step h3 { font-family: var(--f-serif); font-size: 1.45rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 0.55rem; }
+        .step p { font-size: 0.89rem; color: var(--c-text-2); line-height: 1.65; font-weight: 300; }
+        @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+
+        /* ============================================
+           STUDIO
+           ============================================ */
+        .studio-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+        .studio-text p { color: var(--c-text-2); line-height: 1.8; font-weight: 300; }
+        .studio-text p + p { margin-top: 1.2rem; }
+        .studio-text strong { color: var(--c-text); font-weight: 500; }
+        .studio-facts { display: flex; flex-direction: column; gap: 1px; background: var(--c-border); border: 1px solid var(--c-border); border-radius: var(--radius-sm); overflow: hidden; }
+        .studio-fact { background: var(--c-surface); padding: 1.15rem 1.35rem; }
+        .studio-fact dt { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-text-3); margin-bottom: 0.35rem; }
+        .studio-fact dd { font-size: 0.93rem; color: var(--c-text); line-height: 1.5; }
+        @media (max-width: 820px) { .studio-grid { grid-template-columns: 1fr; } }
 
         /* ============================================
            CONTACT
            ============================================ */
-        .contact-inner { text-align: center; }
-        .contact-title { font-family: var(--f-serif); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.75rem; }
-        .contact-subtitle { color: var(--c-text-2); font-weight: 300; margin-bottom: 2.5rem; font-size: 1rem; }
-        .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-        .contact-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; font-weight: 500; padding: 0.7rem 1.5rem; border: 1px solid var(--c-border-strong); border-radius: var(--radius-pill); color: var(--c-text-2); transition: all var(--duration-fast) ease; }
-        .contact-link:hover { border-color: var(--c-accent); color: var(--c-accent); transform: translateY(-1px); }
-        .contact-link svg { width: 16px; height: 16px; }
+        .contact-panel {
+            background: radial-gradient(circle at 78% 18%, var(--c-accent-soft), var(--c-surface) 58%);
+            border: 1px solid var(--c-border); border-radius: var(--radius);
+            padding: clamp(2.25rem, 5.5vw, 4.25rem); text-align: center;
+        }
+        .contact-panel h2 { font-family: var(--f-serif); font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .contact-panel > p { color: var(--c-text-2); font-weight: 300; line-height: 1.7; max-width: 540px; margin: 0 auto 2.25rem; }
+        .contact-mail {
+            display: inline-flex; align-items: center; gap: 0.7rem;
+            font-family: var(--f-serif); font-size: clamp(1.4rem, 3.6vw, 2.1rem);
+            color: var(--c-text); letter-spacing: -0.01em;
+            padding-bottom: 0.25rem; border-bottom: 1px solid var(--c-border-strong);
+            transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+        }
+        .contact-mail:hover { color: var(--c-accent); border-color: var(--c-accent); }
+        .contact-mail svg { width: 22px; height: 22px; color: var(--c-accent); flex-shrink: 0; }
+        .contact-alt { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.5rem; }
+        .contact-alt a {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.85rem; font-weight: 500; padding: 0.6rem 1.3rem;
+            border: 1px solid var(--c-border-strong); border-radius: var(--radius-pill);
+            color: var(--c-text-2); transition: all var(--duration-fast) ease;
+        }
+        .contact-alt a:hover { border-color: var(--c-accent); color: var(--c-accent); }
+        .contact-alt svg { width: 15px; height: 15px; }
+        .contact-maya { font-size: 0.82rem; color: var(--c-text-3); font-weight: 300; margin-top: 1.6rem; }
+
+        /* The contact panel is the page's closing statement — drop the stacked
+           section padding + footer margin that would leave a dead gap under it. */
+        #contact { padding-bottom: 0; }
+        .site-footer { margin-top: clamp(2.5rem, 5vw, 4rem); }
+        .site-footer .foot-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.1rem; }
+        .site-footer a:hover { color: var(--c-accent); }
     </style>
 </head>
 <body>
@@ -421,13 +333,16 @@
         <nav class="nav" aria-label="Main navigation">
             <a href="#" class="nav-logo" aria-label="TrentApps home">TrentApps</a>
             <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#hiroi">hiroi</a>
                 <a href="#work">Work</a>
-                <a href="#capabilities">Capabilities</a>
-                <a href="#process">Process</a>
                 <a href="#studio">Studio</a>
-                <a href="#contact">Contact</a>
             </div>
             <div class="nav-right">
+                <a href="mailto:maya@trentapps.com" class="nav-cta">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    maya@trentapps.com
+                </a>
                 <button class="theme-toggle" aria-label="Toggle color theme">
                     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
                         <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -446,9 +361,9 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" role="dialog" aria-label="Navigation menu" hidden>
         <div class="mobile-menu-inner">
+            <a href="#services">Services</a>
+            <a href="#hiroi">hiroi</a>
             <a href="#work">Work</a>
-            <a href="#capabilities">Capabilities</a>
-            <a href="#process">Process</a>
             <a href="#studio">Studio</a>
             <a href="#contact">Contact</a>
         </div>
@@ -457,58 +372,124 @@
     <main>
         <!-- ==================== HERO ==================== -->
         <section id="hero" class="hero" aria-label="Introduction">
-            <div class="container hero-grid">
-                <div class="hero-copy">
-                    <span class="hero-eyebrow"><span class="dot"></span>TrentApps &middot; Software Studio &middot; Springfield, MO</span>
-                    <h1 class="hero-headline">Ambitious software, <em>actually shipped.</em></h1>
-                    <p class="hero-sub">
-                        TrentApps is a software studio building production-grade tools &mdash; <strong>AI assistant
-                        platforms, real-time and mobile apps, and the modern websites and ordering systems local
-                        businesses run on.</strong> Researched, engineered, and shipped. Not templated, not outsourced, not vaporware.
-                    </p>
-                    <div class="hero-cta-row">
-                        <a href="#work" class="btn btn-primary">
-                            See the work
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                        </a>
-                        <a href="#maya" class="btn btn-ghost" data-maya-open>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                            Talk to Maya
-                        </a>
-                    </div>
+            <div class="container hero-inner">
+                <span class="hero-eyebrow"><span class="dot"></span>TrentApps LLC &middot; Software Studio &middot; Springfield, MO</span>
+                <h1 class="hero-headline">Custom software, <em>beautifully built.</em></h1>
+                <p class="hero-sub">
+                    We're a software studio. We build <strong>the software your business can't buy off the shelf</strong> &mdash;
+                    and we build <strong>hiroi</strong>, our own suite of AI apps. Both aimed at the same thing: giving small and
+                    medium businesses tools that used to take an enterprise budget.
+                </p>
+                <div class="hero-cta-row">
+                    <a href="mailto:maya@trentapps.com?subject=New%20project%20inquiry" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        Start a project
+                    </a>
+                    <a href="#work" class="btn btn-ghost">
+                        See what we've built
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </a>
                 </div>
-                <div class="hero-visual">
-                    <div class="mock-chat">
-                        <div class="chat-head">
-                            <div class="chat-avatar">M</div>
-                            <div class="who">
-                                <div class="nm">Maya &middot; TrentApps</div>
-                                <div class="st">Online now</div>
-                            </div>
-                        </div>
-                        <div class="chat-body">
-                            <div class="bubble in">What kind of software does TrentApps build?</div>
-                            <div class="bubble out">Quite a range &mdash; an AI assistant platform (that's me!), real-time data tools, iOS apps, and custom systems for businesses. Want me to point you to a few?</div>
-                            <div class="bubble in">Yeah, show me the impressive stuff.</div>
-                            <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-                        </div>
-                        <div class="chat-input">
-                            <div class="field">Ask Maya anything&hellip;</div>
-                            <div class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></div>
-                        </div>
-                    </div>
+                <div class="hero-facts">
+                    <span class="hero-fact"><span class="fdot fdot-live"></span><strong>hiroi Assistant</strong> live in beta</span>
+                    <span class="hero-fact"><span class="fdot fdot-soon"></span><strong>Campaigns &amp; Presents</strong> coming soon</span>
+                    <span class="hero-fact"><span class="fdot fdot-ship"></span><strong>12+ products</strong> shipped since 2023</span>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== STATS ==================== -->
-        <section class="section" style="padding-top: 0;">
+        <div class="section-divider"></div>
+
+        <!-- ==================== TWO DOORS ==================== -->
+        <section id="services" class="section">
             <div class="container">
-                <div class="stats-strip reveal">
-                    <div class="stat-cell"><div class="stat-num">12+</div><div class="stat-lab">Products shipped</div></div>
-                    <div class="stat-cell"><div class="stat-num">Live</div><div class="stat-lab">AI assistant platform in production</div></div>
-                    <div class="stat-cell"><div class="stat-num">170+</div><div class="stat-lab">Open-source rules published on npm</div></div>
-                    <div class="stat-cell"><div class="stat-num">Web&middot;iOS&middot;Cloud</div><div class="stat-lab">Across every surface</div></div>
+                <div class="section-header reveal">
+                    <span class="section-label">What We Do</span>
+                    <h2 class="section-title">Two ways to work with us</h2>
+                    <p class="section-subtitle">Hire the studio to build something that's yours alone &mdash; or start on hiroi, the platform we already run.</p>
+                </div>
+
+                <div class="fork-grid">
+                    <article class="fork-card reveal">
+                        <div class="fork-num">01 &mdash; Custom software</div>
+                        <h3>We build the thing that doesn't exist yet</h3>
+                        <p>Tell us what's slowing your business down. We research it, design it, build it properly, and stay on it after launch &mdash; working directly with you, not through an account manager.</p>
+                        <ul class="fork-list">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Internal systems</strong> &mdash; replace the spreadsheets, paper, and copy-paste that run a department</span></li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Web apps &amp; storefronts</strong> &mdash; fast, mobile-first, with ordering, booking, and payments</span></li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>iOS &amp; mobile</strong> &mdash; native SwiftUI and React Native sharing one backend with your web app</span></li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>AI &amp; real-time</strong> &mdash; assistants, voice, live transcription, streaming data, 3D</span></li>
+                        </ul>
+                        <div class="fork-foot">
+                            <a href="mailto:maya@trentapps.com?subject=Custom%20software%20inquiry" class="btn btn-primary btn-sm">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                Email maya@trentapps.com
+                            </a>
+                            <span class="fork-note">Straight answer within a day.</span>
+                        </div>
+                    </article>
+
+                    <article class="fork-card reveal reveal-delay-2">
+                        <div class="fork-num">02 &mdash; The hiroi platform</div>
+                        <h3>Or start on software we already built</h3>
+                        <p>hiroi is our own suite of AI apps for small and medium businesses &mdash; one account, one bill, one natural voice across all of it. No project, no timeline: sign up and use it.</p>
+                        <ul class="fork-list">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Assistant</strong> &mdash; answers customers, books work, follows through. <em>Live in beta.</em></span></li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Campaigns</strong> &mdash; AI calls, texts, and email at scale. <em>Coming soon.</em></span></li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Presents</strong> &mdash; decks that build and narrate themselves. <em>Coming soon.</em></span></li>
+                        </ul>
+                        <div class="fork-foot">
+                            <a href="https://hiroi.ai" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">
+                                Visit hiroi.ai
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                            <span class="fork-note">Maya, in the corner of this page, runs on it.</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==================== HIROI ==================== -->
+        <section id="hiroi" class="section">
+            <div class="container">
+                <div class="hiroi-head reveal">
+                    <div class="section-header">
+                        <span class="section-label">Our Platform</span>
+                        <h2 class="section-title">hiroi &mdash; three focused AI apps, one account</h2>
+                        <p class="section-subtitle">Built and run by TrentApps. The same engineering we'd bring to your project, already shipped and in customers' hands.</p>
+                    </div>
+                </div>
+
+                <div class="roster reveal">
+                    <a class="roster-row" href="https://assistant.hiroi.ai" target="_blank" rel="noopener">
+                        <span class="roster-idx">01</span>
+                        <span class="roster-name"><span class="adot adot-assistant"></span>Assistant</span>
+                        <span class="roster-role">Answers customers the moment they reach out &mdash; on your site or on the phone &mdash; takes orders, books appointments, and hands off to your team when a person is needed.</span>
+                        <span class="roster-end">
+                            <span class="badge badge-production">Live &middot; Beta</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </span>
+                    </a>
+                    <div class="roster-row is-soon">
+                        <span class="roster-idx">02</span>
+                        <span class="roster-name"><span class="adot adot-campaigns"></span>Campaigns</span>
+                        <span class="roster-role">Where Assistant waits for customers to come in, Campaigns goes out &mdash; AI voice calls, SMS, and email to your whole list, with a dashboard that tells you what's working.</span>
+                        <span class="roster-end"><span class="badge badge-case">Coming Soon</span></span>
+                    </div>
+                    <div class="roster-row is-soon">
+                        <span class="roster-idx">03</span>
+                        <span class="roster-name"><span class="adot adot-presents"></span>Presents</span>
+                        <span class="roster-role">Describe the pitch and hiroi designs the slides, then speaks them in the same natural voice your customers already hear. A proposal that presents itself.</span>
+                        <span class="roster-end"><span class="badge badge-case">Coming Soon</span></span>
+                    </div>
+                </div>
+
+                <div class="hiroi-foot reveal">
+                    <p>Assistant is open in beta now. Campaigns and Presents are in build &mdash; email us and we'll put you at the front of the line.</p>
+                    <a href="mailto:maya@trentapps.com?subject=hiroi%20early%20access" class="btn btn-ghost btn-sm">Ask about early access</a>
                 </div>
             </div>
         </section>
@@ -519,260 +500,70 @@
         <section id="work" class="section">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-label">What We've Shipped</span>
-                    <h2 class="section-title">Real software, in production</h2>
-                    <p class="section-subtitle">Not concepts or case-study mockups &mdash; products people use. Here's a sample of what's come out of the studio.</p>
+                    <span class="section-label">The Work</span>
+                    <h2 class="section-title">Everything we've shipped, in one place</h2>
+                    <p class="section-subtitle">Real software people use &mdash; not case-study mockups. Pick any line to read how it was built and what it took.</p>
                 </div>
 
-                <!-- Flagship: Hiroi -->
-                <article class="flagship reveal">
-                    <div class="flagship-grid">
-                        <div>
-                            <span class="badge badge-open">Flagship &middot; AI Platform &middot; Closed Beta</span>
-                            <h3>Hiroi</h3>
-                            <p class="tag">Embeddable AI assistants that live on any website</p>
-                            <p>
-                                Our own AI assistant platform &mdash; the same technology powering <strong>Maya</strong>, the assistant
-                                you can talk to on this page. Voice and text chat with real-time speech, page-aware intelligence that
-                                reads and interacts with a site, voice cloning, guided tours, document retrieval, and analytics &mdash;
-                                all from a single <code>&lt;script&gt;</code> tag. No build step, no npm package.
-                            </p>
-                            <div class="tech-row">
-                                <span class="tech-tag">TypeScript</span>
-                                <span class="tech-tag">OpenAI</span>
-                                <span class="tech-tag">ElevenLabs</span>
-                                <span class="tech-tag">RAG</span>
-                                <span class="tech-tag">Voice AI</span>
-                                <span class="tech-tag">WebGL</span>
-                            </div>
-                            <div class="flagship-links">
-                                <a href="https://hiroi.ai" class="btn btn-primary" target="_blank" rel="noopener">
-                                    Visit hiroi.ai
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                                </a>
-                                <a href="/projects/hiroi.html" class="btn btn-ghost">Project details</a>
-                            </div>
-                        </div>
-                        <div class="showcase-stage">
-                            <div class="mock-voice">
-                                <div class="voice-orb">H</div>
-                                <div class="voice-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-                                <div class="voice-state">Assistant speaking</div>
-                                <p class="voice-caption">&ldquo;One script tag, and I'm live on your site &mdash; in voice or text.&rdquo;</p>
-                                <div class="voice-mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 18v4"/></svg></div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Work grid -->
-                <div class="work-grid">
-                    <article class="work-card reveal reveal-delay-1">
-                        <span class="badge badge-production">Production SaaS</span>
-                        <h4>FormFlow</h4>
-                        <p class="tagline">Conversation to system-of-record, in real time</p>
-                        <p>Records any conversation &mdash; phone, video, or in-person &mdash; and extracts structured data into form fields live, using Whisper and GPT-4. Web app plus native iOS and React Native companions.</p>
-                        <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Whisper</span><span class="tech-tag">GPT-4</span><span class="tech-tag">SwiftUI</span></div>
-                        <a href="/projects/formflow.html" class="work-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-                    </article>
-
-                    <article class="work-card reveal reveal-delay-2">
-                        <span class="badge badge-enterprise">Open Source &middot; npm</span>
-                        <h4>ManagerProtocol</h4>
-                        <p class="tagline">Governance for AI agents</p>
-                        <p>An MCP server that sits between an AI agent and the world &mdash; evaluating every action against 170+ business rules, returning a risk score, and requiring human approval when it matters. Published on npm.</p>
-                        <div class="tech-row"><span class="tech-tag">TypeScript</span><span class="tech-tag">MCP</span><span class="tech-tag">Node.js</span><span class="tech-tag">Zod</span></div>
-                        <a href="/projects/manager-protocol.html" class="work-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-                    </article>
-
-                    <article class="work-card reveal reveal-delay-3">
-                        <span class="badge badge-enterprise">Enterprise</span>
-                        <h4>AuditAI</h4>
-                        <p class="tagline">AI compliance, before enforcement begins</p>
-                        <p>A compliance dashboard for the EU AI Act, Colorado AI Act, and NIST AI RMF. Classify systems by risk, track requirements, visualize gaps, and keep a tamper-evident audit trail.</p>
-                        <div class="tech-row"><span class="tech-tag">React 19</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Vite</span><span class="tech-tag">Recharts</span></div>
-                        <a href="/projects/auditai.html" class="work-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-                    </article>
-
-                    <article class="work-card reveal reveal-delay-1">
-                        <span class="badge badge-realtime">Real-Time Visualization</span>
-                        <h4>Live Earth</h4>
-                        <p class="tagline">The planet's live data on a 3D globe</p>
-                        <p>A photorealistic 3D globe streaming real-time earthquakes, wildfires, ocean temperatures, and city lights &mdash; with a voice interface for hands-free queries across global datasets.</p>
-                        <div class="tech-row"><span class="tech-tag">WebGL</span><span class="tech-tag">Three.js</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Voice AI</span></div>
-                        <a href="/projects/erf.html" class="work-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-                    </article>
-
-                    <article class="work-card reveal reveal-delay-2">
-                        <span class="badge badge-production">Web &middot; iOS</span>
-                        <h4>Lingua</h4>
-                        <p class="tagline">AI language learning that adapts to you</p>
-                        <p>Speech recognition, conversational practice, and lessons that adjust to the learner &mdash; built on React and Claude, with a native iOS companion sharing the same lesson engine.</p>
-                        <div class="tech-row"><span class="tech-tag">React</span><span class="tech-tag">Claude API</span><span class="tech-tag">SwiftUI</span></div>
-                        <span class="work-link" style="opacity:0.6; cursor:default;">In production</span>
-                    </article>
-
-                    <article class="work-card reveal reveal-delay-3">
-                        <span class="badge badge-ai">AI Creative Platform</span>
-                        <h4>YourStory</h4>
-                        <p class="tagline">Cinematic web experiences from your stories</p>
-                        <p>Generates atmospheric, illustrated, narrated stories &mdash; GPT-4o writes, ElevenLabs voices, and dynamic SVG art adapts to the mood, all in an immersive reading experience.</p>
-                        <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">GPT-4o</span><span class="tech-tag">ElevenLabs</span><span class="tech-tag">SVG</span></div>
-                        <a href="/projects/yourstory.html" class="work-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== TECH MARQUEE ==================== -->
-        <div class="marquee reveal" aria-label="Technologies we work with">
-            <div class="marquee-track">
-                <span class="marquee-item">Python</span><span class="marquee-item">TypeScript</span><span class="marquee-item">OpenAI</span><span class="marquee-item">Claude</span><span class="marquee-item">Whisper</span><span class="marquee-item">ElevenLabs</span><span class="marquee-item">React</span><span class="marquee-item">React Native</span><span class="marquee-item">SwiftUI</span><span class="marquee-item">Azure</span><span class="marquee-item">WebGL</span><span class="marquee-item">MCP</span><span class="marquee-item">RAG</span><span class="marquee-item">WebSockets</span>
-                <span class="marquee-item">Python</span><span class="marquee-item">TypeScript</span><span class="marquee-item">OpenAI</span><span class="marquee-item">Claude</span><span class="marquee-item">Whisper</span><span class="marquee-item">ElevenLabs</span><span class="marquee-item">React</span><span class="marquee-item">React Native</span><span class="marquee-item">SwiftUI</span><span class="marquee-item">Azure</span><span class="marquee-item">WebGL</span><span class="marquee-item">MCP</span><span class="marquee-item">RAG</span><span class="marquee-item">WebSockets</span>
-            </div>
-        </div>
-
-        <!-- ==================== CAPABILITIES ==================== -->
-        <section id="capabilities" class="section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-label">What We Build</span>
-                    <h2 class="section-title">The full stack of what your project needs</h2>
-                    <p class="section-subtitle">From a closed-beta AI platform to the website for the shop down the street &mdash; it's the same engineering, scaled to the job.</p>
-                </div>
-                <div class="cap-grid">
-                    <article class="cap-card reveal reveal-delay-1">
-                        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-                        <h3>AI Assistants &amp; Voice</h3>
-                        <p>Chat and voice assistants that actually know your business &mdash; answering customers, taking details, and handing off to a human when it counts. Powered by Hiroi.</p>
-                    </article>
-                    <article class="cap-card reveal reveal-delay-2">
-                        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-                        <h3>Custom Software</h3>
-                        <p>The system that runs the part of your business stuck in spreadsheets and paper &mdash; built to fit exactly how you actually work, web or cloud.</p>
-                    </article>
-                    <article class="cap-card reveal reveal-delay-3">
-                        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
-                        <h3>Mobile Apps</h3>
-                        <p>Native iOS in SwiftUI and cross-platform in React Native &mdash; shipping real apps that share a backend with the web, not throwaway prototypes.</p>
-                    </article>
-                    <article class="cap-card reveal reveal-delay-1">
-                        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-                        <h3>Real-Time Systems</h3>
-                        <p>Live transcription, streaming data, and interactive 3D &mdash; the hard, latency-sensitive stuff most shops won't touch. Built on WebSockets, WebGL, and streaming AI.</p>
-                    </article>
-                    <article class="cap-card reveal reveal-delay-2">
-                        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-                        <h3>Websites &amp; Storefronts</h3>
-                        <p>Fast, modern, mobile-first sites with online ordering, booking, and payments &mdash; so a local business looks (and works) like it has a tech team behind it.</p>
-                    </article>
-                    <article class="cap-card reveal reveal-delay-3">
-                        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
-                        <h3>Governance &amp; Security</h3>
-                        <p>AI safety, compliance tooling, and security-first architecture &mdash; the kind of rigor that turned into ManagerProtocol and AuditAI. We build it that way by default.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- ==================== SHOWCASE FOR BUSINESSES ==================== -->
-        <section id="business" class="section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-label">For Your Business</span>
-                    <h2 class="section-title">That same engineering, on your storefront</h2>
-                    <p class="section-subtitle">A platform studio building you a website isn't overkill &mdash; it's why the result actually works. Example builds below; the real thing is tuned to your brand and your customers.</p>
+                <div class="band reveal">
+                    <div class="band-label">AI &amp; voice products</div>
+                    <a class="wi-row" href="/projects/hiroi.html">
+                        <span class="wi-name">hiroi Assistant</span>
+                        <span class="wi-desc">An AI assistant that lives on any website in one script tag &mdash; voice and text, page-aware, trained on your own documents. <span class="wi-tech">TypeScript &middot; Voice AI &middot; RAG</span></span>
+                        <span class="wi-end"><span class="badge badge-production">Live &middot; Beta</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </a>
+                    <a class="wi-row" href="/projects/formflow.html">
+                        <span class="wi-name">FormFlow</span>
+                        <span class="wi-desc">Records a conversation &mdash; phone, video, or in person &mdash; and fills your forms as it happens, so nobody types up notes afterward. <span class="wi-tech">Python &middot; Whisper &middot; SwiftUI</span></span>
+                        <span class="wi-end"><span class="badge badge-production">Production</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </a>
+                    <a class="wi-row" href="/projects/yourstory.html">
+                        <span class="wi-name">YourStory</span>
+                        <span class="wi-desc">Turns a written story into a narrated, illustrated web experience &mdash; AI writing, real voice, and artwork that shifts with the mood. <span class="wi-tech">GPT-4o &middot; ElevenLabs &middot; SVG</span></span>
+                        <span class="wi-end"><span class="badge badge-ai">AI Creative</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </a>
+                    <a class="wi-row" href="/projects/assistant.html">
+                        <span class="wi-name">Voice Assistant</span>
+                        <span class="wi-desc">A wake-word desktop assistant with a configurable persona &mdash; the early groundwork that became hiroi's voice stack. <span class="wi-tech">Python &middot; GPT-4 &middot; TTS</span></span>
+                        <span class="wi-end"><span class="badge badge-case">Foundation</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </a>
                 </div>
 
-                <!-- Website -->
-                <div class="showcase-row">
-                    <div class="showcase-copy reveal">
-                        <span class="badge badge-production">Website</span>
-                        <h3>A site that looks like you spent more than you did</h3>
-                        <p>Clean, fast, and built for phones first &mdash; because that's where your customers find you. Your hours, menu, photos, and story, loading in a blink.</p>
-                        <ul class="showcase-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Mobile-first, fast, easy to read</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Shows up on Google for local searches</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Built around your brand, not a theme</li>
-                        </ul>
-                    </div>
-                    <div class="showcase-stage reveal reveal-delay-2">
-                        <div class="mock-browser">
-                            <div class="mb-bar"><div class="mb-dots"><span></span><span></span><span></span></div><div class="mb-url">yourshop.com</div></div>
-                            <div class="mb-body">
-                                <div class="site-nav"><span class="logo">The Daily Grind</span><div class="links"><span></span><span></span><span></span></div></div>
-                                <div class="site-hero">
-                                    <div class="kicker">Springfield, MO &middot; Est. 2019</div>
-                                    <h4>Coffee worth<br>the morning drive.</h4>
-                                    <div class="lead"></div><div class="lead short"></div>
-                                    <span class="pill-btn">Order Ahead</span>
-                                </div>
-                                <div class="site-cards"><div class="sc"></div><div class="sc"></div><div class="sc"></div></div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="band reveal">
+                    <div class="band-label">Business &amp; compliance systems</div>
+                    <a class="wi-row" href="/projects/auditai.html">
+                        <span class="wi-name">AuditAI</span>
+                        <span class="wi-desc">A compliance dashboard for the EU AI Act, Colorado AI Act, and NIST AI RMF &mdash; classify systems by risk, track gaps, keep a tamper-evident trail. <span class="wi-tech">React 19 &middot; TypeScript</span></span>
+                        <span class="wi-end"><span class="badge badge-enterprise">Enterprise</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </a>
+                    <a class="wi-row" href="/projects/manager-protocol.html">
+                        <span class="wi-name">ManagerProtocol</span>
+                        <span class="wi-desc">Sits between an AI agent and the real world, scoring every action against 170+ business rules and stopping for human approval when the stakes are high. <span class="wi-tech">MCP &middot; Node.js &middot; npm</span></span>
+                        <span class="wi-end"><span class="badge badge-open">Open Source</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </a>
+                    <a class="wi-row" href="/projects/aifinance.html">
+                        <span class="wi-name">AIFinance</span>
+                        <span class="wi-desc">A debt-payoff planner, and a deliberate study in <em>not</em> using AI &mdash; money math should be provable, so the engine stayed deterministic. <span class="wi-tech">React &middot; TypeScript</span></span>
+                        <span class="wi-end"><span class="badge badge-case">Case Study</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </a>
                 </div>
 
-                <!-- Ordering -->
-                <div class="showcase-row reverse">
-                    <div class="showcase-copy reveal">
-                        <span class="badge badge-ai">Online Ordering</span>
-                        <h3>Take orders without the middleman</h3>
-                        <p>Customers tap through your menu, build their order, and pay &mdash; right on your own site. You keep the full ticket instead of handing a third to a delivery app.</p>
-                        <ul class="showcase-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No per-order commission to a big platform</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pickup, curbside, or delivery</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Orders land straight on your screen</li>
-                        </ul>
-                    </div>
-                    <div class="showcase-stage reveal reveal-delay-2">
-                        <div class="mock-phone">
-                            <div class="phone-screen">
-                                <div class="ph-top"><div class="shop">The Daily Grind</div><div class="tag">Pickup in ~8 min</div></div>
-                                <div class="ph-tabs"><span class="on">Drinks</span><span>Food</span><span>Beans</span></div>
-                                <div class="ph-menu">
-                                    <div class="ph-item"><div class="thumb"></div><div class="info"><div class="nm">Honey Oat Latte</div><div class="pr">$5.25</div></div><div class="add">+</div></div>
-                                    <div class="ph-item"><div class="thumb"></div><div class="info"><div class="nm">Cold Brew</div><div class="pr">$4.00</div></div><div class="add">+</div></div>
-                                    <div class="ph-item"><div class="thumb"></div><div class="info"><div class="nm">Cinnamon Roll</div><div class="pr">$4.50</div></div><div class="add">+</div></div>
-                                    <div class="ph-item"><div class="thumb"></div><div class="info"><div class="nm">Breakfast Burrito</div><div class="pr">$7.75</div></div><div class="add">+</div></div>
-                                </div>
-                                <div class="ph-cart"><span>View cart</span><span class="badge-n">3 &middot; $14.75</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI assistant on the storefront -->
-                <div class="showcase-row">
-                    <div class="showcase-copy reveal">
-                        <span class="badge badge-open">AI Assistant</span>
-                        <h3>An assistant on your site, day and night</h3>
-                        <p>Drop a Hiroi assistant on your storefront and it answers the questions you field a hundred times a day &mdash; hours, menu, parking &mdash; by chat or voice, and can even start an order. The same kind you're talking to right now.</p>
-                        <ul class="showcase-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Trained on your business, not the whole internet</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Chat or natural voice</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Hands off to you when it's something real</li>
-                        </ul>
-                    </div>
-                    <div class="showcase-stage reveal reveal-delay-2">
-                        <div class="mock-chat">
-                            <div class="chat-head">
-                                <div class="chat-avatar">H</div>
-                                <div class="who"><div class="nm">Daily Grind Assistant</div><div class="st">Online now</div></div>
-                            </div>
-                            <div class="chat-body">
-                                <div class="bubble in">Are you open on the 4th of July?</div>
-                                <div class="bubble out">We're open 7am&ndash;noon on the 4th. Want me to set a pickup order for you?</div>
-                                <div class="bubble in">Two cold brews for 8am</div>
-                                <div class="bubble out">Done &mdash; two cold brews, pickup at 8am, $8.00. I'll text you when it's ready. 👍</div>
-                            </div>
-                            <div class="chat-input">
-                                <div class="field">Type a message&hellip;</div>
-                                <div class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></div>
-                            </div>
-                        </div>
+                <div class="band reveal">
+                    <div class="band-label">Real-time, 3D &amp; mobile</div>
+                    <a class="wi-row" href="/projects/erf.html">
+                        <span class="wi-name">Live Earth</span>
+                        <span class="wi-desc">A photorealistic 3D globe streaming live earthquakes, wildfires, and ocean temperatures &mdash; ask it questions out loud and it answers. <span class="wi-tech">WebGL &middot; Three.js &middot; FastAPI</span></span>
+                        <span class="wi-end"><span class="badge badge-realtime">Real-Time</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </a>
+                    <a class="wi-row" href="/projects/claude-code-mobile-ui.html">
+                        <span class="wi-name">Claude Code Mobile UI</span>
+                        <span class="wi-desc">A phone interface for a developer tool that had none &mdash; built months before the vendor shipped their own. <span class="wi-tech">React &middot; CLI automation</span></span>
+                        <span class="wi-end"><span class="badge badge-innov">Ahead Of It</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </a>
+                    <div class="wi-row">
+                        <span class="wi-name">Lingua</span>
+                        <span class="wi-desc">AI language learning that adapts to the learner, on web and native iOS, sharing one lesson engine. <span class="wi-tech">React &middot; Claude &middot; SwiftUI</span></span>
+                        <span class="wi-end"><span class="badge badge-production">In Production</span></span>
                     </div>
                 </div>
             </div>
@@ -784,69 +575,26 @@
         <section id="process" class="section">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-label">How We Work</span>
-                    <h2 class="section-title">A real engineering process &mdash; no mystery</h2>
-                    <p class="section-subtitle">The same disciplined pipeline behind every product above runs every client project. Research first, ship deliberately, and stay on it after launch.</p>
+                    <span class="section-label">How It Goes</span>
+                    <h2 class="section-title">Three steps, no mystery</h2>
+                    <p class="section-subtitle">The same process behind every product above runs every client project.</p>
                 </div>
-
-                <div class="process-grid">
-                    <div class="process-step reveal reveal-delay-1"><div class="num">1</div><h3>Research</h3><p>I learn your business and the problem cold before writing a line &mdash; grounded in how you actually operate.</p></div>
-                    <div class="process-step reveal reveal-delay-2"><div class="num">2</div><h3>Design</h3><p>A clear proposal: what gets built, how it works, what it costs. No surprises, no jargon.</p></div>
-                    <div class="process-step reveal reveal-delay-3"><div class="num">3</div><h3>Build</h3><p>Engineered for real &mdash; secure, tested, and reviewed &mdash; with previews along the way so you're never in the dark.</p></div>
-                    <div class="process-step reveal reveal-delay-4"><div class="num">4</div><h3>Ship</h3><p>We launch on solid infrastructure, fast and stable, with everything wired up and working.</p></div>
-                    <div class="process-step reveal reveal-delay-5"><div class="num">5</div><h3>Run &amp; improve</h3><p>Hosting, security, and the changes you'll need &mdash; handled, with support that actually responds.</p></div>
-                </div>
-
-                <!-- Automated pipeline panel -->
-                <div class="pipe-panel reveal">
-                    <div>
-                        <span class="badge badge-auto" style="margin-bottom: 1rem;">We Practice What We Build</span>
-                        <h3>We run our own studio on the software we sell.</h3>
-                        <p>The proposals, the project tracking, the support &mdash; all of it runs on a custom AI pipeline we built ourselves. Maya triages every incoming request, routes it instantly, and makes sure nothing falls through the cracks.</p>
-                        <p style="margin-bottom: 0;">So when you need a change after launch, you're not chasing a voicemail. You file a quick ticket, the system picks it up the second it lands, and you always know exactly where it stands. That's the level of service the automation buys you.</p>
+                <div class="steps">
+                    <div class="step reveal reveal-delay-1">
+                        <div class="num">Step 01</div>
+                        <h3>We learn it cold</h3>
+                        <p>A conversation about how your business actually works, then a written proposal: what gets built, how it works, what it costs. Plain language, fixed scope, no jargon.</p>
                     </div>
-                    <div class="pipe-flow">
-                        <div class="pf-row">
-                            <div class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
-                            <div class="pf-tx"><strong>You file a request</strong><span>"Update our fall menu"</span></div>
-                            <div class="pf-time">0s</div>
-                        </div>
-                        <div class="pf-row">
-                            <div class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-                            <div class="pf-tx"><strong>Maya triages it</strong><span>Sorted, prioritized, tagged</span></div>
-                            <div class="pf-time">instant</div>
-                        </div>
-                        <div class="pf-row">
-                            <div class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-                            <div class="pf-tx"><strong>It hits the queue</strong><span>Routed to me, nothing lost</span></div>
-                            <div class="pf-time">live</div>
-                        </div>
-                        <div class="pf-row">
-                            <div class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-                            <div class="pf-tx"><strong>Done &amp; you're updated</strong><span>Change is live, you get the word</span></div>
-                            <div class="pf-time">fast</div>
-                        </div>
+                    <div class="step reveal reveal-delay-2">
+                        <div class="num">Step 02</div>
+                        <h3>We build it properly</h3>
+                        <p>Engineered for real &mdash; secure, tested, reviewed &mdash; with working previews along the way so you're never waiting in the dark wondering what you bought.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- ==================== MAYA ==================== -->
-        <section id="maya" class="section">
-            <div class="container">
-                <div class="maya-panel reveal">
-                    <div class="maya-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                        Meet Maya
+                    <div class="step reveal reveal-delay-3">
+                        <div class="num">Step 03</div>
+                        <h3>We keep it running</h3>
+                        <p>Hosting, monitoring, and the changes you'll need after launch. You file a request, it's picked up the same day, and you always know where it stands.</p>
                     </div>
-                    <h2>The assistant on this page is our own software.</h2>
-                    <p>Maya runs on Hiroi &mdash; the platform we build. She's a live demo of what we can put on your site: ask her what TrentApps could build for you, by chat or by voice, and she'll point you in the right direction. Tap the assistant in the corner and say hello.</p>
-                    <a href="#maya" class="btn btn-primary" data-maya-open>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                        Talk to Maya
-                    </a>
                 </div>
             </div>
         </section>
@@ -860,55 +608,56 @@
                     <span class="section-label">The Studio</span>
                     <h2 class="section-title">Who you're hiring</h2>
                 </div>
-                <div class="about-grid">
-                    <div class="about-text reveal">
+                <div class="studio-grid">
+                    <div class="studio-text reveal">
                         <p>
-                            TrentApps is the studio of <strong>Trent Scott</strong>, a software engineer out of Springfield, Missouri.
-                            I grew up in a small town in southern Missouri, studied computer science, and now build software
-                            full-time &mdash; the products on this page, and the custom tools businesses run on.
+                            TrentApps LLC is the studio of <strong>Trent Scott</strong>, a software engineer in Springfield, Missouri.
+                            I grew up in a small town in southern Missouri, studied computer science, and now build software full-time
+                            &mdash; the hiroi platform, and custom systems for the businesses that hire us.
                         </p>
                         <p>
-                            The work spans further than most one-person shops: a closed-beta AI assistant platform, real-time
-                            and mobile apps, open-source developer tooling, and the websites and ordering systems that keep a
-                            local business moving. It's all <strong>carefully researched and genuinely engineered</strong> &mdash;
-                            not cookie-cutter templates, not marketing fluff.
+                            A studio that ships its own products builds a different kind of client work. Everything here is
+                            <strong>carefully researched and genuinely engineered</strong> &mdash; not a theme with your logo dropped in,
+                            not a prototype we call finished.
                         </p>
                         <p>
-                            What that means for you: you work directly with the person building it. Someone who'll take the time
-                            to understand your business and get the details right &mdash; or leave them out. The same care that
-                            goes into shipping a product goes into your project.
+                            What that means for you: you work directly with the person building it, someone who'll take the time to
+                            understand your business and get the details right &mdash; or tell you honestly when software isn't the answer.
                         </p>
                     </div>
-                    <div class="about-details reveal reveal-delay-2">
-                        <div class="about-detail"><div class="about-detail-label">Studio</div><div class="about-detail-value">TrentApps LLC</div></div>
-                        <div class="about-detail"><div class="about-detail-label">Based In</div><div class="about-detail-value">Springfield, Missouri</div></div>
-                        <div class="about-detail"><div class="about-detail-label">Builds</div><div class="about-detail-value">AI platforms, real-time &amp; mobile apps, custom software, websites</div></div>
-                        <div class="about-detail"><div class="about-detail-label">Flagship</div><div class="about-detail-value">Hiroi &mdash; embeddable AI assistants (hiroi.ai)</div></div>
-                    </div>
+                    <dl class="studio-facts reveal reveal-delay-2">
+                        <div class="studio-fact"><dt>Studio</dt><dd>TrentApps LLC</dd></div>
+                        <div class="studio-fact"><dt>Based in</dt><dd>Springfield, Missouri &mdash; working with clients anywhere in the US</dd></div>
+                        <div class="studio-fact"><dt>Platform</dt><dd>hiroi &mdash; Assistant, Campaigns, Presents (hiroi.ai)</dd></div>
+                        <div class="studio-fact"><dt>Contact</dt><dd><a href="mailto:maya@trentapps.com" style="color: var(--c-accent);">maya@trentapps.com</a></dd></div>
+                    </dl>
                 </div>
             </div>
         </section>
 
-        <div class="section-divider"></div>
-
         <!-- ==================== CONTACT ==================== -->
         <section id="contact" class="section">
             <div class="container">
-                <div class="contact-inner reveal">
-                    <h2 class="contact-title">Start a project</h2>
-                    <p class="contact-subtitle">Tell me what you're building or what's getting in the way &mdash; I'll send back a straight answer and a clear plan.</p>
-                    <div class="contact-links">
-                        <a href="mailto:trent@trentapps.com" class="contact-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                            trent@trentapps.com
+                <div class="contact-panel reveal">
+                    <h2>Tell us what you're trying to build.</h2>
+                    <p>One email is enough to start &mdash; describe the problem in your own words and you'll get a straight answer, a clear plan, and a real number.</p>
+                    <a href="mailto:maya@trentapps.com?subject=New%20project%20inquiry" class="contact-mail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        maya@trentapps.com
+                    </a>
+                    <p class="contact-maya">Maya is our own AI assistant &mdash; she reads every message, sorts it, and makes sure nothing gets lost. You can also talk to her in the corner of this page.</p>
+                    <div class="contact-alt">
+                        <a href="https://hiroi.ai" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            hiroi.ai
                         </a>
-                        <a href="#maya" class="contact-link" data-maya-open>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                            Talk to Maya
-                        </a>
-                        <a href="https://github.com/TrentApps-com" class="contact-link" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        <a href="https://github.com/TrentApps-com" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                             GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/in/tdscott2/" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            LinkedIn
                         </a>
                     </div>
                 </div>
@@ -919,7 +668,11 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2026 TrentApps LLC &middot; Trent Scott &middot; Springfield, MO</p>
+            <p class="foot-row">
+                <span>&copy; 2026 TrentApps LLC</span>
+                <span>Springfield, Missouri</span>
+                <span><a href="mailto:maya@trentapps.com">maya@trentapps.com</a></span>
+            </p>
         </div>
     </footer>
 

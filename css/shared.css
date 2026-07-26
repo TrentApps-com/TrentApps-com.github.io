@@ -12,32 +12,34 @@
     --c-border-strong: rgba(0, 0, 0, 0.12);
     --c-text: #1a1a1a;
     --c-text-2: #555550;
-    --c-text-3: #8a8a82;
-    --c-accent: #8b7355;
-    --c-accent-soft: rgba(139, 115, 85, 0.09);
+    --c-text-3: #6f6f68; /* tertiary text — 4.68:1 on --c-bg, WCAG AA */
+    /* Accent and badge foregrounds are tuned to clear 4.5:1 as small text on
+       --c-bg / --c-surface / their own soft tint. Lightening one breaks WCAG AA. */
+    --c-accent: #7d6749;
+    --c-accent-soft: rgba(125, 103, 73, 0.09);
     --c-accent-text: #6b5a42;
-    --c-badge-production: #1a7a3a;
-    --c-badge-production-bg: rgba(26, 122, 58, 0.1);
+    --c-badge-production: #15702f;
+    --c-badge-production-bg: rgba(21, 112, 47, 0.1);
     --c-badge-enterprise: #2563aa;
     --c-badge-enterprise-bg: rgba(37, 99, 170, 0.1);
-    --c-badge-ai: #b45309;
-    --c-badge-ai-bg: rgba(180, 83, 9, 0.1);
+    --c-badge-ai: #9c4708;
+    --c-badge-ai-bg: rgba(156, 71, 8, 0.1);
     --c-badge-open: #7c3aed;
     --c-badge-open-bg: rgba(124, 58, 237, 0.1);
-    --c-badge-realtime: #0891b2;
-    --c-badge-realtime-bg: rgba(8, 145, 178, 0.1);
+    --c-badge-realtime: #0a6a83;
+    --c-badge-realtime-bg: rgba(10, 106, 131, 0.1);
     --c-badge-auto: #9333ea;
     --c-badge-auto-bg: rgba(147, 51, 234, 0.1);
-    --c-badge-case: #6b7280;
-    --c-badge-case-bg: rgba(107, 114, 128, 0.1);
-    --c-badge-innov: #dc2626;
-    --c-badge-innov-bg: rgba(220, 38, 38, 0.1);
-    --c-hero-orb-1: rgba(139, 115, 85, 0.06);
-    --c-hero-orb-2: rgba(139, 115, 85, 0.04);
+    --c-badge-case: #565c66;
+    --c-badge-case-bg: rgba(86, 92, 102, 0.1);
+    --c-badge-innov: #b81c1c;
+    --c-badge-innov-bg: rgba(184, 28, 28, 0.1);
+    --c-hero-orb-1: rgba(125, 103, 73, 0.06);
+    --c-hero-orb-2: rgba(125, 103, 73, 0.04);
     --c-card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
     --c-card-shadow-hover: 0 4px 16px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.04);
     --c-nav-bg: rgba(247, 246, 243, 0.85);
-    --c-metric-bg: rgba(139, 115, 85, 0.06);
+    --c-metric-bg: rgba(125, 103, 73, 0.06);
 
     /* Typography */
     --f-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
@@ -70,7 +72,7 @@
     --c-border-strong: rgba(255, 255, 255, 0.10);
     --c-text: #ededed;
     --c-text-2: #9a9a94;
-    --c-text-3: #5a5a56;
+    --c-text-3: #80807a; /* tertiary text — 4.95:1 on --c-bg, 4.55:1 on --c-surface, WCAG AA */
     --c-accent: #c9b99a;
     --c-accent-soft: rgba(201, 185, 154, 0.07);
     --c-accent-text: #c9b99a;
