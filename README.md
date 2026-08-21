@@ -1,31 +1,27 @@
-# TrentApps LLC — Studio Website
+# trentapps.com — Trent Scott's Portfolio
 
 **Live site:** [https://trentapps.com](https://trentapps.com)
 
-The website for TrentApps LLC, a software studio in Springfield, Missouri. Two things it needs to say:
+The personal portfolio of Trent Scott — software engineer in Springfield, Missouri, founder of TrentApps LLC and the hiroi platform. The page tells one story in order:
 
-1. **We build custom software** for small and medium businesses — start a project at `maya@trentapps.com`.
-2. **We build hiroi**, our own suite of AI apps — Assistant (live in beta), Campaigns and Presents (coming soon).
+1. **Hero** — who Trent is, in his own words ("Every project here started with *I wonder if I could…*").
+2. **Professional history** (`#story`) — a timeline: Missouri State (CIS) → founding TrentApps LLC (2023) → Moses/Weitzman Health System (2024, current role) → the AI-governance projects (2025) → hiroi live in beta (2026).
+3. **hiroi Assistant** (`#hiroi`) — the flagship: feature grid, a "this site is the demo" panel (Maya, the corner widget, runs on it), and the Campaigns/Presents roadmap.
+4. **The Archive** (`#work`) — every other shipped project in one scannable index; each row links to a detail page.
+5. **About** (`#about`) — off-the-clock Trent, plus the facts card (location, day job, education, studio, contact).
+6. **Contact** (`#contact`) — one email: `maya@trentapps.com`.
 
 ## Structure
 
 | Path | What |
 |---|---|
-| `index.html` | The whole studio page: hero → two doors (custom software / hiroi) → hiroi roster → work index → process → studio → contact. Page-specific CSS lives in its `<style>` block. |
+| `index.html` | The whole portfolio page. Page-specific CSS lives in its `<style>` block. |
 | `css/shared.css` | Design tokens (color, type, spacing, motion) plus nav, badges, reveal animations, footer. Shared with every project page. |
 | `css/project-detail.css` | Layout for the `projects/*.html` detail pages. |
 | `js/shared.js` | Theme toggle, scroll progress, nav state, reveal observer, mobile menu. |
-| `projects/*.html` | One detail page per shipped product. Every row in the homepage work index links to one of these. |
+| `projects/*.html` | One detail page per shipped product, chained with prev/next links. |
 
-Anchor ids on the homepage — `#services`, `#hiroi`, `#work`, `#process`, `#studio`, `#contact` — are linked from every project page's nav and breadcrumb. Renaming one means updating `projects/*.html` too.
-
-## Work index
-
-The homepage lists everything shipped in one scannable index, grouped by what it proves:
-
-- **AI & voice products** — hiroi Assistant, FormFlow, YourStory, Voice Assistant
-- **Business & compliance systems** — AuditAI, ManagerProtocol, AIFinance
-- **Real-time, 3D & mobile** — Live Earth, Claude Code Mobile UI, Lingua
+Anchor ids on the homepage — `#story`, `#hiroi`, `#work`, `#about`, `#contact` — are linked from every project page's nav. Renaming one means updating `projects/*.html` too.
 
 ## Maya
 
