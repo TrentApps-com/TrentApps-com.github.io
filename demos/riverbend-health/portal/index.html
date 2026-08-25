@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Patient Portal · Riverbend Family Health — Demo | TrentApps</title>
+<meta name="description" content="The patient portal and front-desk queue from the Riverbend Family Health demonstration build by TrentApps LLC.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/demos/riverbend-health/base.css">
+<style>
+  body { background: var(--wash); }
+  .switch { display: flex; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px; width: max-content; margin: 0 auto 24px; }
+  .switch button { border: 0; background: none; border-radius: 999px; padding: 9px 20px; font-size: 14.5px; font-weight: 600; cursor: pointer; color: var(--ink-2); }
+  .switch button.on { background: var(--teal); color: #fff; }
+
+  .portal-head { padding: 30px 0 6px; text-align: center; }
+  .portal-head h1 { font-size: clamp(24px, 3.4vw, 32px); }
+  .portal-head p { color: var(--ink-2); font-size: 15px; margin: 8px auto 22px; max-width: 56ch; }
+
+  .side-by { display: grid; grid-template-columns: 1.1fr .9fr; gap: 20px; align-items: start; padding-bottom: 60px; }
+  @media (max-width: 940px) { .side-by { grid-template-columns: 1fr; } }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-bottom: 18px; }
+  .card > header { padding: 15px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .card > header h2 { font-size: 16px; }
+  .card > header .s { font-size: 13px; color: var(--ink-2); }
+  .card > header .right { margin-left: auto; }
+  .card .body { padding: 18px 20px; }
+
+  .who { display: flex; align-items: center; gap: 13px; padding: 20px; border-bottom: 1px solid var(--line); }
+  .who .av { width: 46px; height: 46px; border-radius: 50%; background: var(--teal); color: #fff; display: grid; place-items: center; font-family: var(--display); font-size: 16px; font-weight: 600; flex-shrink: 0; }
+  .who b { font-size: 16px; display: block; }
+  .who span { font-size: 13.5px; color: var(--ink-2); }
+
+  .appt { display: flex; gap: 14px; align-items: flex-start; padding: 15px 20px; border-bottom: 1px solid var(--line); }
+  .appt:last-child { border-bottom: 0; }
+  .appt .when { background: var(--mint-bg); border-radius: 9px; padding: 8px 10px; text-align: center; min-width: 58px; flex-shrink: 0; }
+  .appt .when .d { font-family: var(--display); font-size: 19px; font-weight: 600; color: var(--teal); line-height: 1.05; }
+  .appt .when .m { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+  .appt .b b { font-size: 15px; }
+  .appt .b p { font-size: 13.5px; color: var(--ink-2); }
+  .appt .act { margin-left: auto; }
+
+  .tasklist .t { display: flex; gap: 12px; align-items: center; padding: 13px 20px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+  .tasklist .t:last-child { border-bottom: 0; }
+  .tasklist .tk { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; background: var(--mint-bg); color: var(--teal); }
+  .tasklist .tk svg { width: 12px; height: 12px; }
+  .tasklist .t.todo .tk { background: #eef1f2; color: var(--ink-3); }
+  .tasklist .t.todo { color: var(--ink-2); }
+  .tasklist .t .m { margin-left: auto; font-size: 12.5px; color: var(--ink-3); }
+
+  .docs .d { display: flex; gap: 11px; align-items: center; padding: 12px 20px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+  .docs .d:last-child { border-bottom: 0; }
+  .docs .ic { width: 30px; height: 30px; border-radius: 7px; background: var(--mint-bg); color: var(--teal); display: grid; place-items: center; flex-shrink: 0; }
+  .docs .ic svg { width: 15px; height: 15px; }
+  .docs .m { margin-left: auto; font-size: 12.5px; color: var(--ink-3); }
+
+  .msg { padding: 14px 20px; border-bottom: 1px solid var(--line); }
+  .msg:last-child { border-bottom: 0; }
+  .msg .h { display: flex; gap: 10px; align-items: center; font-size: 13px; color: var(--ink-2); margin-bottom: 5px; }
+  .msg .h b { color: var(--ink); font-size: 14px; }
+  .msg p { font-size: 14.5px; }
+
+  /* Front desk queue */
+  .q { display: flex; flex-direction: column; }
+  .qrow { padding: 15px 20px; border-bottom: 1px solid var(--line); display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap; }
+  .qrow:last-child { border-bottom: 0; }
+  .qrow .av { width: 38px; height: 38px; border-radius: 50%; background: var(--wash); color: var(--teal); display: grid; place-items: center; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+  .qrow .b { flex: 1; min-width: 200px; }
+  .qrow .b b { font-size: 15.5px; }
+  .qrow .b .meta { font-size: 13px; color: var(--ink-2); }
+  .qrow .b .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .qrow .b .chips span { font-size: 11.5px; font-weight: 600; border-radius: 99px; padding: 3px 9px; background: var(--wash); color: var(--ink-2); border: 1px solid var(--line); }
+  .qrow .act { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; }
+  .st { font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 99px; padding: 4px 10px; }
+  .st.new { background: #e9f2fb; color: #14568f; }
+  .st.review { background: #fdf1dd; color: var(--warn); }
+  .st.ready { background: var(--mint-bg); color: var(--ok); }
+  .empty { padding: 40px 20px; text-align: center; color: var(--ink-2); font-size: 14.5px; }
+  .empty a { color: var(--teal); text-decoration: underline; }
+
+  .detail { font-size: 14px; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; width: 100%; }
+  .detail[hidden] { display: none; }
+  .detail .r { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; }
+  .detail .r span { color: var(--ink-2); }
+  .detail .r b { text-align: right; max-width: 62%; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="note"><b>Live demo.</b> Two sides of the same system. Anything you submit on the <a href="/demos/riverbend-health/#intake">intake form</a> shows up in the front desk queue here.</div>
+
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/demos/riverbend-health/">
+      <svg class="mk" viewBox="0 0 36 36" aria-hidden="true">
+        <circle cx="18" cy="18" r="17" fill="none" stroke="#0f6c73" stroke-width="2"/>
+        <path d="M6 22 C11 14 15 26 20 18 C24 12 27 20 30 16" fill="none" stroke="#0f6c73" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <span class="nm">Riverbend<small>Family Health</small></span>
+    </a>
+    <nav class="site-nav">
+      <a href="/demos/riverbend-health/">&larr; Back to the practice site</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap portal-head">
+    <h1>The portal, both ways</h1>
+    <p>Patients see their own visits and paperwork. The front desk sees the queue. Same data, two very different screens.</p>
+    <div class="switch" id="switch">
+      <button class="on" data-v="patient">Patient view</button>
+      <button data-v="desk">Front desk</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- PATIENT -->
+    <section class="view" data-view="patient">
+      <div class="side-by">
+        <div>
+          <div class="card">
+            <div class="who">
+              <span class="av" id="p-init">MG</span>
+              <span><b id="p-name">Marguerite Alcott</b><span id="p-meta">Patient since 2019 · Dr. Adaeze Obi</span></span>
+            </div>
+            <header><h2>Upcoming</h2><span class="s">Two visits on the books</span></header>
+            <div>
+              <div class="appt">
+                <span class="when"><span class="d">14</span><span class="m">Sep</span></span>
+                <span class="b"><b>Annual physical</b><p>9:20am with Dr. Adaeze Obi · Room 3 · fasting labs first</p></span>
+                <span class="act"><button class="btn btn-ghost btn-sm">Reschedule</button></span>
+              </div>
+              <div class="appt">
+                <span class="when"><span class="d">02</span><span class="m">Dec</span></span>
+                <span class="b"><b>Lab follow-up</b><p>3:00pm with Priya Raman, NP · 20 minutes</p></span>
+                <span class="act"><button class="btn btn-ghost btn-sm">Reschedule</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <header><h2>Before your visit</h2><span class="s" id="task-count">1 thing left</span></header>
+            <div class="tasklist" id="tasks"></div>
+          </div>
+
+          <div class="card">
+            <header><h2>Messages</h2><span class="s">From your care team</span></header>
+            <div>
+              <div class="msg">
+                <div class="h"><b>Dr. Adaeze Obi</b><span>Aug 19</span></div>
+                <p>Your labs from June all came back in range — nothing to act on. We'll repeat the panel at the September physical. No need to fast until midnight the night before, morning of is fine.</p>
+              </div>
+              <div class="msg">
+                <div class="h"><b>Front desk</b><span>Aug 14</span></div>
+                <p>We have your new insurance card on file. Your copay for a routine visit is now $25 instead of $40.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <header><h2>Your documents</h2><span class="s">Everything you've sent us</span></header>
+            <div class="docs" id="docs"></div>
+          </div>
+
+          <div class="card">
+            <header><h2>Medications</h2></header>
+            <div class="body" id="meds" style="font-size:14.5px;color:var(--ink-2)"></div>
+          </div>
+
+          <div class="card">
+            <header><h2>Why this matters</h2></header>
+            <div class="body" style="font-size:14.5px;color:var(--ink-2)">
+              <p>Every item on this screen used to be a phone call to the front desk or a form filled out twice.
+              The portal isn't a nice-to-have &mdash; it's how a two-person front office keeps up with a full schedule.</p>
+              <p style="margin-top:12px">The same shape works for a law office (matters, documents, invoices) or an accountant
+              (returns, requests, e-signature) with the labels changed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FRONT DESK -->
+    <section class="view" data-view="desk" hidden>
+      <div class="card">
+        <header>
+          <h2>New patient queue</h2>
+          <span class="s" id="q-sub">Intakes submitted from the website, newest first.</span>
+          <span class="right"><button class="btn btn-ghost btn-sm" id="clear-q">Clear submitted intakes</button></span>
+        </header>
+        <div class="q" id="queue"></div>
+      </div>
+
+      <div class="card">
+        <header><h2>Today's schedule</h2><span class="s">Thursday · 3 providers</span></header>
+        <div class="q">
+          <div class="qrow"><span class="av">8:00</span><span class="b"><b>Wendell Cho</b><div class="meta">Sick visit · Priya Raman, NP</div></span><span class="act"><span class="st ready">Checked in</span></span></div>
+          <div class="qrow"><span class="av">8:40</span><span class="b"><b>Ines Baptiste</b><div class="meta">Chronic follow-up · Dr. Joel Hartland</div></span><span class="act"><span class="st ready">Checked in</span></span></div>
+          <div class="qrow"><span class="av">9:20</span><span class="b"><b>Marguerite Alcott</b><div class="meta">Annual physical · Dr. Adaeze Obi · fasting labs</div></span><span class="act"><span class="st review">Waiting on labs</span></span></div>
+          <div class="qrow"><span class="av">10:00</span><span class="b"><b>Theo Vasquez</b><div class="meta">Sports physical · Priya Raman, NP</div></span><span class="act"><span class="st new">Forms outstanding</span></span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap cols">
+    <div><strong>Riverbend Family Health</strong>1140 Riverbend Parkway<br>(555) 019-7700</div>
+    <div><strong>Patients</strong><a href="/demos/riverbend-health/#intake">New patient forms</a></div>
+    <div><strong>An invented practice</strong>Built by <a href="/">TrentApps LLC</a><br>to demonstrate intake and client portals.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var KEY = 'ta-riverbend';
+  var $ = function (s) { return document.querySelector(s); };
+
+  function store() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || { intakes: [], draft: {} }; }
+    catch (e) { return { intakes: [], draft: {} }; }
+  }
+  function put(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} }
+
+  var TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+  var FILE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>';
+
+  /* The patient side shows the most recent intake if one exists, so the two
+     screens visibly describe the same person. Otherwise a seeded regular. */
+  function latest() {
+    var s = store();
+    return s.intakes.length ? s.intakes[s.intakes.length - 1] : null;
+  }
+
+  function renderPatient() {
+    var it = latest();
+    var d = it ? it.data : null;
+    var name = d ? (d['i-first'] + ' ' + d['i-last']).trim() : 'Marguerite Alcott';
+    if (!name) name = 'Marguerite Alcott';
+    $('#p-name').textContent = name;
+    $('#p-init').textContent = name.split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
+    $('#p-meta').textContent = d
+      ? 'New patient · ' + (d['i-pref'] === 'No preference' ? 'provider being assigned' : d['i-pref'])
+      : 'Patient since 2019 · Dr. Adaeze Obi';
+
+    var files = (d && d.files) || [];
+    var hasIns = d ? !!(d['i-carrier'] || files.length) : true;
+    var tasks = [
+      { t: 'New-patient intake', done: !!d, m: d ? 'Submitted' : 'Not started' },
+      { t: 'Insurance on file', done: hasIns, m: hasIns ? (d && d['i-carrier'] ? d['i-carrier'] : 'Card uploaded') : 'Bring the card in' },
+      { t: 'Consent & privacy acknowledgement', done: !!d, m: d ? 'Signed' : 'Waiting' },
+      { t: 'Fasting labs before the physical', done: false, m: 'Any morning this week' }
+    ];
+    $('#tasks').innerHTML = tasks.map(function (t) {
+      return '<div class="t' + (t.done ? '' : ' todo') + '"><span class="tk">' + (t.done ? TICK : '') + '</span>' +
+        t.t + '<span class="m">' + t.m + '</span></div>';
+    }).join('');
+    var left = tasks.filter(function (t) { return !t.done; }).length;
+    $('#task-count').textContent = left ? left + (left === 1 ? ' thing left' : ' things left') : 'All done';
+
+    var docs = files.length ? files : [{ name: 'insurance-front.jpg', size: '1.4 MB' }, { name: 'insurance-back.jpg', size: '1.2 MB' }];
+    docs = docs.concat([{ name: 'lab-results-june.pdf', size: '412 KB' }, { name: 'visit-summary-june.pdf', size: '188 KB' }]);
+    $('#docs').innerHTML = docs.map(function (f) {
+      return '<div class="d"><span class="ic">' + FILE + '</span>' + f.name + '<span class="m">' + f.size + '</span></div>';
+    }).join('');
+
+    $('#meds').innerHTML = d && d['i-meds']
+      ? '<p>' + d['i-meds'].replace(/</g, '&lt;') + '</p><p style="margin-top:10px;font-size:13px">As you reported it on your intake. Your provider will confirm at the visit.</p>'
+      : '<p>Lisinopril 10&nbsp;mg daily · Vitamin&nbsp;D 2000&nbsp;IU daily</p><p style="margin-top:10px;font-size:13px">Refills go through the portal — no phone tree.</p>';
+  }
+
+  function renderQueue() {
+    var list = store().intakes.slice().reverse();
+    var host = $('#queue');
+    if (!list.length) {
+      host.innerHTML = '<div class="empty">Nothing in the queue yet. <a href="/demos/riverbend-health/#intake">Fill out the intake form</a> and it lands here.</div>';
+      $('#q-sub').textContent = 'Intakes submitted from the website, newest first.';
+      return;
+    }
+    $('#q-sub').textContent = list.length + ' waiting to be worked';
+    host.innerHTML = list.map(function (it) {
+      var d = it.data;
+      var name = (d['i-first'] + ' ' + d['i-last']).trim() || 'Unnamed';
+      var init = name.split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
+      var chips = [];
+      if (d['i-reason']) chips.push(d['i-reason']);
+      if ((d.files || []).length) chips.push((d.files.length) + ' document' + (d.files.length > 1 ? 's' : ''));
+      if (d['i-carrier']) chips.push(d['i-carrier']);
+      if ((d.conds || []).length && d.conds[0] !== 'None of these') chips.push(d.conds.length + ' history item' + (d.conds.length > 1 ? 's' : ''));
+      var mins = Math.max(0, Math.round((Date.now() - it.at) / 60000));
+      return '<div class="qrow">' +
+        '<span class="av">' + init + '</span>' +
+        '<span class="b"><b>' + name + '</b>' +
+          '<div class="meta">' + it.id + ' · submitted ' + (mins < 1 ? 'just now' : mins + ' min ago') +
+          (d['i-pref'] && d['i-pref'] !== 'No preference' ? ' · requested ' + d['i-pref'] : ' · no provider preference') + '</div>' +
+          '<div class="chips">' + chips.map(function (c) { return '<span>' + c + '</span>'; }).join('') + '</div>' +
+          '<div class="detail" data-detail="' + it.id + '" hidden></div>' +
+        '</span>' +
+        '<span class="act">' +
+          '<span class="st ' + it.status + '">' + (it.status === 'new' ? 'New' : it.status === 'review' ? 'In review' : 'Ready to schedule') + '</span>' +
+          '<button class="btn btn-ghost btn-sm" data-open="' + it.id + '">Open</button>' +
+          '<button class="btn btn-primary btn-sm" data-adv="' + it.id + '">' +
+            (it.status === 'new' ? 'Start review' : it.status === 'review' ? 'Mark ready' : 'Scheduled') + '</button>' +
+        '</span>' +
+      '</div>';
+    }).join('');
+  }
+
+  function detailHtml(it) {
+    var d = it.data;
+    var rows = [
+      ['Date of birth', d['i-dob'] || '—'],
+      ['Reach at', [d['i-phone'], d['i-email']].filter(Boolean).join(' · ') || '—'],
+      ['Address', d['i-addr'] || '—'],
+      ['History', (d.conds || []).length ? d.conds.join(', ') : 'Nothing reported'],
+      ['Medications', d['i-meds'] || 'None listed'],
+      ['Allergies', d['i-allergy'] || 'None listed'],
+      ['Pharmacy', d['i-pharm'] || '—'],
+      ['Insurance', [d['i-carrier'], d['i-member']].filter(Boolean).join(' · ') || 'Bringing the card in'],
+      ['Documents', (d.files || []).length ? d.files.map(function (f) { return f.name; }).join(', ') : 'None attached']
+    ];
+    return rows.map(function (r) { return '<div class="r"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>'; }).join('');
+  }
+
+  document.addEventListener('click', function (e) {
+    var sw = e.target.closest('#switch button');
+    if (sw) {
+      Array.prototype.forEach.call(document.querySelectorAll('#switch button'), function (b) { b.classList.toggle('on', b === sw); });
+      Array.prototype.forEach.call(document.querySelectorAll('.view'), function (v) { v.hidden = v.dataset.view !== sw.dataset.v; });
+      return;
+    }
+    var open = e.target.closest('[data-open]');
+    if (open) {
+      var el = document.querySelector('[data-detail="' + open.dataset.open + '"]');
+      var it = store().intakes.filter(function (x) { return x.id === open.dataset.open; })[0];
+      if (!el || !it) return;
+      if (el.hidden) { el.innerHTML = detailHtml(it); el.hidden = false; open.textContent = 'Close'; }
+      else { el.hidden = true; open.textContent = 'Open'; }
+      return;
+    }
+    var adv = e.target.closest('[data-adv]');
+    if (adv) {
+      var s = store();
+      s.intakes.forEach(function (x) {
+        if (x.id !== adv.dataset.adv) return;
+        x.status = x.status === 'new' ? 'review' : 'ready';
+      });
+      put(s); renderQueue();
+      return;
+    }
+    if (e.target.closest('#clear-q')) {
+      var st = store(); st.intakes = []; put(st); renderQueue(); renderPatient();
+    }
+  });
+
+  renderPatient();
+  renderQueue();
+})();
+</script>
+<script src="/demos/assets/demobar.js" data-demo="Riverbend Family Health" data-keys="ta-riverbend"></script>
+</body>
+</html>

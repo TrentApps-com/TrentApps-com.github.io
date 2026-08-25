@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cedar Ridge Land Works — Contractor Site &amp; Estimator Demo | TrentApps</title>
+<meta name="description" content="A working demonstration of a field-services site with a live job estimator — acreage, terrain, access and haul-off priced instantly, then a quote request that lands ready to schedule. Built by TrentApps LLC. Cedar Ridge Land Works is an invented business.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trentapps.com/demos/cedar-ridge/">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bark: #23301f;
+  --bark-2: #33452c;
+  /* Moss is dark enough to carry white button text (6.2:1) and to read as
+     text on the bone background. --moss-lit is its counterpart on the barks. */
+  --moss: #456a2d;
+  --moss-lit: #8cbd68;
+  --clay: #a3521d;   /* 5.6:1 against white button text */
+  --bone: #f6f4ee;
+  --bone-2: #eae6da;
+  --card: #ffffff;
+  --ink: #1d2419;
+  --ink-2: #5a6553;
+  --ink-3: #646e5c;
+  --line: #ddd8c9;
+  --slab: 'Roboto Slab', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  --r: 10px;
+  --maxw: 1120px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 78px; }
+body { font-family: var(--sans); font-size: 16.5px; line-height: 1.65; color: var(--ink); background: var(--bone); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4 { font-family: var(--slab); font-weight: 700; line-height: 1.12; letter-spacing: -.015em; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--moss); outline-offset: 3px; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+.eyebrow { display: inline-block; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--moss); margin-bottom: 12px; }
+/* The bark backgrounds need the lighter green instead. */
+.hero .eyebrow, .est .eyebrow { color: var(--moss-lit); }
+.sec { padding: clamp(56px, 8vw, 96px) 0; }
+.sec h2 { font-size: clamp(28px, 4.2vw, 42px); }
+.sec-head { max-width: 60ch; margin-bottom: 38px; }
+.sec-head p { color: var(--ink-2); margin-top: 13px; }
+
+.note { background: var(--bark); color: #d7e2cf; font-size: 13.5px; padding: 9px 18px; text-align: center; }
+.note b { color: var(--moss-lit); }
+.note a { color: var(--moss-lit); text-decoration: underline; text-underline-offset: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  font-weight: 600; font-size: 15.5px; padding: 13px 24px; border-radius: 999px;
+  border: 1px solid transparent; cursor: pointer; transition: background .15s ease, border-color .15s ease, transform .12s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 17px; height: 17px; }
+.btn-primary { background: var(--moss); color: #fff; }
+.btn-primary:hover { background: #35521f; }
+.btn-clay { background: var(--clay); color: #fff; }
+.btn-clay:hover { background: #843f13; }
+.btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+.btn-ghost:hover { border-color: var(--ink-3); background: rgba(0,0,0,.03); }
+.btn-ghost-lite { border-color: rgba(255,255,255,.3); color: #fff; }
+.btn-ghost-lite:hover { border-color: var(--moss-lit); color: var(--moss-lit); }
+.btn-sm { padding: 9px 17px; font-size: 14px; }
+
+/* ── Header ── */
+.site-head { position: sticky; top: 0; z-index: 90; background: rgba(35,48,31,.97); backdrop-filter: blur(8px); color: #fff; }
+.site-head .inner { max-width: var(--maxw); margin: 0 auto; padding: 13px clamp(20px,4vw,40px); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 11px; }
+.brand .mk { width: 34px; height: 34px; flex-shrink: 0; }
+.brand .nm { font-family: var(--slab); font-weight: 700; font-size: 18px; line-height: 1.1; }
+.brand .nm small { display: block; font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--moss-lit); margin-top: 2px; }
+.site-nav { display: flex; align-items: center; gap: 24px; }
+.site-nav a { font-size: 14.5px; font-weight: 500; color: rgba(255,255,255,.8); }
+.site-nav a:hover { color: var(--moss-lit); }
+.site-nav a.btn-primary { color: #fff; }
+@media (max-width: 780px) { .site-nav .hide-sm { display: none; } }
+
+/* ── Hero ── */
+.hero { position: relative; color: #fff; background: var(--bark); overflow: hidden; padding: clamp(60px, 9vw, 108px) 0 clamp(56px, 8vw, 96px); }
+.hero .ridge { position: absolute; inset: auto 0 0 0; height: 62%; }
+.hero .ridge svg { width: 100%; height: 100%; display: block; }
+.hero .wrap { position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(36px, 5.6vw, 60px); max-width: 17ch; }
+.hero h1 em { font-style: normal; color: var(--moss-lit); }
+.hero p.lead { margin: 20px 0 30px; max-width: 50ch; color: rgba(255,255,255,.82); font-size: 18px; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-badges { display: flex; gap: 10px 26px; flex-wrap: wrap; margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.16); }
+.hero-badge { display: flex; align-items: center; gap: 9px; font-size: 14px; color: rgba(255,255,255,.8); }
+.hero-badge svg { width: 17px; height: 17px; color: var(--moss-lit); flex-shrink: 0; }
+
+/* ── Services ── */
+.svcs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.svc { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 26px 24px; display: flex; flex-direction: column; }
+.svc .ic { width: 44px; height: 44px; border-radius: 11px; background: #eaf1e3; color: #35521f; display: grid; place-items: center; margin-bottom: 16px; }
+.svc .ic svg { width: 21px; height: 21px; }
+.svc h3 { font-size: 20px; margin-bottom: 8px; }
+.svc p { font-size: 15px; color: var(--ink-2); flex: 1; }
+.svc .pr { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 14px; color: var(--ink-2); }
+.svc .pr b { color: var(--ink); font-size: 16px; }
+@media (max-width: 880px) { .svcs { grid-template-columns: 1fr; } }
+
+/* ── Estimator ── */
+.est { background: var(--bark-2); color: #fff; }
+.est h2 { color: #fff; }
+.est .sec-head p { color: rgba(255,255,255,.75); }
+.est-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(24px, 4vw, 44px); align-items: start; }
+.est-form { background: var(--card); color: var(--ink); border-radius: var(--r); padding: clamp(22px, 3.4vw, 30px); }
+.fgroup { margin-bottom: 22px; }
+.fgroup:last-child { margin-bottom: 0; }
+.fgroup > label, .fgroup > .lbl { display: block; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 9px; }
+.opts { display: flex; gap: 8px; flex-wrap: wrap; }
+.opt {
+  border: 1px solid var(--line); background: var(--bone); border-radius: 8px;
+  padding: 10px 15px; cursor: pointer; font-size: 14.5px; font-weight: 500;
+  transition: border-color .14s ease, background .14s ease;
+}
+.opt:hover { border-color: var(--ink-3); }
+.opt.on { background: var(--moss); border-color: var(--moss); color: #fff; }
+.opt small { display: block; font-size: 12px; font-weight: 400; color: var(--ink-2); margin-top: 1px; }
+.opt.on small { color: rgba(255,255,255,.92); }
+.rangerow { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.rangerow b { font-family: var(--mono); font-size: 22px; }
+input[type="range"] { width: 100%; accent-color: var(--moss); }
+.checks { display: flex; flex-direction: column; gap: 9px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; cursor: pointer; }
+.check input { margin-top: 4px; accent-color: var(--moss); width: 17px; height: 17px; }
+.check span small { display: block; color: var(--ink-2); font-size: 13px; }
+
+.quote { background: var(--bark); color: #fff; border-radius: var(--r); padding: clamp(22px, 3.4vw, 30px); position: sticky; top: 90px; }
+.quote h3 { font-size: 19px; margin-bottom: 4px; }
+.quote > p.s { font-size: 13.5px; color: rgba(255,255,255,.6); margin-bottom: 20px; }
+.qrow { display: flex; justify-content: space-between; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.14); font-size: 14.5px; }
+.qrow span:first-child { color: rgba(255,255,255,.68); }
+.qrow b { font-family: var(--mono); font-weight: 500; }
+.qtotal { margin-top: 20px; }
+.qtotal .l { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.qtotal .v { font-family: var(--mono); font-size: clamp(30px, 4.4vw, 40px); font-weight: 500; color: var(--moss-lit); line-height: 1.1; margin-top: 4px; }
+.qtotal .n { font-size: 13px; color: rgba(255,255,255,.6); margin-top: 8px; line-height: 1.5; }
+.quote .btn { width: 100%; margin-top: 18px; }
+@media (max-width: 900px) { .est-grid { grid-template-columns: 1fr; } .quote { position: static; } }
+
+/* ── Request form ── */
+.req { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: clamp(22px, 3.6vw, 34px); max-width: 720px; }
+.reqfields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fld { display: flex; flex-direction: column; gap: 5px; }
+.fld.wide { grid-column: 1 / -1; }
+.fld label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.fld input, .fld textarea, .fld select { border: 1px solid var(--line); border-radius: 8px; padding: 11px 13px; font-size: 15.5px; background: var(--bone); }
+.fld input:focus, .fld textarea:focus { background: #fff; }
+.fld .err { font-size: 12.5px; color: #a8342a; min-height: 1em; }
+.reqsum { background: var(--bone-2); border-radius: 8px; padding: 14px 16px; font-size: 14px; margin-bottom: 18px; }
+.reqsum b { font-family: var(--mono); }
+@media (max-width: 620px) { .reqfields { grid-template-columns: 1fr; } }
+
+.sent { text-align: center; padding: 20px 0; }
+.sent .tick { width: 58px; height: 58px; border-radius: 50%; background: #e6f0dd; display: grid; place-items: center; margin: 0 auto 18px; }
+.sent .tick svg { width: 28px; height: 28px; color: #43682c; }
+.sent h3 { font-size: 26px; margin-bottom: 8px; }
+.sent p { color: var(--ink-2); max-width: 46ch; margin: 0 auto 18px; }
+.ticketcard { text-align: left; max-width: 460px; margin: 0 auto; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.ticketcard .th { background: var(--bone-2); padding: 12px 16px; font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); display: flex; justify-content: space-between; }
+.ticketcard .tr { display: flex; justify-content: space-between; gap: 14px; padding: 11px 16px; border-top: 1px solid var(--line); font-size: 14.5px; }
+.ticketcard .tr b { text-align: right; }
+
+/* ── Work ── */
+.jobs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.job { border-radius: var(--r); overflow: hidden; border: 1px solid var(--line); background: var(--card); }
+.job .art { height: 132px; }
+.job .art svg { width: 100%; height: 100%; display: block; }
+.job .b { padding: 18px 20px 20px; }
+.job h4 { font-size: 17px; margin-bottom: 6px; }
+.job p { font-size: 14.5px; color: var(--ink-2); }
+.job .m { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); margin-top: 10px; }
+@media (max-width: 880px) { .jobs { grid-template-columns: 1fr; } }
+
+footer.site { background: var(--bark); color: rgba(255,255,255,.65); padding: 44px 0 40px; font-size: 14.5px; }
+footer.site .cols { display: flex; justify-content: space-between; gap: 26px; flex-wrap: wrap; }
+footer.site strong { display: block; color: #fff; margin-bottom: 6px; }
+footer.site a { text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) { * { transition-duration: .001ms !important; } }
+</style>
+</head>
+<body>
+
+<div class="note"><b>Live demo.</b> The estimator below does real math &mdash; move the acreage and watch the range move with it, then <a href="#request">send the request</a>.</div>
+
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="#top">
+      <svg class="mk" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="#7cae57" stroke-width="2"/>
+        <path d="M8 27 L16 14 L22 23 L27 16 L32 27 Z" fill="#7cae57"/>
+      </svg>
+      <span class="nm">Cedar Ridge<small>Land Works</small></span>
+    </a>
+    <nav class="site-nav">
+      <a class="hide-sm" href="#services">Services</a>
+      <a class="hide-sm" href="#estimate">Estimator</a>
+      <a class="hide-sm" href="#work">Recent work</a>
+      <a class="btn btn-primary btn-sm" href="#request">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="ridge" aria-hidden="true">
+    <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
+      <path d="M0 190 L180 96 L330 172 L470 74 L640 186 L790 120 L940 196 L1090 132 L1200 190 L1200 300 L0 300 Z" fill="#2c3c25"/>
+      <path d="M0 232 L150 168 L310 226 L500 152 L660 236 L840 176 L1010 240 L1200 186 L1200 300 L0 300 Z" fill="#35492c"/>
+      <path d="M0 268 L220 226 L430 272 L640 224 L880 274 L1090 232 L1200 262 L1200 300 L0 300 Z" fill="#3f5734"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow">Licensed &amp; insured &middot; Serving four counties</span>
+    <h1>We clear the land <em>and tell you the price first.</em></h1>
+    <p class="lead">
+      Brush clearing, invasive removal, fenceline work and forestry mulching. Put your acreage into the
+      estimator and you'll have a real range in about fifteen seconds &mdash; not after two weeks of phone tag.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#estimate">Price my job</a>
+      <a class="btn btn-ghost-lite" href="#services">What we do</a>
+    </div>
+    <div class="hero-badges">
+      <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Free on-site walk before work starts</span>
+      <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Written quote, no day-of surprises</span>
+      <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Haul-off included or chipped on site</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What we do</span>
+      <h2>Four kinds of work, one crew</h2>
+      <p>Every job gets walked before a machine moves. What follows is what we actually charge for &mdash; the estimator further down uses these same numbers.</p>
+    </div>
+    <div class="svcs">
+      <div class="svc">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12 5 8M12 12l7-4M5 8v8l7 4 7-4V8l-7-4z"/></svg></span>
+        <h3>Brush &amp; overgrowth clearing</h3>
+        <p>Reclaiming pasture, yard edges and old fields that have gone to cedar and blackberry. Cut low, hauled or chipped, ground left workable.</p>
+        <div class="pr">from <b>$950</b> / acre</div>
+      </div>
+      <div class="svc">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9l7-7 7 7M8 15h8"/></svg></span>
+        <h3>Invasive species removal</h3>
+        <p>Bush honeysuckle, autumn olive, callery pear and English ivy &mdash; cut, treated and followed up the next season so it doesn't come back.</p>
+        <div class="pr">from <b>$1,250</b> / acre</div>
+      </div>
+      <div class="svc">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16M20 4v16M4 9h16M4 15h16"/></svg></span>
+        <h3>Fenceline reclamation</h3>
+        <p>Six to ten feet cleared either side, posts exposed, and the line left straight enough to run new wire the same week.</p>
+        <div class="pr">from <b>$4.50</b> / linear ft</div>
+      </div>
+      <div class="svc">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></span>
+        <h3>Forestry mulching</h3>
+        <p>One machine, one pass, no burn pile. Best on standing brush under six inches where you want the material left as ground cover.</p>
+        <div class="pr">from <b>$1,400</b> / acre</div>
+      </div>
+      <div class="svc">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2M8 11v6M12 11v6M16 11v6M5 7l1 13a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-13"/></svg></span>
+        <h3>Haul-off &amp; debris</h3>
+        <p>Loaded and gone the same day, or stacked where you want it. Priced by the load, not by the guess.</p>
+        <div class="pr">from <b>$385</b> / load</div>
+      </div>
+      <div class="svc">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <h3>Follow-up season</h3>
+        <p>Cleared ground grows back. We come back the following spring and treat the regrowth before it's brush again.</p>
+        <div class="pr">from <b>$340</b> / acre</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec est" id="estimate">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Instant estimator</span>
+      <h2>What would your job cost?</h2>
+      <p>These are the same factors we'd walk the property to check. The number moves as you change them, and the range widens honestly when the job gets less predictable.</p>
+    </div>
+    <div class="est-grid">
+      <div class="est-form">
+        <div class="fgroup">
+          <span class="lbl">Type of work</span>
+          <div class="opts" id="o-kind">
+            <button type="button" class="opt on" data-kind="brush">Brush clearing<small>$950/ac</small></button>
+            <button type="button" class="opt" data-kind="invasive">Invasive removal<small>$1,250/ac</small></button>
+            <button type="button" class="opt" data-kind="mulch">Forestry mulching<small>$1,400/ac</small></button>
+            <button type="button" class="opt" data-kind="fence">Fenceline<small>$4.50/ft</small></button>
+          </div>
+        </div>
+
+        <div class="fgroup" id="g-acres">
+          <div class="rangerow"><label for="acres">How much ground</label><b id="acres-out">3.0 acres</b></div>
+          <input id="acres" type="range" min="0.5" max="40" step="0.5" value="3">
+        </div>
+
+        <div class="fgroup" id="g-feet" hidden>
+          <div class="rangerow"><label for="feet">Linear feet of fence</label><b id="feet-out">1,200 ft</b></div>
+          <input id="feet" type="range" min="100" max="6000" step="100" value="1200">
+        </div>
+
+        <div class="fgroup">
+          <span class="lbl">Terrain</span>
+          <div class="opts" id="o-terrain">
+            <button type="button" class="opt on" data-terrain="1">Flat &amp; open</button>
+            <button type="button" class="opt" data-terrain="1.18">Rolling</button>
+            <button type="button" class="opt" data-terrain="1.42">Steep or rocky</button>
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <span class="lbl">Machine access</span>
+          <div class="opts" id="o-access">
+            <button type="button" class="opt on" data-access="1">Drive right in</button>
+            <button type="button" class="opt" data-access="1.12">Tight gate or turn</button>
+            <button type="button" class="opt" data-access="1.3">Walk-in only</button>
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <span class="lbl">Density of growth</span>
+          <div class="opts" id="o-density">
+            <button type="button" class="opt" data-density="0.82">Light &mdash; mostly grass</button>
+            <button type="button" class="opt on" data-density="1">Moderate brush</button>
+            <button type="button" class="opt" data-density="1.34">Heavy &mdash; can't walk it</button>
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <span class="lbl">Add-ons</span>
+          <div class="checks">
+            <label class="check"><input type="checkbox" id="c-haul"><span>Haul the debris off<small>$385 per load &mdash; we estimate the loads from the acreage</small></span></label>
+            <label class="check"><input type="checkbox" id="c-stump"><span>Grind the stumps<small>Adds about 22% &mdash; only worth it if you're mowing after</small></span></label>
+            <label class="check"><input type="checkbox" id="c-follow"><span>Book the follow-up season<small>$340/acre next spring, locked at today's price</small></span></label>
+          </div>
+        </div>
+      </div>
+
+      <aside class="quote" aria-live="polite">
+        <h3>Your estimate</h3>
+        <p class="s">Based on what you've told us so far.</p>
+        <div id="qlines"></div>
+        <div class="qtotal">
+          <div class="l">Likely range</div>
+          <div class="v" id="q-range">$0 – $0</div>
+          <div class="n" id="q-note">Move the sliders and this updates.</div>
+        </div>
+        <a class="btn btn-primary" href="#request" id="q-cta">Send this to the crew</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="request">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Request the quote</span>
+      <h2>Send it over and we'll come look</h2>
+      <p>Your estimate rides along with the request, so the first conversation starts from a number instead of from scratch.</p>
+    </div>
+    <div class="req">
+      <div id="req-live">
+        <div class="reqsum" id="req-sum">Estimate not built yet &mdash; <a href="#estimate" style="text-decoration:underline">run the estimator</a> and it'll attach here.</div>
+        <form id="req-form" novalidate>
+          <div class="reqfields">
+            <div class="fld"><label for="r-name">Name</label><input id="r-name" autocomplete="name"><span class="err" data-for="name"></span></div>
+            <div class="fld"><label for="r-phone">Phone</label><input id="r-phone" inputmode="tel" autocomplete="tel" placeholder="(555) 000-0000"><span class="err" data-for="phone"></span></div>
+            <div class="fld wide"><label for="r-addr">Property address or nearest crossroads</label><input id="r-addr" placeholder="County Road 214, about 3 miles east of Hollis"><span class="err" data-for="addr"></span></div>
+            <div class="fld wide">
+              <label for="r-when">When do you need it done?</label>
+              <select id="r-when">
+                <option>As soon as you can get to it</option>
+                <option>Within the next month</option>
+                <option>Before spring green-up</option>
+                <option>Just getting a number for now</option>
+              </select>
+            </div>
+            <div class="fld wide"><label for="r-notes">Anything we should know? (optional)</label><textarea id="r-notes" rows="3" placeholder="There's an old fence line under the honeysuckle, and the neighbor's cattle are on the south side."></textarea></div>
+          </div>
+          <div style="margin-top:20px"><button class="btn btn-clay" type="submit">Send the request</button></div>
+        </form>
+      </div>
+
+      <div class="sent" id="req-sent" hidden>
+        <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>It's in the crew's queue.</h3>
+        <p>On a real site this creates the job ticket, texts the foreman, and puts a site walk on the calendar. Here it just shows you what the crew would see.</p>
+        <div class="ticketcard" id="req-ticket"></div>
+        <p style="margin-top:22px"><button class="btn btn-ghost" id="req-again">Send another</button></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="work" style="background:var(--bone-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Recent work</span>
+      <h2>What it looks like after</h2>
+      <p>Illustrated for the demo &mdash; a real site would carry the crew's own before-and-after photos here.</p>
+    </div>
+    <div class="jobs">
+      <div class="job">
+        <div class="art"><svg viewBox="0 0 300 132" preserveAspectRatio="none" aria-hidden="true">
+          <rect width="300" height="132" fill="#3f5734"/>
+          <path d="M0 96 L70 58 L140 96 Z" fill="#4f6b41"/><path d="M120 100 L200 52 L280 100 Z" fill="#587845"/>
+          <rect y="96" width="300" height="36" fill="#6d8a52"/>
+          <rect x="30" y="70" width="6" height="30" fill="#2f3f26"/><rect x="70" y="66" width="6" height="34" fill="#2f3f26"/>
+          <rect x="110" y="72" width="6" height="28" fill="#2f3f26"/><rect x="150" y="68" width="6" height="32" fill="#2f3f26"/>
+          <rect x="30" y="76" width="126" height="3" fill="#2f3f26"/><rect x="30" y="88" width="126" height="3" fill="#2f3f26"/>
+        </svg></div>
+        <div class="b"><h4>Fenceline reclaimed, 1,840 ft</h4><p>Twenty years of honeysuckle off both sides, posts exposed, new wire run the following week.</p><div class="m">3 days &middot; two operators</div></div>
+      </div>
+      <div class="job">
+        <div class="art"><svg viewBox="0 0 300 132" preserveAspectRatio="none" aria-hidden="true">
+          <rect width="300" height="132" fill="#46603a"/>
+          <ellipse cx="150" cy="120" rx="200" ry="52" fill="#7b9a5c"/>
+          <ellipse cx="60" cy="60" rx="46" ry="26" fill="#3a5230"/><ellipse cx="240" cy="48" rx="52" ry="28" fill="#3a5230"/>
+          <rect x="118" y="44" width="64" height="40" rx="5" fill="#c8b78e"/><rect x="132" y="60" width="36" height="24" fill="#8f7f5c"/>
+        </svg></div>
+        <div class="b"><h4>Six acres back to pasture</h4><p>Cedar and blackberry cut low, hauled off, ground left ready to drill seed in the fall.</p><div class="m">5 days &middot; haul-off included</div></div>
+      </div>
+      <div class="job">
+        <div class="art"><svg viewBox="0 0 300 132" preserveAspectRatio="none" aria-hidden="true">
+          <rect width="300" height="132" fill="#33452c"/>
+          <rect y="84" width="300" height="48" fill="#6b8a4f"/>
+          <circle cx="60" cy="70" r="18" fill="#4d6b3a"/><circle cx="112" cy="76" r="13" fill="#4d6b3a"/>
+          <circle cx="215" cy="66" r="21" fill="#4d6b3a"/><circle cx="262" cy="76" r="14" fill="#4d6b3a"/>
+          <rect x="140" y="42" width="24" height="48" fill="#2b3a24"/><path d="M128 44 L152 20 L176 44 Z" fill="#5e8244"/>
+        </svg></div>
+        <div class="b"><h4>Invasive removal, second season</h4><p>Callery pear and autumn olive treated at the stump, then walked again the next spring for regrowth.</p><div class="m">2 visits &middot; 11 months apart</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap cols">
+    <div><strong>Cedar Ridge Land Works</strong>(555) 018-4402<br>Hollis, Missouri</div>
+    <div><strong>Service area</strong>Four counties, about 60 miles out.<br>Farther for multi-week jobs.</div>
+    <div><strong>An invented business</strong>Built by <a href="/">TrentApps LLC</a><br>to demonstrate estimating and quote intake.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+
+  var RATES = {
+    brush:    { label: 'Brush clearing',     per: 950,  unit: 'acre', spread: .18 },
+    invasive: { label: 'Invasive removal',   per: 1250, unit: 'acre', spread: .22 },
+    mulch:    { label: 'Forestry mulching',  per: 1400, unit: 'acre', spread: .16 },
+    fence:    { label: 'Fenceline clearing', per: 4.5,  unit: 'ft',   spread: .2  }
+  };
+  var HAUL_PER_LOAD = 385, FOLLOW_PER_ACRE = 340, STUMP_UPLIFT = .22, MIN_JOB = 650;
+
+  var state = { kind: 'brush', acres: 3, feet: 1200, terrain: 1, access: 1, density: 1, haul: false, stump: false, follow: false };
+  var lastQuote = null;
+
+  var dollars = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+
+  function compute() {
+    var r = RATES[state.kind];
+    var isFence = state.kind === 'fence';
+    var qty = isFence ? state.feet : state.acres;
+    var acresEquiv = isFence ? state.feet / 660 : state.acres;   /* ~10 ft wide strip ≈ acres worked */
+
+    var base = r.per * qty;
+    var lines = [{ l: r.label + ' — ' + (isFence ? state.feet.toLocaleString() + ' ft' : state.acres.toFixed(1) + ' ac'), v: base }];
+
+    var mult = state.terrain * state.access * state.density;
+    var adj = base * (mult - 1);
+    if (Math.abs(adj) > 1) {
+      lines.push({ l: 'Terrain, access & density', v: adj });
+    }
+    var running = base + adj;
+
+    if (state.stump) {
+      var st = running * STUMP_UPLIFT;
+      lines.push({ l: 'Stump grinding', v: st });
+      running += st;
+    }
+    if (state.haul) {
+      var loads = Math.max(1, Math.round(acresEquiv * state.density * 1.6));
+      var h = loads * HAUL_PER_LOAD;
+      lines.push({ l: 'Haul-off — ' + loads + ' load' + (loads > 1 ? 's' : ''), v: h });
+      running += h;
+    }
+    if (state.follow) {
+      var fu = Math.max(FOLLOW_PER_ACRE, acresEquiv * FOLLOW_PER_ACRE);
+      lines.push({ l: 'Follow-up season (next spring)', v: fu });
+      running += fu;
+    }
+
+    var total = Math.max(MIN_JOB, running);
+    /* The range widens with the work type's unpredictability and with rough
+       ground — an honest quote is a band, not a single number. */
+    var spread = RATES[state.kind].spread + (state.terrain - 1) * .35 + (state.density - 1) * .25;
+    return {
+      lines: lines,
+      low: total * (1 - spread / 2),
+      high: total * (1 + spread / 2),
+      qtyLabel: isFence ? state.feet.toLocaleString() + ' linear ft' : state.acres.toFixed(1) + ' acres',
+      kindLabel: r.label,
+      minApplied: running < MIN_JOB
+    };
+  }
+
+  function render() {
+    var isFence = state.kind === 'fence';
+    $('#g-acres').hidden = isFence;
+    $('#g-feet').hidden = !isFence;
+    $('#acres-out').textContent = state.acres.toFixed(1) + ' acres';
+    $('#feet-out').textContent = state.feet.toLocaleString() + ' ft';
+
+    var q = compute();
+    lastQuote = q;
+    $('#qlines').innerHTML = q.lines.map(function (l) {
+      return '<div class="qrow"><span>' + l.l + '</span><b>' + (l.v < 0 ? '−' : '') + dollars(Math.abs(l.v)) + '</b></div>';
+    }).join('');
+    $('#q-range').textContent = dollars(q.low) + ' – ' + dollars(q.high);
+    $('#q-note').textContent = q.minApplied
+      ? 'Small jobs carry a ' + dollars(MIN_JOB) + ' minimum — mobilizing the equipment costs the same either way.'
+      : 'A firm number comes after the site walk, which is free. We have never come in over the top of this range.';
+
+    $('#req-sum').innerHTML = 'Attached to your request: <b>' + q.kindLabel + '</b>, ' + q.qtyLabel +
+      ' &middot; estimated <b>' + dollars(q.low) + ' – ' + dollars(q.high) + '</b>';
+  }
+
+  function pick(hostId, attr, key, cast) {
+    $(hostId).addEventListener('click', function (e) {
+      var b = e.target.closest('[data-' + attr + ']');
+      if (!b) return;
+      Array.prototype.forEach.call(this.querySelectorAll('.opt'), function (o) { o.classList.toggle('on', o === b); });
+      state[key] = cast(b.dataset[attr]);
+      render();
+    });
+  }
+  pick('#o-kind', 'kind', 'kind', String);
+  pick('#o-terrain', 'terrain', 'terrain', Number);
+  pick('#o-access', 'access', 'access', Number);
+  pick('#o-density', 'density', 'density', Number);
+
+  $('#acres').addEventListener('input', function () { state.acres = Number(this.value); render(); });
+  $('#feet').addEventListener('input', function () { state.feet = Number(this.value); render(); });
+  ['haul', 'stump', 'follow'].forEach(function (k) {
+    $('#c-' + k).addEventListener('change', function () { state[k] = this.checked; render(); });
+  });
+
+  $('#req-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var ok = true;
+    [['name', '#r-name', 'We need a name.'], ['phone', '#r-phone', 'A number the crew can reach.'], ['addr', '#r-addr', 'Where is the property?']]
+      .forEach(function (f) {
+        var v = $(f[1]).value.trim();
+        var bad = f[0] === 'phone' ? $(f[1]).value.replace(/\D/g, '').length < 10 : !v;
+        document.querySelector('[data-for="' + f[0] + '"]').textContent = bad ? f[2] : '';
+        if (bad) ok = false;
+      });
+    if (!ok) return;
+
+    var q = lastQuote || compute();
+    $('#req-ticket').innerHTML =
+      '<div class="th"><span>JOB TICKET</span><span>CR-' + String(Date.now()).slice(-5) + '</span></div>' +
+      '<div class="tr"><span>Customer</span><b>' + $('#r-name').value.trim() + '</b></div>' +
+      '<div class="tr"><span>Reach at</span><b>' + $('#r-phone').value.trim() + '</b></div>' +
+      '<div class="tr"><span>Property</span><b>' + $('#r-addr').value.trim() + '</b></div>' +
+      '<div class="tr"><span>Work</span><b>' + q.kindLabel + '</b></div>' +
+      '<div class="tr"><span>Size</span><b>' + q.qtyLabel + '</b></div>' +
+      '<div class="tr"><span>Estimate</span><b>' + dollars(q.low) + ' – ' + dollars(q.high) + '</b></div>' +
+      '<div class="tr"><span>Timing</span><b>' + $('#r-when').value + '</b></div>';
+    $('#req-live').hidden = true;
+    $('#req-sent').hidden = false;
+    $('#req-sent').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  $('#req-again').addEventListener('click', function () {
+    $('#req-form').reset();
+    $('#req-sent').hidden = true;
+    $('#req-live').hidden = false;
+  });
+
+  render();
+})();
+</script>
+<script src="/demos/assets/demobar.js" data-demo="Cedar Ridge Land Works"></script>
+</body>
+</html>

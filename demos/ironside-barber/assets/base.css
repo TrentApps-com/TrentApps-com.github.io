@@ -1,0 +1,129 @@
+/* Ironside Barber Co. — demo styling.
+   An invented shop built to show TrentApps' appointment-booking system. Slate,
+   brass and bone; condensed signage type over a serif-free body. The same
+   structure fits a salon, a spa, a tattoo studio or a two-chair shop. */
+:root {
+  --slate: #16191d;
+  --slate-2: #1f242a;
+  --slate-3: #2b323a;
+  --bone: #f2efe8;
+  --bone-2: #e4dfd3;
+  --brass: #c0873f;
+  --brass-lit: #dda953;
+  /* Brass is only legible as text on the dark slate. On bone/white surfaces
+     use --brass-ink (5.0:1 on --bone, WCAG AA). */
+  --brass-ink: #845a20;
+  --ink: #14171a;
+  --ink-soft: #5c646d;
+  --line: rgba(20, 23, 26, .13);
+  --line-dark: rgba(242, 239, 232, .14);
+  --ok: #3d7a4e;
+
+  --display: 'Oswald', 'Arial Narrow', system-ui, sans-serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --radius: 4px;
+  --maxw: 1120px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bone);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: .01em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+.eyebrow {
+  display: inline-block; font-family: var(--display); font-weight: 500;
+  font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--brass-ink); margin-bottom: 14px;
+}
+/* On the dark slate the lighter brass is the legible one. */
+.hero .eyebrow, .booking .eyebrow { color: var(--brass-lit); }
+.muted { color: var(--ink-soft); }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  font-family: var(--display); font-weight: 500; font-size: 15px;
+  letter-spacing: .13em; text-transform: uppercase;
+  padding: 14px 26px; border: 1px solid transparent; border-radius: var(--radius);
+  cursor: pointer; transition: background .16s ease, color .16s ease, border-color .16s ease, transform .12s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--brass); color: #16191d; }
+.btn-primary:hover { background: var(--brass-lit); }
+.btn-dark { background: var(--slate); color: var(--bone); }
+.btn-dark:hover { background: var(--slate-3); }
+.btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+.btn-ghost:hover { border-color: var(--slate); background: rgba(20,23,26,.04); }
+.btn-ghost-lite { border-color: var(--line-dark); color: var(--bone); background: transparent; }
+.btn-ghost-lite:hover { border-color: var(--brass); color: var(--brass); }
+.btn-sm { padding: 9px 16px; font-size: 13px; }
+.btn[disabled] { opacity: .38; cursor: not-allowed; transform: none; }
+
+/* ── Barber pole rule ── */
+.pole {
+  height: 5px;
+  background: repeating-linear-gradient(115deg, #b02b2b 0 14px, #f2efe8 14px 28px, #2f5fa8 28px 42px, #f2efe8 42px 56px);
+}
+
+/* ── Site header ── */
+.site-head {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(22, 25, 29, .96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-dark);
+  color: var(--bone);
+}
+.site-head .inner {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 14px clamp(20px, 4vw, 40px);
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.brand { display: flex; align-items: center; gap: 11px; }
+.brand .mk {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid var(--brass); position: relative; flex-shrink: 0;
+  display: grid; place-items: center;
+  font-family: var(--display); font-size: 15px; color: var(--brass);
+}
+.brand .nm { font-family: var(--display); font-size: 21px; letter-spacing: .08em; text-transform: uppercase; }
+.brand .nm small { display: block; font-size: 9.5px; letter-spacing: .32em; color: var(--brass); line-height: 1; margin-top: 3px; }
+.site-nav { display: flex; align-items: center; gap: 26px; }
+.site-nav a {
+  font-family: var(--display); font-size: 14px; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(242,239,232,.78); transition: color .15s ease;
+}
+.site-nav a:hover { color: var(--brass); }
+.site-nav a.btn-primary { color: #16191d; }
+.site-nav a.btn-dark { color: var(--bone); }
+@media (max-width: 760px) { .site-nav .hide-sm { display: none; } }
+
+footer.site {
+  background: var(--slate); color: rgba(242,239,232,.62);
+  padding: 46px 0 40px; font-size: 14px;
+}
+footer.site .cols { display: flex; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+footer.site strong { color: var(--bone); font-weight: 600; display: block; margin-bottom: 6px; font-size: 14px; }
+footer.site a:hover { color: var(--brass); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}

@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ironside Barber Co. — Appointment Booking Demo | TrentApps</title>
+<meta name="description" content="A working demonstration of a barbershop site with live appointment booking — pick a service, a barber and a time, and the slot disappears for everyone else. Built by TrentApps LLC. Ironside Barber Co. is an invented business.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trentapps.com/demos/ironside-barber/">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/demos/ironside-barber/assets/base.css">
+<style>
+  /* ── Hero ── */
+  .hero {
+    background: var(--slate); color: var(--bone);
+    position: relative; overflow: hidden;
+    padding: clamp(56px, 8vw, 92px) 0 clamp(52px, 8vw, 96px);
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 78% 18%, rgba(192,135,63,.16), transparent 46%),
+      repeating-linear-gradient(90deg, rgba(242,239,232,.028) 0 1px, transparent 1px 46px);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; }
+  .hero h1 {
+    font-size: clamp(50px, 9.4vw, 104px); font-weight: 600; line-height: .88;
+    letter-spacing: -.005em; margin: 6px 0 0;
+  }
+  .hero h1 span { display: block; color: var(--brass); }
+  .hero .strap {
+    display: flex; gap: 10px 20px; flex-wrap: wrap; align-items: center;
+    margin: 26px 0 0; font-family: var(--display); font-size: 13.5px;
+    letter-spacing: .2em; text-transform: uppercase; color: rgba(242,239,232,.66);
+  }
+  .hero .strap .sep { width: 5px; height: 5px; border-radius: 50%; background: var(--brass); }
+  .hero p.lead { margin: 26px 0 34px; max-width: 46ch; color: rgba(242,239,232,.8); font-size: 17.5px; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-stats {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    margin-top: 54px; padding-top: 26px; border-top: 1px solid var(--line-dark);
+  }
+  .hero-stat .n { font-family: var(--display); font-size: 36px; color: var(--brass); line-height: 1; }
+  .hero-stat .l { font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; color: rgba(242,239,232,.55); margin-top: 6px; }
+
+  /* ── Sections ── */
+  .sec { padding: clamp(60px, 8vw, 104px) 0; }
+  .sec h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 500; }
+  .sec-head { max-width: 58ch; margin-bottom: 42px; }
+  .sec-head p { color: var(--ink-soft); margin-top: 14px; font-size: 17px; }
+
+  /* ── Services ── */
+  .svc-list { border-top: 1px solid var(--line); }
+  .svc {
+    display: grid; grid-template-columns: 1fr auto auto; gap: 18px 26px;
+    align-items: baseline; padding: 22px 4px; border-bottom: 1px solid var(--line);
+    transition: background .15s ease, padding-left .15s ease;
+  }
+  a.svc:hover { background: rgba(192,135,63,.07); padding-left: 14px; }
+  .svc .nm { font-family: var(--display); font-size: 23px; font-weight: 500; }
+  .svc .ds { grid-column: 1; grid-row: 2; color: var(--ink-soft); font-size: 15px; margin-top: -6px; }
+  .svc .mins { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); white-space: nowrap; }
+  .svc .pr { font-family: var(--display); font-size: 24px; color: var(--brass-ink); white-space: nowrap; }
+
+  /* ── Barbers ── */
+  .chairs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .chair {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px 24px 24px;
+  }
+  .chair .av {
+    width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center;
+    font-family: var(--display); font-size: 21px; color: var(--bone);
+    background: var(--slate-3); margin-bottom: 16px;
+  }
+  .chair h3 { font-size: 22px; }
+  .chair .role { font-family: var(--display); font-size: 12px; letter-spacing: .18em; color: var(--brass-ink); text-transform: uppercase; margin: 4px 0 12px; }
+  .chair p { font-size: 15px; color: var(--ink-soft); }
+  .chair .specs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+  .chair .specs span { font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px; color: var(--ink-soft); }
+  @media (max-width: 820px) { .chairs { grid-template-columns: 1fr; } }
+
+  /* ── Booking teaser ── */
+  .booking { background: var(--slate); color: var(--bone); }
+  .booking h2 { color: var(--bone); }
+  .booking .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 6vw, 70px); align-items: center; }
+  .booking p { color: rgba(242,239,232,.76); margin-top: 14px; }
+  .booking ul { margin: 26px 0 32px; display: flex; flex-direction: column; gap: 12px; }
+  .booking li { display: flex; gap: 11px; align-items: flex-start; font-size: 15.5px; color: rgba(242,239,232,.8); }
+  .booking li b { color: var(--bone); font-weight: 600; }
+  .booking li svg { width: 17px; height: 17px; color: var(--brass); flex-shrink: 0; margin-top: 4px; }
+  /* mini calendar mock */
+  .cal { background: var(--bone); color: var(--ink); border-radius: 6px; padding: 22px; box-shadow: 0 30px 60px rgba(0,0,0,.4); }
+  .cal .ch { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .cal .ch b { font-family: var(--display); font-size: 18px; text-transform: uppercase; letter-spacing: .06em; }
+  .cal .ch span { font-size: 12.5px; color: var(--ink-soft); }
+  .cal .dows, .cal .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  .cal .dows span { text-align: center; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 5px; }
+  .cal .days b {
+    aspect-ratio: 1; display: grid; place-items: center; border-radius: 4px;
+    font-family: var(--mono); font-size: 12.5px; font-weight: 500; background: var(--bone-2); color: var(--ink);
+  }
+  .cal .days b.off { opacity: .68; }
+  .cal .days b.on { background: var(--slate); color: var(--bone); }
+  .cal .slots { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .cal .slots i {
+    font-style: normal; font-family: var(--mono); font-size: 12px;
+    border: 1px solid var(--line); border-radius: 4px; padding: 6px 9px;
+  }
+  .cal .slots i.taken { opacity: .68; text-decoration: line-through; }
+  .cal .slots i.pick { background: var(--brass); border-color: var(--brass); color: #16191d; font-weight: 600; }
+  @media (max-width: 860px) { .booking .grid { grid-template-columns: 1fr; } }
+
+  /* ── Visit ── */
+  .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 6vw, 64px); }
+  .hours { border-top: 1px solid var(--line); }
+  .hours div { display: flex; justify-content: space-between; padding: 12px 2px; border-bottom: 1px solid var(--line); font-size: 15.5px; }
+  .hours div.today { color: var(--brass-ink); font-weight: 600; }
+  .hours dt { font-family: var(--display); letter-spacing: .1em; text-transform: uppercase; font-size: 14px; }
+  .hours dd { font-family: var(--mono); font-size: 14px; }
+  .addr p { color: var(--ink-soft); margin-bottom: 18px; }
+  .addr .big { font-family: var(--display); font-size: 26px; color: var(--ink); text-transform: none; letter-spacing: 0; margin-bottom: 6px; }
+  @media (max-width: 780px) { .visit-grid { grid-template-columns: 1fr; } }
+
+  .demo-note {
+    background: var(--slate-2); color: rgba(242,239,232,.8);
+    font-size: 13.5px; padding: 10px 16px; text-align: center;
+  }
+  .demo-note b { color: var(--brass-lit); }
+  .demo-note a { color: var(--brass-lit); text-decoration: underline; text-underline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<div class="demo-note">
+  <b>Live demo.</b> Click anything &mdash; <a href="/demos/ironside-barber/book/">book a real appointment</a> and the slot disappears from every other visitor's screen.
+</div>
+<div class="pole" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="#top">
+      <span class="mk" aria-hidden="true">I</span>
+      <span class="nm">Ironside<small>Barber Co.</small></span>
+    </a>
+    <nav class="site-nav">
+      <a class="hide-sm" href="#services">Services</a>
+      <a class="hide-sm" href="#chairs">Barbers</a>
+      <a class="hide-sm" href="#visit">Visit</a>
+      <a class="btn btn-primary btn-sm" href="/demos/ironside-barber/book/">Book a chair</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Est. 2009 &middot; Six chairs</span>
+    <h1>Ironside<span>Barber Co.</span></h1>
+    <div class="strap">
+      <span>Fades &amp; classic cuts</span><span class="sep"></span>
+      <span>Straight-razor shaves</span><span class="sep"></span>
+      <span>Walk-ins when we've got room</span>
+    </div>
+    <p class="lead">
+      Six chairs, no small talk required, and a booking page that actually knows who's free. Pick your barber
+      and your time &mdash; you'll get a text the morning of, and nobody double-books you.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="/demos/ironside-barber/book/">Book a chair</a>
+      <a class="btn btn-ghost-lite" href="#services">See the list</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="n">6</div><div class="l">Chairs</div></div>
+      <div class="hero-stat"><div class="n">15</div><div class="l">Years open</div></div>
+      <div class="hero-stat"><div class="n">7am</div><div class="l">Weekdays open</div></div>
+      <div class="hero-stat"><div class="n">0</div><div class="l">Double-bookings</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The list</span>
+      <h2>What a chair costs</h2>
+      <p>Prices are what you pay. No "starting at," no surprise upcharge when you sit down. Every line here is bookable online.</p>
+    </div>
+    <div class="svc-list">
+      <a class="svc" href="/demos/ironside-barber/book/?service=cut">
+        <span class="nm">The Ironside Cut</span>
+        <span class="ds">Clipper and shear cut, hot towel, straight-razor neck finish.</span>
+        <span class="mins">45 min</span><span class="pr">$38</span>
+      </a>
+      <a class="svc" href="/demos/ironside-barber/book/?service=fade">
+        <span class="nm">Skin Fade</span>
+        <span class="ds">Tight taper into the skin, blended and finished by hand.</span>
+        <span class="mins">50 min</span><span class="pr">$42</span>
+      </a>
+      <a class="svc" href="/demos/ironside-barber/book/?service=beard">
+        <span class="nm">Beard Shape &amp; Line</span>
+        <span class="ds">Trimmed, shaped, lined, oiled. Add to any cut for $18.</span>
+        <span class="mins">25 min</span><span class="pr">$26</span>
+      </a>
+      <a class="svc" href="/demos/ironside-barber/book/?service=shave">
+        <span class="nm">Straight-Razor Shave</span>
+        <span class="ds">Two passes, hot towels, cold finish. Forty minutes of quiet.</span>
+        <span class="mins">40 min</span><span class="pr">$45</span>
+      </a>
+      <a class="svc" href="/demos/ironside-barber/book/?service=kid">
+        <span class="nm">Kid's Cut (12 and under)</span>
+        <span class="ds">Whatever they'll sit still for, done fast and done right.</span>
+        <span class="mins">30 min</span><span class="pr">$24</span>
+      </a>
+      <a class="svc" href="/demos/ironside-barber/book/?service=full">
+        <span class="nm">The Full Hour</span>
+        <span class="ds">Cut, beard, shave finish, and nobody rushing you out of the chair.</span>
+        <span class="mins">75 min</span><span class="pr">$78</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec booking" id="how">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <span class="eyebrow">Booking</span>
+        <h2>The part most shops get wrong</h2>
+        <p>
+          A booking page is only useful if it tells the truth about who's actually free. Ironside's does &mdash;
+          it holds the slot the second you tap it, and it knows that a straight-razor shave takes forty minutes,
+          not fifteen.
+        </p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Real availability.</b> Each barber has their own hours and days off. The grid only offers what's genuinely open.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Service-aware timing.</b> A 75-minute appointment blocks 75 minutes. Nobody stacks a shave on top of a fade.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>No app, no account.</b> Name and phone number. That's the whole form.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Reminders that reduce no-shows.</b> A text the night before and the morning of, with a one-tap cancel that frees the chair.</span></li>
+        </ul>
+        <a class="btn btn-primary" href="/demos/ironside-barber/book/">Try the booking flow</a>
+      </div>
+      <div class="cal" aria-hidden="true">
+        <div class="ch"><b>March</b><span>Marcus Vance &middot; Skin Fade</span></div>
+        <div class="dows"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+        <div class="days">
+          <b class="off">2</b><b>3</b><b>4</b><b>5</b><b>6</b><b>7</b><b class="off">8</b>
+          <b class="off">9</b><b>10</b><b class="on">11</b><b>12</b><b>13</b><b>14</b><b class="off">15</b>
+          <b class="off">16</b><b>17</b><b>18</b><b>19</b><b>20</b><b>21</b><b class="off">22</b>
+        </div>
+        <div class="slots">
+          <i class="taken">7:00</i><i class="taken">7:50</i><i>8:40</i><i class="pick">9:30</i><i>10:20</i><i class="taken">11:10</i><i>1:00</i><i>1:50</i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="chairs">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The chairs</span>
+      <h2>Who's cutting</h2>
+      <p>Book by name or take whoever's open &mdash; the schedule handles both.</p>
+    </div>
+    <div class="chairs">
+      <div class="chair">
+        <div class="av">MV</div>
+        <h3>Marcus Vance</h3>
+        <div class="role">Owner &middot; 15 years</div>
+        <p>Opened the shop in 2009 after eight years downtown. Fastest fade in the building and the only one who'll argue with you about it.</p>
+        <div class="specs"><span>Skin fades</span><span>Classic cuts</span><span>Kids</span></div>
+      </div>
+      <div class="chair">
+        <div class="av">DR</div>
+        <h3>Dee Reyes</h3>
+        <div class="role">Barber &middot; 9 years</div>
+        <p>Straight-razor work is the specialty &mdash; two passes, hot towels, and forty minutes where nobody asks you anything.</p>
+        <div class="specs"><span>Shaves</span><span>Beard work</span><span>Textured cuts</span></div>
+      </div>
+      <div class="chair">
+        <div class="av">TO</div>
+        <h3>Terrance Okafor</h3>
+        <div class="role">Barber &middot; 5 years</div>
+        <p>Books out furthest, so plan ahead. Works Tuesday through Saturday and takes the early chairs on weekends.</p>
+        <div class="specs"><span>Fades</span><span>Line-ups</span><span>Design work</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="visit" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="visit-grid">
+      <div class="addr">
+        <span class="eyebrow">Visit</span>
+        <h2>Come sit down</h2>
+        <p style="margin-top:14px">Walk-ins are welcome whenever a chair's empty, but Saturday mornings book out by Thursday. If you want a specific barber, book it.</p>
+        <div class="big">418 Foundry Street</div>
+        <p>Suite B &middot; Parking behind the building off Wilkes Alley</p>
+        <div class="big" style="font-size:20px">(555) 014-9930</div>
+        <p style="margin-top:22px"><a class="btn btn-dark" href="/demos/ironside-barber/book/">Book a chair</a></p>
+      </div>
+      <div>
+        <span class="eyebrow">Hours</span>
+        <dl class="hours">
+          <div><dt>Monday</dt><dd>7:00 &ndash; 6:00</dd></div>
+          <div><dt>Tuesday</dt><dd>7:00 &ndash; 6:00</dd></div>
+          <div><dt>Wednesday</dt><dd>7:00 &ndash; 6:00</dd></div>
+          <div><dt>Thursday</dt><dd>7:00 &ndash; 7:00</dd></div>
+          <div><dt>Friday</dt><dd>7:00 &ndash; 7:00</dd></div>
+          <div><dt>Saturday</dt><dd>8:00 &ndash; 3:00</dd></div>
+          <div><dt>Sunday</dt><dd>Closed</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap cols">
+    <div>
+      <strong>Ironside Barber Co.</strong>
+      418 Foundry Street, Suite B<br>(555) 014-9930
+    </div>
+    <div>
+      <strong>Book</strong>
+      <a href="/demos/ironside-barber/book/">Online booking</a><br>
+      Walk-ins as available
+    </div>
+    <div>
+      <strong>An invented business</strong>
+      Built by <a href="/" style="text-decoration:underline">TrentApps LLC</a><br>
+      to demonstrate appointment booking.
+    </div>
+  </div>
+</footer>
+
+<script src="/demos/assets/demobar.js" data-demo="Ironside Barber Co." data-keys="ta-ironside-bookings"></script>
+</body>
+</html>

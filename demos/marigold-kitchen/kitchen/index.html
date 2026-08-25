@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kitchen Display · Marigold Kitchen — Demo | TrentApps</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/demos/marigold-kitchen/assets/base.css">
+<style>
+  body { background: #1c1916; color: #f3ead9; }
+  .demo-ribbon { background: #110f0d; }
+  .kds-top { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; border-bottom: 1px solid #36302a; flex-wrap: wrap; gap: 10px; }
+  .kds-top .ttl { font-family: var(--display); font-size: 22px; display: flex; align-items: center; gap: 10px; }
+  .kds-top .ttl .mk { width: 24px; height: 24px; border-radius: 6px; background: var(--ember); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+  .kds-top .meta { color: #b6a892; font-size: 13px; display: flex; gap: 14px; align-items: center; }
+  .live { display: inline-flex; align-items: center; gap: 6px; color: #6fd38a; font-weight: 600; }
+  .live .blip { width: 8px; height: 8px; border-radius: 50%; background: #6fd38a; box-shadow: 0 0 0 0 rgba(111,211,138,.6); animation: blip 1.6s infinite; }
+  @keyframes blip { 0%{box-shadow:0 0 0 0 rgba(111,211,138,.5)} 70%{box-shadow:0 0 0 8px rgba(111,211,138,0)} 100%{box-shadow:0 0 0 0 rgba(111,211,138,0)} }
+  .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 18px 22px 60px; align-items: start; }
+  .col { background: #24201c; border: 1px solid #36302a; border-radius: 14px; min-height: 60vh; display: flex; flex-direction: column; }
+  .col-h { padding: 13px 16px; border-bottom: 1px solid #36302a; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: 13px; display: flex; justify-content: space-between; }
+  .col-h .ct { background: #36302a; border-radius: 999px; padding: 1px 9px; font-size: 12px; }
+  .col.new .col-h { color: #f2b066; }
+  .col.cooking .col-h { color: #f2884e; }
+  .col.ready .col-h { color: #6fd38a; }
+  .col-body { padding: 12px; display: flex; flex-direction: column; gap: 12px; overflow: auto; }
+  .ticket { background: #2c2722; border: 1px solid #3d362f; border-left: 3px solid #3d362f; border-radius: 12px; padding: 13px 14px; box-shadow: 0 6px 16px rgba(0,0,0,.2); transition: border-color .3s ease; }
+  /* aging cues — a ticket waiting too long signals urgency, like a real line */
+  .ticket.age-warn { border-left-color: var(--amber); }
+  .ticket.age-late { border-left-color: var(--ember); }
+  .ticket.age-late .ago { color: #f0a070; }
+  .ticket .th { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .ticket .num { font-family: var(--display); font-size: 19px; color: #fff; }
+  .ticket .ago { font-size: 12px; color: #b6a892; }
+  .ticket .chan { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #b6a892; }
+  .ticket ul { list-style: none; margin: 0 0 10px; padding: 0; }
+  .ticket li { display: flex; gap: 8px; font-size: 14px; padding: 2px 0; }
+  /* lighter coral than the brand ember so the qty clears AA on the dark ticket */
+  .ticket li .q { color: #f0815a; font-weight: 700; min-width: 22px; }
+  .ticket .adv { width: 100%; }
+  .empty { color: #a39884; font-size: 13px; text-align: center; padding: 24px 8px; }
+  .ticket.flash { animation: pop .5s ease; }
+  @keyframes pop { 0%{transform:scale(.96);box-shadow:0 0 0 2px var(--marigold)} 100%{transform:scale(1)} }
+  @media (max-width: 760px) { .cols { grid-template-columns: 1fr; } .col { min-height: auto; } }
+</style>
+</head>
+<body>
+
+<div class="demo-ribbon">
+  <span class="tag">Demo</span>
+  <span>Kitchen display — orders placed on the <a href="/demos/marigold-kitchen/order">order page</a> appear here instantly. Tap a ticket to advance it.</span>
+</div>
+
+<div class="kds-top">
+  <div class="ttl"><span class="mk">M</span> Marigold Kitchen — Line</div>
+  <div class="meta">
+    <span class="live"><span class="blip"></span> Live</span>
+    <span id="clock"></span>
+    <button class="btn btn-ghost btn-sm" id="reset" style="color:#f3ead9;border-color:#4a4239">Reset demo</button>
+  </div>
+</div>
+
+<div class="cols">
+  <div class="col new"><div class="col-h"><span>New</span><span class="ct" id="ct-new">0</span></div><div class="col-body" id="col-new"></div></div>
+  <div class="col cooking"><div class="col-h"><span>Cooking</span><span class="ct" id="ct-cooking">0</span></div><div class="col-body" id="col-cooking"></div></div>
+  <div class="col ready"><div class="col-h"><span>Ready</span><span class="ct" id="ct-ready">0</span></div><div class="col-body" id="col-ready"></div></div>
+</div>
+
+<script src="/demos/marigold-kitchen/assets/menu.js"></script>
+<script>
+(function () {
+  var M = window.Marigold;
+  var chan = ('BroadcastChannel' in window) ? new BroadcastChannel(M.CHANNEL) : null;
+  var NEXT = { new: 'cooking', cooking: 'ready', ready: 'done' };
+  var LABEL = { new: 'Start cooking', cooking: 'Mark ready', ready: 'Complete' };
+
+  // Seed a couple of in-progress tickets so the board feels alive on first open.
+  function seed() {
+    var board = M.loadBoard();
+    if (board.length) return board;
+    var now = Date.now();
+    var seeded = [
+      { id: 'seed1', num: '#M-1042', channel: 'online', items: [
+          { id: 'burger', name: 'The Marigold Burger', qty: 2 },
+          { id: 'fries', name: 'Hand-cut Fries', qty: 1 },
+          { id: 'lemonade', name: 'House Lemonade', qty: 2 } ],
+        placed: new Date(now - 4 * 60000).toISOString(), status: 'cooking', payStatus: 'paid', total: '41.20' },
+      { id: 'seed2', num: '#M-1041', channel: 'online', items: [
+          { id: 'risotto', name: 'Wild Mushroom Risotto', qty: 1 },
+          { id: 'greens', name: 'Seasonal Greens', qty: 1 } ],
+        placed: new Date(now - 9 * 60000).toISOString(), status: 'ready', payStatus: 'paid', total: '24.90' }
+    ];
+    M.saveBoard(seeded);
+    return seeded;
+  }
+
+  function ago(iso) {
+    var s = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 1000));
+    if (s < 60) return s + 's';
+    var m = Math.floor(s / 60); return m + 'm';
+  }
+
+  function ticketHtml(t) {
+    var items = (t.items || []).map(function (i) {
+      return '<li><span class="q">' + i.qty + '×</span><span>' + i.name + '</span></li>';
+    }).join('');
+    // Age cue: a ticket waiting > 8 min warns (amber), > 15 min is late (ember).
+    // Completed/ready tickets don't accrue urgency.
+    var mins = (Date.now() - new Date(t.placed).getTime()) / 60000;
+    var ageCls = (t.status === 'ready') ? '' : (mins > 15 ? ' age-late' : (mins > 8 ? ' age-warn' : ''));
+    return '<div class="ticket' + ageCls + '" data-id="' + t.id + '">' +
+      '<div class="th"><span class="num">' + t.num + '</span><span class="ago" data-ago="' + t.placed + '">' + ago(t.placed) + ' ago</span></div>' +
+      '<div class="chan">' + (t.channel || 'online') + ' · paid</div>' +
+      '<ul>' + items + '</ul>' +
+      '<button class="btn btn-primary btn-sm adv" data-adv="' + t.id + '">' + (LABEL[t.status] || 'Advance') + '</button>' +
+      '</div>';
+  }
+
+  function render(flashId) {
+    var board = M.loadBoard().filter(function (t) { return t.status !== 'done'; });
+    ['new', 'cooking', 'ready'].forEach(function (st) {
+      var list = board.filter(function (t) { return t.status === st; });
+      var el = document.getElementById('col-' + st);
+      el.innerHTML = list.length ? list.map(ticketHtml).join('') : '<div class="empty">No tickets</div>';
+      document.getElementById('ct-' + st).textContent = list.length;
+    });
+    if (flashId) {
+      var node = document.querySelector('.ticket[data-id="' + flashId + '"]');
+      if (node) node.classList.add('flash');
+    }
+  }
+
+  function advance(id) {
+    var board = M.loadBoard();
+    var t = board.find(function (x) { return x.id === id; });
+    if (!t) return;
+    t.status = NEXT[t.status] || 'done';
+    M.saveBoard(board);
+    if (chan) chan.postMessage({ type: 'upsert', ticket: t });
+    render();
+  }
+
+  document.querySelector('.cols').addEventListener('click', function (e) {
+    var id = e.target && e.target.getAttribute && e.target.getAttribute('data-adv');
+    if (id) advance(id);
+  });
+
+  // Live updates from the order page (and from other open KDS tabs).
+  if (chan) chan.onmessage = function (ev) {
+    var msg = ev.data || {};
+    if (msg.type === 'upsert' && msg.ticket) {
+      var board = M.loadBoard();
+      var i = board.findIndex(function (x) { return x.id === msg.ticket.id; });
+      if (i >= 0) board[i] = msg.ticket; else board.unshift(msg.ticket);
+      M.saveBoard(board);
+      render(msg.ticket.id);
+    } else if (msg.type === 'clear') {
+      render();
+    }
+  };
+  // Cross-tab fallback when BroadcastChannel re-renders aren't enough.
+  window.addEventListener('storage', function (e) { if (e.key === M.STORE_KEY) render(); });
+
+  document.getElementById('reset').addEventListener('click', function () {
+    localStorage.removeItem(M.STORE_KEY);
+    if (chan) chan.postMessage({ type: 'clear' });
+    seed(); render();
+  });
+
+  function tick() {
+    document.getElementById('clock').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    document.querySelectorAll('[data-ago]').forEach(function (n) { n.textContent = ago(n.getAttribute('data-ago')) + ' ago'; });
+  }
+
+  seed(); render(); tick();
+  setInterval(tick, 5000);
+})();
+</script>
+<script src="/demos/assets/demobar.js" data-demo="Marigold Kitchen" data-keys="ta-marigold-orders-board"></script>
+</body>
+</html>

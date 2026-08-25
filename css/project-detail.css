@@ -38,7 +38,7 @@
 .project-hero-title {
     font-family: var(--f-serif);
     font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 400;
+    font-weight: 750;
     line-height: 1.1;
     letter-spacing: -0.03em;
     margin-bottom: 0.75rem;
@@ -131,7 +131,7 @@
 .demo-section-title {
     font-family: var(--f-serif);
     font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-    font-weight: 400;
+    font-weight: 750;
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
 }
@@ -213,9 +213,9 @@
 .use-case-title {
     font-family: var(--f-serif);
     font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 400;
+    font-weight: 750;
     line-height: 1.2;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
     margin-bottom: 1.5rem;
 }
 

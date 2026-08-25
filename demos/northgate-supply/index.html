@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Northgate Supply Co. — Inventory Management Demo | TrentApps</title>
+<meta name="description" content="A working demonstration of an inventory system: stock levels, low-stock alerts, receiving, counts and movement history. Built by TrentApps LLC. Northgate Supply Co. is an invented business.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trentapps.com/demos/northgate-supply/">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --steel: #0d2233;
+  --steel-2: #143349;
+  --steel-3: #1d4664;
+  --paper: #f2f5f8;
+  --card: #ffffff;
+  --ink: #12212c;
+  --ink-2: #55697a;
+  --ink-3: #627585;   /* 4.8:1 on #fafcfe, WCAG AA at small sizes */
+  --line: #dde5ec;
+  --line-2: #c8d5e0;
+  --blue: #1668b0;
+  --blue-lit: #3a95e0;
+  --green: #10794c;
+  --green-bg: #e2f4ec;
+  --amber: #8f5606;
+  --amber-bg: #fdf0dc;
+  --red: #b32b23;
+  --red-bg: #fdeceb;
+  --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+  --r: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--sans); font-size: 15px; line-height: 1.55;
+  color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.note { background: var(--steel); color: #cfe1ee; font-size: 13.5px; padding: 9px 18px; text-align: center; }
+.note b { color: #6fc0f5; }
+
+/* ── App shell ── */
+.app { display: grid; grid-template-columns: 224px 1fr; min-height: 100vh; }
+.side { background: var(--steel); color: #cfe1ee; padding: 20px 0; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+.side .brand { display: flex; align-items: center; gap: 11px; padding: 0 20px 22px; border-bottom: 1px solid rgba(255,255,255,.09); }
+.side .brand .mk {
+  width: 34px; height: 34px; border-radius: 7px; background: var(--blue);
+  display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 15px; flex-shrink: 0;
+}
+.side .brand .nm { font-weight: 600; font-size: 15px; color: #fff; line-height: 1.2; }
+.side .brand .nm small { display: block; font-size: 11px; color: #7fa3bd; font-weight: 400; }
+.side nav { padding: 16px 12px; display: flex; flex-direction: column; gap: 2px; }
+.side nav button {
+  display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+  padding: 9px 12px; border: 0; background: none; border-radius: 6px; cursor: pointer;
+  color: #b6cfe2; font-size: 14px; font-weight: 500;
+}
+.side nav button:hover { background: rgba(255,255,255,.07); color: #fff; }
+.side nav button.on { background: var(--blue); color: #fff; }
+.side nav button svg { width: 17px; height: 17px; flex-shrink: 0; }
+.side nav .badge { margin-left: auto; background: var(--red); color: #fff; font-size: 11px; font-weight: 600; border-radius: 99px; padding: 1px 7px; font-family: var(--mono); }
+.side .foot { margin-top: auto; padding: 18px 20px 0; font-size: 12px; color: #6d8ca5; }
+
+.main { padding: 0 0 40px; min-width: 0; }
+.topbar {
+  background: var(--card); border-bottom: 1px solid var(--line);
+  padding: 16px 26px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  position: sticky; top: 0; z-index: 40;
+}
+.topbar h1 { font-size: 20px; font-weight: 600; letter-spacing: -.01em; }
+.topbar .who { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--ink-2); }
+.topbar .who .av { width: 30px; height: 30px; border-radius: 50%; background: var(--steel-3); color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+.pad { padding: 24px 26px; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  font-size: 14px; font-weight: 600; padding: 9px 16px; border-radius: 6px;
+  border: 1px solid transparent; cursor: pointer; transition: background .14s ease, border-color .14s ease;
+}
+.btn svg { width: 15px; height: 15px; }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover { background: #12588f; }
+.btn-ghost { background: var(--card); border-color: var(--line-2); color: var(--ink); }
+.btn-ghost:hover { background: var(--paper); border-color: var(--ink-3); }
+.btn-sm { padding: 6px 11px; font-size: 13px; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+
+/* ── KPI row ── */
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.kpi { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; }
+.kpi .l { font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); }
+.kpi .v { font-family: var(--mono); font-size: 27px; font-weight: 600; letter-spacing: -.02em; margin-top: 6px; line-height: 1.1; }
+.kpi .s { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; }
+.kpi.warn .v { color: var(--amber); }
+.kpi.bad .v { color: var(--red); }
+@media (max-width: 1000px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Panels ── */
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-bottom: 20px; }
+.panel > header {
+  padding: 14px 18px; border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.panel > header h2 { font-size: 15.5px; font-weight: 600; }
+.panel > header .sub { font-size: 13px; color: var(--ink-2); }
+.panel > header .right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* ── Filters ── */
+.filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--line); background: #fafcfe; }
+.filters input[type="search"], .filters select {
+  border: 1px solid var(--line-2); border-radius: 6px; padding: 8px 11px; font-size: 14px; background: #fff;
+}
+.filters input[type="search"] { flex: 1; min-width: 180px; }
+.chip {
+  font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 99px;
+  border: 1px solid var(--line-2); background: #fff; cursor: pointer;
+}
+.chip.on { background: var(--steel); border-color: var(--steel); color: #fff; }
+
+/* ── Table ── */
+.tblwrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead th {
+  text-align: left; font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3); padding: 10px 18px; border-bottom: 1px solid var(--line); white-space: nowrap;
+  background: #fafcfe;
+}
+tbody td { padding: 12px 18px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: #f7fbfe; }
+td.num, th.num { text-align: right; font-family: var(--mono); }
+.sku { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); }
+.pname { font-weight: 600; }
+.pmeta { font-size: 12.5px; color: var(--ink-2); }
+
+.tag { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; border-radius: 99px; padding: 3px 10px; white-space: nowrap; }
+.tag.ok { background: var(--green-bg); color: var(--green); }
+.tag.low { background: var(--amber-bg); color: var(--amber); }
+.tag.out { background: var(--red-bg); color: var(--red); }
+.tag .d { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+/* stock bar */
+.bar { height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; margin-top: 5px; min-width: 74px; }
+.bar i { display: block; height: 100%; border-radius: 3px; }
+.bar i.ok { background: var(--green); }
+.bar i.low { background: var(--amber); }
+.bar i.out { background: var(--red); }
+
+.rowbtns { display: flex; gap: 6px; justify-content: flex-end; }
+
+/* ── Alerts ── */
+.alerts { display: flex; flex-direction: column; }
+.alert { display: flex; gap: 13px; align-items: flex-start; padding: 13px 18px; border-bottom: 1px solid var(--line); }
+.alert:last-child { border-bottom: 0; }
+.alert .ic { width: 30px; height: 30px; border-radius: 7px; display: grid; place-items: center; flex-shrink: 0; }
+.alert .ic svg { width: 15px; height: 15px; }
+.alert.low .ic { background: var(--amber-bg); color: var(--amber); }
+.alert.out .ic { background: var(--red-bg); color: var(--red); }
+.alert .b { flex: 1; min-width: 0; }
+.alert .b b { font-weight: 600; }
+.alert .b p { font-size: 13px; color: var(--ink-2); }
+.alert .act { flex-shrink: 0; }
+.empty { padding: 30px 18px; text-align: center; color: var(--ink-2); font-size: 14px; }
+
+/* ── Movement log ── */
+.log { font-family: var(--mono); font-size: 13px; }
+.log .row { display: grid; grid-template-columns: 128px 74px 1fr 78px; gap: 12px; padding: 9px 18px; border-bottom: 1px solid var(--line); align-items: center; }
+.log .row:last-child { border-bottom: 0; }
+.log .t { color: var(--ink-3); font-size: 12px; }
+.log .k { font-weight: 600; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; border-radius: 4px; padding: 2px 6px; width: max-content; }
+.log .k.recv { background: var(--green-bg); color: var(--green); }
+.log .k.sold { background: #e7eff7; color: var(--blue); }
+.log .k.adj { background: var(--amber-bg); color: var(--amber); }
+.log .d { font-family: var(--sans); font-size: 13.5px; }
+.log .q { text-align: right; font-weight: 600; }
+.log .q.up { color: var(--green); }
+.log .q.dn { color: var(--red); }
+@media (max-width: 720px) { .log .row { grid-template-columns: 1fr auto; } .log .t, .log .k { grid-column: 1 / -1; } }
+
+/* ── Modal ── */
+.scrim { position: fixed; inset: 0; background: rgba(13,34,51,.55); display: none; place-items: center; padding: 18px; z-index: 300; }
+.scrim.on { display: grid; }
+.modal { background: #fff; border-radius: 12px; width: 100%; max-width: 460px; box-shadow: 0 30px 70px rgba(13,34,51,.3); overflow: hidden; }
+.modal header { padding: 18px 22px 14px; border-bottom: 1px solid var(--line); }
+.modal header h3 { font-size: 18px; font-weight: 600; }
+.modal header p { font-size: 13.5px; color: var(--ink-2); margin-top: 3px; }
+.modal .body { padding: 18px 22px; display: flex; flex-direction: column; gap: 14px; }
+.modal footer { padding: 14px 22px 18px; display: flex; gap: 9px; justify-content: flex-end; }
+.fld { display: flex; flex-direction: column; gap: 5px; }
+.fld label { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); }
+.fld input, .fld select, .fld textarea { border: 1px solid var(--line-2); border-radius: 6px; padding: 10px 12px; font-size: 15px; }
+.fld .hint { font-size: 12.5px; color: var(--ink-2); }
+.qtyrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.stockline { background: var(--paper); border-radius: 6px; padding: 11px 13px; font-size: 13.5px; display: flex; justify-content: space-between; }
+.stockline b { font-family: var(--mono); }
+
+/* ── Views ── */
+.view[hidden] { display: none; }
+
+@media (max-width: 820px) {
+  .app { grid-template-columns: 1fr; }
+  /* The desktop app shell pins the rail to the viewport; on one column it has
+     to collapse back to normal flow or it eats the whole first screen. */
+  .side { position: static; height: auto; overflow: visible; padding-bottom: 0; }
+  .side nav { flex-direction: row; overflow-x: auto; }
+  .side nav button { white-space: nowrap; }
+  .side .foot { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="note"><b>Live demo.</b> Receive a shipment, adjust a count, sell something &mdash; every number on this page recalculates, and the log records who did it.</div>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <span class="mk">NS</span>
+      <span class="nm">Northgate Supply<small>Warehouse &middot; Bay 3</small></span>
+    </div>
+    <nav>
+      <button data-view="stock" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 12 3 4 7v10l8 4 8-4z"/><path d="m4 7 8 4 8-4M12 21V11"/></svg>Stock</button>
+      <button data-view="alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.3a2 2 0 0 1 3.4 0l7.4 12.8A2 2 0 0 1 19.4 19H4.6a2 2 0 0 1-1.7-2.9z"/><path d="M12 9v4M12 17h.01"/></svg>Reorder<span class="badge" id="nav-alerts">0</span></button>
+      <button data-view="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>Movement</button>
+    </nav>
+    <div class="foot">
+      An invented business, built by <a href="/" style="text-decoration:underline;color:#8fc4e8">TrentApps</a> to demonstrate inventory software.
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <h1 id="view-title">Stock on hand</h1>
+      <span class="sub" id="view-sub" style="font-size:13.5px;color:var(--ink-2)"></span>
+      <span class="who"><span class="av">RK</span>Ruth Kessler &middot; Bay 3</span>
+    </div>
+
+    <div class="pad">
+      <div class="kpis">
+        <div class="kpi"><div class="l">SKUs tracked</div><div class="v" id="k-skus">0</div><div class="s" id="k-skus-s">across 4 categories</div></div>
+        <div class="kpi"><div class="l">Inventory value</div><div class="v" id="k-value">$0</div><div class="s">at cost</div></div>
+        <div class="kpi warn"><div class="l">Below reorder point</div><div class="v" id="k-low">0</div><div class="s">need a purchase order</div></div>
+        <div class="kpi bad"><div class="l">Out of stock</div><div class="v" id="k-out">0</div><div class="s">can't sell today</div></div>
+      </div>
+
+      <!-- STOCK -->
+      <section class="view" data-view="stock">
+        <div class="panel">
+          <header>
+            <h2>Every SKU</h2>
+            <span class="sub" id="stock-count"></span>
+            <span class="right">
+              <button class="btn btn-ghost btn-sm" id="btn-count">Cycle count</button>
+              <button class="btn btn-primary btn-sm" id="btn-receive">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                Receive shipment
+              </button>
+            </span>
+          </header>
+          <div class="filters">
+            <input type="search" id="q" placeholder="Search name, SKU or supplier…" aria-label="Search stock">
+            <button class="chip on" data-filter="all">All</button>
+            <button class="chip" data-filter="low">Needs reorder</button>
+            <button class="chip" data-filter="out">Out of stock</button>
+            <select id="cat" aria-label="Filter by category"><option value="">All categories</option></select>
+          </div>
+          <div class="tblwrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th><th>Category</th><th class="num">On hand</th>
+                  <th class="num">Reorder at</th><th>Status</th><th class="num">Value</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="stock-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ALERTS -->
+      <section class="view" data-view="alerts" hidden>
+        <div class="panel">
+          <header>
+            <h2>What to order</h2>
+            <span class="sub">Anything at or below its reorder point, with the supplier already attached.</span>
+            <span class="right"><button class="btn btn-primary btn-sm" id="btn-po">Draft purchase orders</button></span>
+          </header>
+          <div class="alerts" id="alerts-body"></div>
+        </div>
+        <div class="panel" id="po-panel" hidden>
+          <header><h2>Draft purchase orders</h2><span class="sub">Grouped by supplier, ready to send.</span></header>
+          <div id="po-body"></div>
+        </div>
+      </section>
+
+      <!-- LOG -->
+      <section class="view" data-view="log" hidden>
+        <div class="panel">
+          <header><h2>Movement history</h2><span class="sub">Every change, who made it, and when. Nothing is edited in place.</span></header>
+          <div class="log" id="log-body"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- Receive / adjust modal -->
+<div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="modal">
+    <header><h3 id="m-title">Receive shipment</h3><p id="m-sub">Add stock that just came off the truck.</p></header>
+    <div class="body">
+      <div class="fld" id="m-item-fld">
+        <label for="m-item">Item</label>
+        <select id="m-item"></select>
+      </div>
+      <div class="stockline"><span>On hand now</span><b id="m-current">—</b></div>
+      <div class="qtyrow">
+        <div class="fld">
+          <label for="m-qty" id="m-qty-label">Quantity received</label>
+          <input id="m-qty" type="number" min="0" step="1" value="0">
+        </div>
+        <div class="fld">
+          <label for="m-ref" id="m-ref-label">Packing slip #</label>
+          <input id="m-ref" type="text" placeholder="PS-40218">
+        </div>
+      </div>
+      <div class="fld">
+        <label for="m-note">Note (optional)</label>
+        <input id="m-note" type="text" placeholder="Two cases damaged, rejected">
+      </div>
+      <div class="stockline"><span>On hand after</span><b id="m-after">—</b></div>
+    </div>
+    <footer>
+      <button class="btn btn-ghost" id="m-cancel">Cancel</button>
+      <button class="btn btn-primary" id="m-save">Post it</button>
+    </footer>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var KEY = 'ta-northgate-inventory';
+
+  /* Seed catalogue — an invented industrial/janitorial supply house. */
+  var SEED = {
+    items: [
+      { sku: 'NG-1042', name: 'Nitrile Gloves, 8 mil', cat: 'Safety', unit: 'box of 100', cost: 14.50, qty: 62, reorder: 40, supplier: 'Halloran Safety' },
+      { sku: 'NG-1108', name: 'Safety Glasses, Anti-Fog', cat: 'Safety', unit: 'each', cost: 4.25, qty: 18, reorder: 30, supplier: 'Halloran Safety' },
+      { sku: 'NG-1155', name: 'Hi-Vis Vest, Class 2', cat: 'Safety', unit: 'each', cost: 11.00, qty: 0, reorder: 12, supplier: 'Halloran Safety' },
+      { sku: 'NG-2201', name: 'Shop Towels, Blue', cat: 'Janitorial', unit: 'case of 12', cost: 22.75, qty: 34, reorder: 20, supplier: 'Prairie Paper Co.' },
+      { sku: 'NG-2240', name: 'Degreaser Concentrate', cat: 'Janitorial', unit: '5 gal', cost: 48.00, qty: 7, reorder: 8, supplier: 'Vandermeer Chemical' },
+      { sku: 'NG-2277', name: 'Floor Pads, 20"', cat: 'Janitorial', unit: 'case of 5', cost: 31.40, qty: 21, reorder: 10, supplier: 'Prairie Paper Co.' },
+      { sku: 'NG-3310', name: 'Ratchet Straps, 15 ft', cat: 'Hardware', unit: 'pack of 4', cost: 27.90, qty: 44, reorder: 25, supplier: 'Kestrel Industrial' },
+      { sku: 'NG-3348', name: 'Hex Bolts 3/8" x 2"', cat: 'Hardware', unit: 'box of 250', cost: 38.60, qty: 9, reorder: 15, supplier: 'Kestrel Industrial' },
+      { sku: 'NG-3390', name: 'Anti-Seize Compound', cat: 'Hardware', unit: '16 oz', cost: 12.10, qty: 26, reorder: 12, supplier: 'Vandermeer Chemical' },
+      { sku: 'NG-4402', name: 'Stretch Wrap, 18"', cat: 'Packaging', unit: 'roll', cost: 19.25, qty: 78, reorder: 40, supplier: 'Prairie Paper Co.' },
+      { sku: 'NG-4430', name: 'Corrugated Boxes, 12x12x12', cat: 'Packaging', unit: 'bundle of 25', cost: 33.00, qty: 12, reorder: 18, supplier: 'Prairie Paper Co.' },
+      { sku: 'NG-4477', name: 'Poly Strapping, 1/2"', cat: 'Packaging', unit: 'coil', cost: 41.80, qty: 5, reorder: 6, supplier: 'Kestrel Industrial' }
+    ],
+    log: [
+      { t: -2, kind: 'recv', sku: 'NG-4402', qty: 40, who: 'Ruth K.', note: 'PS-40155' },
+      { t: -5, kind: 'sold', sku: 'NG-1042', qty: -12, who: 'Counter', note: 'Order 8841' },
+      { t: -9, kind: 'sold', sku: 'NG-2201', qty: -6, who: 'Counter', note: 'Order 8838' },
+      { t: -26, kind: 'adj', sku: 'NG-3348', qty: -3, who: 'Ruth K.', note: 'Cycle count variance' },
+      { t: -31, kind: 'recv', sku: 'NG-3310', qty: 24, who: 'Dmitri A.', note: 'PS-40140' },
+      { t: -48, kind: 'sold', sku: 'NG-1155', qty: -8, who: 'Counter', note: 'Order 8829' }
+    ]
+  };
+
+  var $ = function (s) { return document.querySelector(s); };
+  var state = null, filter = 'all', mode = 'receive', modalSku = null;
+
+  function load() {
+    try {
+      var raw = JSON.parse(localStorage.getItem(KEY));
+      if (raw && raw.items && raw.items.length) return raw;
+    } catch (e) {}
+    var seeded = JSON.parse(JSON.stringify(SEED));
+    var now = Date.now();
+    seeded.log = seeded.log.map(function (l) {
+      return { at: now + l.t * 3600000, kind: l.kind, sku: l.sku, qty: l.qty, who: l.who, note: l.note };
+    });
+    return seeded;
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  var money = function (n) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+  var moneyShort = function (n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  };
+  function statusOf(it) {
+    if (it.qty === 0) return 'out';
+    if (it.qty <= it.reorder) return 'low';
+    return 'ok';
+  }
+  function statusLabel(s) { return s === 'out' ? 'Out of stock' : s === 'low' ? 'Reorder' : 'In stock'; }
+  function byId(sku) {
+    return state.items.filter(function (i) { return i.sku === sku; })[0];
+  }
+  function ago(ts) {
+    var m = Math.round((Date.now() - ts) / 60000);
+    if (m < 1) return 'just now';
+    if (m < 60) return m + ' min ago';
+    var h = Math.round(m / 60);
+    if (h < 24) return h + ' hr ago';
+    return Math.round(h / 24) + ' d ago';
+  }
+
+  /* ── renderers ── */
+  function renderKpis() {
+    var low = 0, out = 0, value = 0;
+    state.items.forEach(function (i) {
+      var s = statusOf(i);
+      if (s === 'low') low++;
+      if (s === 'out') out++;
+      value += i.qty * i.cost;
+    });
+    var cats = {};
+    state.items.forEach(function (i) { cats[i.cat] = 1; });
+    $('#k-skus').textContent = state.items.length;
+    $('#k-skus-s').textContent = 'across ' + Object.keys(cats).length + ' categories';
+    $('#k-value').textContent = moneyShort(value);
+    $('#k-low').textContent = low;
+    $('#k-out').textContent = out;
+    $('#nav-alerts').textContent = low + out;
+    $('#nav-alerts').style.display = (low + out) ? '' : 'none';
+  }
+
+  function visibleItems() {
+    var q = $('#q').value.trim().toLowerCase();
+    var cat = $('#cat').value;
+    return state.items.filter(function (i) {
+      var s = statusOf(i);
+      if (filter === 'low' && s === 'ok') return false;
+      if (filter === 'out' && s !== 'out') return false;
+      if (cat && i.cat !== cat) return false;
+      if (!q) return true;
+      return (i.name + ' ' + i.sku + ' ' + i.supplier + ' ' + i.cat).toLowerCase().indexOf(q) !== -1;
+    });
+  }
+
+  function renderStock() {
+    var rows = visibleItems();
+    $('#stock-count').textContent = rows.length + ' of ' + state.items.length + ' items';
+    $('#stock-body').innerHTML = rows.map(function (i) {
+      var s = statusOf(i);
+      var pct = Math.max(3, Math.min(100, Math.round(i.qty / Math.max(1, i.reorder * 2) * 100)));
+      return '<tr>' +
+        '<td><div class="pname">' + i.name + '</div>' +
+          '<div class="sku">' + i.sku + ' &middot; ' + i.unit + ' &middot; ' + i.supplier + '</div>' +
+          '<div class="bar"><i class="' + s + '" style="width:' + pct + '%"></i></div></td>' +
+        '<td class="pmeta">' + i.cat + '</td>' +
+        '<td class="num"><b>' + i.qty + '</b></td>' +
+        '<td class="num pmeta">' + i.reorder + '</td>' +
+        '<td><span class="tag ' + s + '"><span class="d"></span>' + statusLabel(s) + '</span></td>' +
+        '<td class="num">' + money(i.qty * i.cost) + '</td>' +
+        '<td><div class="rowbtns">' +
+          '<button class="btn btn-ghost btn-sm" data-recv="' + i.sku + '">Receive</button>' +
+          '<button class="btn btn-ghost btn-sm" data-adj="' + i.sku + '">Adjust</button>' +
+        '</div></td>' +
+      '</tr>';
+    }).join('') || '<tr><td colspan="7"><div class="empty">Nothing matches that.</div></td></tr>';
+  }
+
+  function renderAlerts() {
+    var need = state.items.filter(function (i) { return statusOf(i) !== 'ok'; })
+      .sort(function (a, b) { return (a.qty / Math.max(1, a.reorder)) - (b.qty / Math.max(1, b.reorder)); });
+    if (!need.length) {
+      $('#alerts-body').innerHTML = '<div class="empty">Nothing below its reorder point. Everything on the floor is covered.</div>';
+      return;
+    }
+    $('#alerts-body').innerHTML = need.map(function (i) {
+      var s = statusOf(i);
+      var suggest = Math.max(i.reorder * 2 - i.qty, i.reorder);
+      return '<div class="alert ' + s + '">' +
+        '<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+          (s === 'out' ? '<circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/>' : '<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.3a2 2 0 0 1 3.4 0l7.4 12.8A2 2 0 0 1 19.4 19H4.6a2 2 0 0 1-1.7-2.9z"/>') +
+        '</svg></span>' +
+        '<span class="b"><b>' + i.name + '</b> <span class="sku">' + i.sku + '</span>' +
+          '<p>' + i.qty + ' on hand, reorder point ' + i.reorder + ' &middot; ' + i.supplier +
+          ' &middot; suggest ordering <b>' + suggest + ' ' + i.unit + '</b> (' + money(suggest * i.cost) + ')</p></span>' +
+        '<span class="act"><button class="btn btn-ghost btn-sm" data-recv="' + i.sku + '">Receive</button></span>' +
+      '</div>';
+    }).join('');
+  }
+
+  function renderPo() {
+    var need = state.items.filter(function (i) { return statusOf(i) !== 'ok'; });
+    if (!need.length) { $('#po-panel').hidden = true; return; }
+    var bySup = {};
+    need.forEach(function (i) { (bySup[i.supplier] = bySup[i.supplier] || []).push(i); });
+    $('#po-body').innerHTML = Object.keys(bySup).map(function (sup) {
+      var lines = bySup[sup];
+      var total = 0;
+      var rows = lines.map(function (i) {
+        var q = Math.max(i.reorder * 2 - i.qty, i.reorder);
+        total += q * i.cost;
+        return '<tr><td><span class="pname">' + i.name + '</span> <span class="sku">' + i.sku + '</span></td>' +
+          '<td class="num">' + q + '</td><td class="pmeta">' + i.unit + '</td><td class="num">' + money(q * i.cost) + '</td></tr>';
+      }).join('');
+      return '<div style="border-bottom:1px solid var(--line)">' +
+        '<div style="padding:13px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">' +
+          '<b>' + sup + '</b><span class="sku">' + lines.length + ' line' + (lines.length > 1 ? 's' : '') + '</span>' +
+          '<span style="margin-left:auto;font-family:var(--mono);font-weight:600">' + money(total) + '</span></div>' +
+        '<div class="tblwrap"><table><thead><tr><th>Item</th><th class="num">Qty</th><th>Unit</th><th class="num">Extended</th></tr></thead>' +
+        '<tbody>' + rows + '</tbody></table></div></div>';
+    }).join('');
+    $('#po-panel').hidden = false;
+  }
+
+  function renderLog() {
+    var l = state.log.slice().sort(function (a, b) { return b.at - a.at; });
+    $('#log-body').innerHTML = l.map(function (e) {
+      var it = byId(e.sku);
+      var kindLabel = e.kind === 'recv' ? 'Received' : e.kind === 'sold' ? 'Sold' : 'Adjusted';
+      return '<div class="row">' +
+        '<span class="t">' + ago(e.at) + '</span>' +
+        '<span class="k ' + e.kind + '">' + kindLabel + '</span>' +
+        '<span class="d">' + (it ? it.name : e.sku) + ' <span class="sku">' + e.sku + '</span>' +
+          '<br><span class="sku">' + e.who + (e.note ? ' &middot; ' + e.note : '') + '</span></span>' +
+        '<span class="q ' + (e.qty > 0 ? 'up' : 'dn') + '">' + (e.qty > 0 ? '+' : '') + e.qty + '</span>' +
+      '</div>';
+    }).join('') || '<div class="empty">No movement recorded.</div>';
+  }
+
+  function renderAll() {
+    renderKpis(); renderStock(); renderAlerts(); renderPo(); renderLog();
+  }
+
+  /* ── modal ── */
+  function openModal(kind, sku) {
+    mode = kind; modalSku = sku || state.items[0].sku;
+    var isRecv = kind === 'receive';
+    $('#m-title').textContent = isRecv ? 'Receive shipment' : 'Adjust count';
+    $('#m-sub').textContent = isRecv
+      ? 'Add stock that just came off the truck.'
+      : 'Correct the number after a physical count. The difference is logged, never overwritten.';
+    $('#m-qty-label').textContent = isRecv ? 'Quantity received' : 'Counted quantity';
+    $('#m-ref-label').textContent = isRecv ? 'Packing slip #' : 'Count sheet #';
+    $('#m-ref').placeholder = isRecv ? 'PS-40218' : 'CC-0091';
+    $('#m-item').innerHTML = state.items.map(function (i) {
+      return '<option value="' + i.sku + '"' + (i.sku === modalSku ? ' selected' : '') + '>' + i.name + ' — ' + i.sku + '</option>';
+    }).join('');
+    $('#m-qty').value = isRecv ? 0 : byId(modalSku).qty;
+    $('#m-note').value = '';
+    $('#m-ref').value = '';
+    syncModal();
+    $('#scrim').classList.add('on');
+    $('#m-qty').focus();
+  }
+  function syncModal() {
+    var it = byId($('#m-item').value);
+    var q = Number($('#m-qty').value) || 0;
+    $('#m-current').textContent = it.qty + ' ' + it.unit;
+    var after = mode === 'receive' ? it.qty + q : q;
+    $('#m-after').textContent = after + ' ' + it.unit +
+      (mode === 'adjust' ? '  (' + (after - it.qty >= 0 ? '+' : '') + (after - it.qty) + ')' : '');
+  }
+  function closeModal() { $('#scrim').classList.remove('on'); }
+
+  function commit() {
+    var it = byId($('#m-item').value);
+    var q = Number($('#m-qty').value) || 0;
+    var delta = mode === 'receive' ? q : q - it.qty;
+    if (mode === 'receive' && q <= 0) { closeModal(); return; }
+    it.qty = Math.max(0, mode === 'receive' ? it.qty + q : q);
+    state.log.push({
+      at: Date.now(),
+      kind: mode === 'receive' ? 'recv' : 'adj',
+      sku: it.sku,
+      qty: delta,
+      who: 'Ruth K.',
+      note: $('#m-ref').value.trim() || $('#m-note').value.trim() ||
+            (mode === 'receive' ? 'Received at Bay 3' : 'Cycle count')
+    });
+    save(); renderAll(); closeModal();
+  }
+
+  /* ── events ── */
+  document.addEventListener('click', function (e) {
+    var recv = e.target.closest('[data-recv]');
+    if (recv) { openModal('receive', recv.dataset.recv); return; }
+    var adj = e.target.closest('[data-adj]');
+    if (adj) { openModal('adjust', adj.dataset.adj); return; }
+    var nav = e.target.closest('.side nav button');
+    if (nav) {
+      Array.prototype.forEach.call(document.querySelectorAll('.side nav button'), function (b) {
+        b.classList.toggle('on', b === nav);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.view'), function (v) {
+        v.hidden = v.dataset.view !== nav.dataset.view;
+      });
+      var titles = { stock: ['Stock on hand', 'Everything Northgate carries, counted as of right now.'],
+                     alerts: ['Reorder list', 'What has to be ordered before it costs you a sale.'],
+                     log: ['Movement history', 'The audit trail. Nothing here can be edited after the fact.'] };
+      $('#view-title').textContent = titles[nav.dataset.view][0];
+      $('#view-sub').textContent = titles[nav.dataset.view][1];
+      return;
+    }
+    var chip = e.target.closest('.chip');
+    if (chip) {
+      filter = chip.dataset.filter;
+      Array.prototype.forEach.call(document.querySelectorAll('.chip'), function (c) { c.classList.toggle('on', c === chip); });
+      renderStock();
+    }
+  });
+
+  $('#scrim').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
+  $('#m-cancel').addEventListener('click', closeModal);
+  $('#m-save').addEventListener('click', commit);
+  $('#m-item').addEventListener('change', function () {
+    if (mode === 'adjust') $('#m-qty').value = byId(this.value).qty;
+    syncModal();
+  });
+  $('#m-qty').addEventListener('input', syncModal);
+  $('#btn-receive').addEventListener('click', function () { openModal('receive'); });
+  $('#btn-count').addEventListener('click', function () { openModal('adjust'); });
+  $('#btn-po').addEventListener('click', function () {
+    renderPo();
+    var p = $('#po-panel');
+    if (!p.hidden) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('#q').addEventListener('input', renderStock);
+  $('#cat').addEventListener('change', renderStock);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+  /* ── boot ── */
+  state = load(); save();
+  var cats = {};
+  state.items.forEach(function (i) { cats[i.cat] = 1; });
+  $('#cat').innerHTML = '<option value="">All categories</option>' +
+    Object.keys(cats).sort().map(function (c) { return '<option>' + c + '</option>'; }).join('');
+  $('#view-sub').textContent = 'Everything Northgate carries, counted as of right now.';
+  renderAll();
+})();
+</script>
+<script src="/demos/assets/demobar.js" data-demo="Northgate Supply Co." data-keys="ta-northgate-inventory"></script>
+</body>
+</html>

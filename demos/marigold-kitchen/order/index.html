@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Order · Marigold Kitchen — Demo | TrentApps</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/demos/marigold-kitchen/assets/base.css">
+<style>
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .brand { font-family: var(--display); font-size: 20px; font-weight: 700; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; }
+  .brand .mk { width: 24px; height: 24px; border-radius: 6px; background: var(--ember); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+  .layout { display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start; padding: 28px 0 80px; }
+  .cat-nav { position: sticky; top: 52px; background: var(--bg); padding: 12px 0; display: flex; gap: 8px; flex-wrap: wrap; z-index: 50; }
+  .cat-nav button { font: inherit; font-size: 13px; font-weight: 600; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; color: var(--ink-soft); }
+  .cat-nav button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .cat h2 { font-size: 26px; margin: 26px 0 12px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 16px 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px; }
+  .item .nm { font-weight: 600; font-size: 16px; }
+  .item .ds { color: var(--ink-soft); font-size: 14px; flex: 1; }
+  .item .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .item .tg { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sage); background: #eef1ea; padding: 2px 7px; border-radius: 999px; }
+  .item .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+  .item .pr { font-family: var(--mono); font-weight: 600; font-size: 16px; color: var(--ember-deep); }
+
+  /* Cart */
+  .cart { position: sticky; top: 52px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .cart h3 { padding: 16px 18px; border-bottom: 1px solid var(--line); font-size: 18px; display: flex; justify-content: space-between; align-items: center; }
+  .cart h3 .clear { font: inherit; font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--ink-soft); background: none; border: none; cursor: pointer; text-decoration: underline; }
+  .lines { max-height: 46vh; overflow: auto; }
+  .line { display: flex; gap: 10px; align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--line); }
+  .line .nm { flex: 1; font-size: 14px; font-weight: 600; }
+  .line .pr { font-size: 14px; color: var(--ink-soft); white-space: nowrap; }
+  .qty { display: flex; align-items: center; gap: 6px; }
+  .qty button { width: 26px; height: 26px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); font-size: 16px; line-height: 1; cursor: pointer; color: var(--ink); }
+  .qty span { min-width: 16px; text-align: center; font-weight: 600; font-size: 14px; }
+  .cart-empty { padding: 28px 18px; color: var(--ink-soft); font-size: 14px; text-align: center; }
+  .totals { padding: 14px 18px; border-top: 1px solid var(--line); font-size: 14px; }
+  .totals .row { display: flex; justify-content: space-between; margin: 4px 0; color: var(--ink-soft); }
+  .totals .row.grand { color: var(--ink); font-weight: 700; font-size: 17px; margin-top: 8px; }
+  .cart .pay { padding: 0 18px 18px; }
+  .cart .pay .btn { width: 100%; }
+
+  /* Modal */
+  .scrim { position: fixed; inset: 0; background: rgba(30,24,18,.55); display: none; place-items: center; z-index: 300; padding: 18px; }
+  .scrim.on { display: grid; }
+  .modal { background: var(--surface); border-radius: 20px; max-width: 440px; width: 100%; box-shadow: var(--shadow-lg); overflow: hidden; }
+  .modal .mh { padding: 20px 22px 10px; }
+  .modal .mh h3 { font-size: 22px; }
+  .modal .mb { padding: 4px 22px 20px; }
+  .testbar { background: #eef1ea; border: 1px dashed #c4d0bb; color: #46663c; font-size: 12.5px; border-radius: 10px; padding: 9px 12px; margin-bottom: 14px; }
+  .testbar b { font-weight: 700; }
+  .fld { margin-bottom: 12px; }
+  .fld label { display: block; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 5px; }
+  .fld input { width: 100%; font: inherit; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+  .fld input:focus { outline: 2px solid var(--marigold); border-color: var(--marigold); }
+  .frow { display: flex; gap: 12px; }
+  .frow .fld { flex: 1; }
+  .stripe-mark { display: flex; align-items: center; gap: 6px; justify-content: center; color: var(--ink-soft); font-size: 12px; margin-top: 6px; }
+  .ok-screen { text-align: center; padding: 30px 24px; }
+  .ok-screen .check { width: 64px; height: 64px; border-radius: 50%; background: var(--good); color: #fff; display: grid; place-items: center; font-size: 34px; margin: 0 auto 14px; }
+  .ok-screen h3 { font-size: 24px; }
+  .ok-screen .num { font-family: var(--display); font-size: 30px; color: var(--marigold-deep); margin: 8px 0; }
+  .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 11px 18px; border-radius: 999px; font-size: 14px; font-weight: 600; opacity: 0; transition: all .25s ease; z-index: 400; pointer-events: none; }
+  .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .mobile-cart-btn { display: none; }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: 1fr; }
+    .cart { position: fixed; left: 0; right: 0; bottom: 0; top: auto; border-radius: 18px 18px 0 0; transform: translateY(100%); transition: transform .28s ease; z-index: 320; max-height: 88vh; display: flex; flex-direction: column; }
+    .cart.open { transform: translateY(0); }
+    .lines { max-height: none; flex: 1; }
+    .mobile-cart-btn { display: flex; position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 310; box-shadow: var(--shadow-lg); justify-content: space-between; }
+    .cart-close { display: block; }
+  }
+  .cart-close { display: none; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="demo-ribbon">
+  <span class="tag">Demo</span>
+  <span><b>Marigold Kitchen</b> — sample ordering. Add items, check out with the <b>test card 4242&nbsp;4242&nbsp;4242&nbsp;4242</b>. No real charge. Watch it land on the <a href="/demos/marigold-kitchen/kitchen">kitchen display</a>.</span>
+</div>
+
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="/demos/marigold-kitchen/" style="text-decoration:none"><span class="mk">M</span> Marigold Kitchen</a>
+    <a class="btn btn-ghost btn-sm" href="/demos/marigold-kitchen/kitchen">Kitchen view →</a>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="cat-nav" id="catnav"></div>
+      <div id="menu"></div>
+    </div>
+
+    <aside class="cart" id="cart">
+      <h3>Your order <button class="cart-close" id="cartClose" aria-label="Close">&times;</button></h3>
+      <div class="lines" id="lines"></div>
+      <div class="cart-empty" id="cartEmpty">Your cart is empty — add something tasty.</div>
+      <div class="totals" id="totals" hidden>
+        <div class="row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+        <div class="row"><span>Tax (est.)</span><span id="tax">$0.00</span></div>
+        <div class="row grand"><span>Total</span><span id="grand">$0.00</span></div>
+      </div>
+      <div class="pay"><button class="btn btn-primary" id="checkout" disabled>Checkout</button></div>
+    </aside>
+  </div>
+</div>
+
+<button class="btn btn-primary mobile-cart-btn" id="mobileCart"><span id="mobileCartLabel">View cart</span><span id="mobileCartTotal">$0.00</span></button>
+
+<!-- Checkout modal -->
+<div class="scrim" id="scrim">
+  <div class="modal" id="modal">
+    <div id="checkoutForm">
+      <div class="mh"><h3>Checkout</h3><p class="muted" style="margin:4px 0 0">Pickup · ready in ~20 min</p></div>
+      <div class="mb">
+        <div class="testbar"><b>Test mode.</b> Use card <b>4242 4242 4242 4242</b>, any future date, any CVC. No real money moves.</div>
+        <div class="fld"><label>Name</label><input id="cName" placeholder="Alex Rivera" autocomplete="name"></div>
+        <div class="fld"><label>Card number</label><input id="cCard" placeholder="4242 4242 4242 4242" inputmode="numeric" autocomplete="cc-number"></div>
+        <div class="frow">
+          <div class="fld"><label>Expiry</label><input id="cExp" placeholder="MM / YY" inputmode="numeric" autocomplete="cc-exp"></div>
+          <div class="fld"><label>CVC</label><input id="cCvc" placeholder="123" inputmode="numeric" autocomplete="cc-csc"></div>
+        </div>
+        <button class="btn btn-primary" id="pay" style="width:100%">Pay <span id="payAmt"></span></button>
+        <div class="stripe-mark">🔒 Secured by Stripe · test mode</div>
+        <button class="btn btn-ghost btn-sm" id="cancelPay" style="width:100%;margin-top:8px">Cancel</button>
+      </div>
+    </div>
+    <div id="okForm" hidden>
+      <div class="ok-screen">
+        <div class="check">✓</div>
+        <h3>Order placed!</h3>
+        <div class="num" id="okNum">#M-1001</div>
+        <p class="muted">It just hit the kitchen line. In a real setup you'd get a text when it's ready.</p>
+        <a class="btn btn-ghost btn-sm" href="/demos/marigold-kitchen/kitchen" target="_blank">Watch it on the kitchen display →</a>
+        <div style="margin-top:10px"><button class="btn btn-primary btn-sm" id="okDone">Start another order</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/demos/marigold-kitchen/assets/menu.js"></script>
+<script>
+(function () {
+  var M = window.Marigold;
+  var cart = {}; // id -> qty
+  var TAX_RATE = 0.0825;
+  var chan = ('BroadcastChannel' in window) ? new BroadcastChannel(M.CHANNEL) : null;
+
+  // ── Toast (defined first: preload() below calls flashToast during init) ──
+  var toastEl = document.getElementById('toast'); var toastT;
+  function flashToast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg; toastEl.classList.add('on');
+    clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 1700);
+  }
+
+  // ── Render menu ──
+  var menuEl = document.getElementById('menu');
+  var catnav = document.getElementById('catnav');
+  M.MENU.forEach(function (g, i) {
+    var b = document.createElement('button');
+    b.textContent = g.cat; b.dataset.cat = g.cat; if (i === 0) b.className = 'on';
+    b.addEventListener('click', function () {
+      document.getElementById('cat-' + slug(g.cat)).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    catnav.appendChild(b);
+  });
+  function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-'); }
+  menuEl.innerHTML = M.MENU.map(function (g) {
+    return '<section class="cat" id="cat-' + slug(g.cat) + '"><h2>' + g.cat + '</h2><div class="grid">' +
+      g.items.map(function (it) {
+        var tags = (it.tags || []).map(function (t) { return '<span class="tg">' + t + '</span>'; }).join('');
+        return '<div class="item"><div class="nm">' + it.name + '</div><div class="ds">' + it.desc + '</div>' +
+          (tags ? '<div class="tags">' + tags + '</div>' : '') +
+          '<div class="foot"><span class="pr">' + M.money(it.price) + '</span>' +
+          '<button class="btn btn-primary btn-sm" data-add="' + it.id + '">Add +</button></div></div>';
+      }).join('') + '</div></section>';
+  }).join('');
+
+  menuEl.addEventListener('click', function (e) {
+    var id = e.target && e.target.getAttribute && e.target.getAttribute('data-add');
+    if (id) { addItem(id); flashToast(M.BY_ID[id].name + ' added'); }
+  });
+
+  // ── Cart logic ──
+  function addItem(id, n) { cart[id] = (cart[id] || 0) + (n || 1); renderCart(); }
+  function setQty(id, q) { if (q <= 0) delete cart[id]; else cart[id] = q; renderCart(); }
+  function subtotal() { return Object.keys(cart).reduce(function (s, id) { return s + M.BY_ID[id].price * cart[id]; }, 0); }
+
+  var linesEl = document.getElementById('lines');
+  var emptyEl = document.getElementById('cartEmpty');
+  var totalsEl = document.getElementById('totals');
+  var checkoutBtn = document.getElementById('checkout');
+
+  function renderCart() {
+    var ids = Object.keys(cart);
+    if (!ids.length) {
+      linesEl.innerHTML = ''; emptyEl.hidden = false; totalsEl.hidden = true;
+      checkoutBtn.disabled = true;
+      document.getElementById('mobileCartLabel').textContent = 'View cart';
+      document.getElementById('mobileCartTotal').textContent = '$0.00';
+      return;
+    }
+    emptyEl.hidden = true; totalsEl.hidden = false; checkoutBtn.disabled = false;
+    linesEl.innerHTML = ids.map(function (id) {
+      var it = M.BY_ID[id];
+      return '<div class="line"><span class="nm">' + it.name + '</span>' +
+        '<div class="qty"><button data-dec="' + id + '">−</button><span>' + cart[id] + '</span><button data-inc="' + id + '">+</button></div>' +
+        '<span class="pr">' + M.money(it.price * cart[id]) + '</span></div>';
+    }).join('');
+    var sub = subtotal(), tax = sub * TAX_RATE, grand = sub + tax;
+    document.getElementById('subtotal').textContent = M.money(sub);
+    document.getElementById('tax').textContent = M.money(tax);
+    document.getElementById('grand').textContent = M.money(grand);
+    var count = ids.reduce(function (s, id) { return s + cart[id]; }, 0);
+    document.getElementById('mobileCartLabel').textContent = 'View cart · ' + count + ' item' + (count > 1 ? 's' : '');
+    document.getElementById('mobileCartTotal').textContent = M.money(grand);
+  }
+  linesEl.addEventListener('click', function (e) {
+    var inc = e.target.getAttribute && e.target.getAttribute('data-inc');
+    var dec = e.target.getAttribute && e.target.getAttribute('data-dec');
+    if (inc) setQty(inc, cart[inc] + 1);
+    if (dec) setQty(dec, cart[dec] - 1);
+  });
+  // clear cart
+  var h3 = document.querySelector('.cart h3');
+  var clearBtn = document.createElement('button');
+  clearBtn.className = 'clear'; clearBtn.textContent = 'Clear';
+  clearBtn.addEventListener('click', function () { cart = {}; renderCart(); });
+  h3.appendChild(clearBtn);
+
+  // ── Mobile cart drawer ──
+  var cartAside = document.getElementById('cart');
+  document.getElementById('mobileCart').addEventListener('click', function () { cartAside.classList.add('open'); });
+  document.getElementById('cartClose').addEventListener('click', function () { cartAside.classList.remove('open'); });
+
+  // ── Bot deep-link preload: ?items=id:qty,id:qty  OR  ?cart=<json> ──
+  (function preload() {
+    var qs = new URLSearchParams(location.search);
+    var added = false;
+    if (qs.get('items')) {
+      qs.get('items').split(',').forEach(function (tok) {
+        var p = tok.split(':'); var id = p[0].trim(); var q = parseInt(p[1] || '1', 10);
+        if (M.BY_ID[id]) { addItem(id, isFinite(q) ? q : 1); added = true; }
+      });
+    } else if (qs.get('cart')) {
+      try {
+        var parsed = JSON.parse(qs.get('cart'));
+        (parsed.items || []).forEach(function (l) { if (M.BY_ID[l.id]) { addItem(l.id, l.qty || 1); added = true; } });
+      } catch (_) {}
+    }
+    if (added) flashToast('Added from the assistant');
+  })();
+  renderCart();
+
+  // ── Checkout ──
+  var scrim = document.getElementById('scrim');
+  var checkoutForm = document.getElementById('checkoutForm');
+  var okForm = document.getElementById('okForm');
+  function openCheckout() {
+    if (!Object.keys(cart).length) return;
+    document.getElementById('payAmt').textContent = M.money(subtotal() * (1 + TAX_RATE));
+    checkoutForm.hidden = false; okForm.hidden = true;
+    scrim.classList.add('on');
+  }
+  function closeCheckout() { scrim.classList.remove('on'); }
+  checkoutBtn.addEventListener('click', openCheckout);
+  document.getElementById('cancelPay').addEventListener('click', closeCheckout);
+  scrim.addEventListener('click', function (e) { if (e.target === scrim) closeCheckout(); });
+
+  // light input formatting
+  document.getElementById('cCard').addEventListener('input', function (e) {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+  });
+
+  var nextNum = (M.loadBoard().length || 0) + 1001;
+  document.getElementById('pay').addEventListener('click', function () {
+    var card = document.getElementById('cCard').value.replace(/\s/g, '');
+    if (card && card !== '4242424242424242') { flashToast('Use test card 4242 4242 4242 4242'); return; }
+    placeOrder();
+  });
+
+  function placeOrder() {
+    var items = Object.keys(cart).map(function (id) {
+      var it = M.BY_ID[id];
+      return { id: id, name: it.name, qty: cart[id], price: it.price };
+    });
+    var sub = subtotal(); var total = (sub * (1 + TAX_RATE)).toFixed(2);
+    var num = '#M-' + nextNum;
+    var order = {
+      id: 'ord_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      num: num,
+      channel: 'online',
+      table: null,
+      items: items,
+      placed: new Date().toISOString(),
+      status: 'new',
+      payStatus: 'paid',
+      total: total
+    };
+    var board = M.loadBoard(); board.unshift(order); M.saveBoard(board);
+    if (chan) chan.postMessage({ type: 'upsert', ticket: order });
+
+    document.getElementById('okNum').textContent = num;
+    checkoutForm.hidden = true; okForm.hidden = false;
+    cart = {}; renderCart(); cartAside.classList.remove('open');
+  }
+  document.getElementById('okDone').addEventListener('click', function () {
+    closeCheckout();
+    document.getElementById('cName').value = ''; document.getElementById('cCard').value = '';
+    document.getElementById('cExp').value = ''; document.getElementById('cCvc').value = '';
+    nextNum++;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+<!-- Hiroi assistant — set DEMO_SITE_ID to the provisioned Marigold demo bot id. -->
+<script>
+(function () {
+  var DEMO_SITE_ID = ''; // TODO: provision a Marigold demo bot, then set its site id here
+  if (!DEMO_SITE_ID) return;
+  var s = document.createElement('script');
+  s.src = 'https://hiroi.ai/static/va-wave-widget.js';
+  s.setAttribute('data-site-id', DEMO_SITE_ID);
+  s.defer = true;
+  document.body.appendChild(s);
+})();
+</script>
+<script src="/demos/assets/demobar.js" data-demo="Marigold Kitchen" data-keys="ta-marigold-orders-board"></script>
+</body>
+</html>

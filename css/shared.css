@@ -4,20 +4,20 @@
 
 :root {
     /* Colors — Light */
-    --c-bg: #f7f6f3;
-    --c-bg-alt: #efeee9;
+    --c-bg: #f4f7fc;
+    --c-bg-alt: #e9eff8;
     --c-surface: #ffffff;
-    --c-surface-hover: #fafaf8;
-    --c-border: rgba(0, 0, 0, 0.07);
-    --c-border-strong: rgba(0, 0, 0, 0.12);
-    --c-text: #1a1a1a;
-    --c-text-2: #555550;
-    --c-text-3: #6f6f68; /* tertiary text — 4.68:1 on --c-bg, WCAG AA */
+    --c-surface-hover: #f8fbff;
+    --c-border: rgba(0, 40, 100, 0.09);
+    --c-border-strong: rgba(0, 40, 100, 0.16);
+    --c-text: #00112c;
+    --c-text-2: #495d7e;
+    --c-text-3: #5c7090; /* tertiary text — 4.68:1 on --c-bg, WCAG AA */
     /* Accent and badge foregrounds are tuned to clear 4.5:1 as small text on
        --c-bg / --c-surface / their own soft tint. Lightening one breaks WCAG AA. */
-    --c-accent: #7d6749;
-    --c-accent-soft: rgba(125, 103, 73, 0.09);
-    --c-accent-text: #6b5a42;
+    --c-accent: #0a5ccc;
+    --c-accent-soft: rgba(10, 92, 204, 0.08);
+    --c-accent-text: #0a5ccc;
     --c-badge-production: #15702f;
     --c-badge-production-bg: rgba(21, 112, 47, 0.1);
     --c-badge-enterprise: #2563aa;
@@ -30,20 +30,24 @@
     --c-badge-realtime-bg: rgba(10, 106, 131, 0.1);
     --c-badge-auto: #9333ea;
     --c-badge-auto-bg: rgba(147, 51, 234, 0.1);
-    --c-badge-case: #565c66;
-    --c-badge-case-bg: rgba(86, 92, 102, 0.1);
+    --c-badge-case: #4d5a6e;
+    --c-badge-case-bg: rgba(77, 90, 110, 0.1);
     --c-badge-innov: #b81c1c;
     --c-badge-innov-bg: rgba(184, 28, 28, 0.1);
-    --c-hero-orb-1: rgba(125, 103, 73, 0.06);
-    --c-hero-orb-2: rgba(125, 103, 73, 0.04);
-    --c-card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
-    --c-card-shadow-hover: 0 4px 16px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.04);
-    --c-nav-bg: rgba(247, 246, 243, 0.85);
-    --c-metric-bg: rgba(125, 103, 73, 0.06);
+    --c-hero-orb-1: rgba(10, 92, 204, 0.08);
+    --c-hero-orb-2: rgba(3, 201, 254, 0.05);
+    --c-card-shadow: 0 1px 3px rgba(0, 25, 70, 0.05), 0 4px 12px rgba(0, 25, 70, 0.04);
+    --c-card-shadow-hover: 0 4px 16px rgba(0, 25, 70, 0.10), 0 8px 32px rgba(0, 25, 70, 0.06);
+    --c-nav-bg: rgba(244, 247, 252, 0.85);
+    --c-metric-bg: rgba(10, 92, 204, 0.06);
 
     /* Typography */
-    --f-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-    --f-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* One family carries the whole site. --f-serif is a legacy token name kept
+       because it is referenced from every page; it is the DISPLAY role (heavy
+       weights, tight tracking), not a serif. --f-mark is the logo wordmark. */
+    --f-serif: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --f-sans: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --f-mark: 'Quicksand', 'Nunito Sans', -apple-system, sans-serif;
 
     /* Spacing */
     --s-section: clamp(80px, 10vw, 140px);
@@ -64,40 +68,40 @@
 }
 
 [data-theme="dark"] {
-    --c-bg: #0b0b0b;
-    --c-bg-alt: #111111;
-    --c-surface: #161616;
-    --c-surface-hover: #1c1c1c;
-    --c-border: rgba(255, 255, 255, 0.06);
-    --c-border-strong: rgba(255, 255, 255, 0.10);
-    --c-text: #ededed;
-    --c-text-2: #9a9a94;
-    --c-text-3: #80807a; /* tertiary text — 4.95:1 on --c-bg, 4.55:1 on --c-surface, WCAG AA */
-    --c-accent: #c9b99a;
-    --c-accent-soft: rgba(201, 185, 154, 0.07);
-    --c-accent-text: #c9b99a;
-    --c-badge-production-bg: rgba(34, 197, 94, 0.1);
+    --c-bg: #00112c;
+    --c-bg-alt: #04182f;
+    --c-surface: #07203f;
+    --c-surface-hover: #0b284b;
+    --c-border: rgba(130, 185, 255, 0.11);
+    --c-border-strong: rgba(130, 185, 255, 0.20);
+    --c-text: #eaf2ff;
+    --c-text-2: #9fb6d8;
+    --c-text-3: #8aa2c6; /* tertiary text — 7.2:1 on --c-bg, 6.3:1 on --c-surface, WCAG AA */
+    --c-accent: #35c4ff;
+    --c-accent-soft: rgba(53, 196, 255, 0.09);
+    --c-accent-text: #35c4ff;
+    --c-badge-production-bg: rgba(34, 197, 94, 0.12);
     --c-badge-production: #4ade80;
-    --c-badge-enterprise-bg: rgba(96, 165, 250, 0.1);
+    --c-badge-enterprise-bg: rgba(96, 165, 250, 0.12);
     --c-badge-enterprise: #60a5fa;
-    --c-badge-ai-bg: rgba(251, 191, 36, 0.1);
+    --c-badge-ai-bg: rgba(251, 191, 36, 0.12);
     --c-badge-ai: #fbbf24;
-    --c-badge-open-bg: rgba(167, 139, 250, 0.1);
+    --c-badge-open-bg: rgba(167, 139, 250, 0.12);
     --c-badge-open: #a78bfa;
-    --c-badge-realtime-bg: rgba(34, 211, 238, 0.1);
+    --c-badge-realtime-bg: rgba(34, 211, 238, 0.12);
     --c-badge-realtime: #22d3ee;
-    --c-badge-auto-bg: rgba(192, 132, 252, 0.1);
+    --c-badge-auto-bg: rgba(192, 132, 252, 0.12);
     --c-badge-auto: #c084fc;
-    --c-badge-case-bg: rgba(156, 163, 175, 0.1);
-    --c-badge-case: #9ca3af;
-    --c-badge-innov-bg: rgba(248, 113, 113, 0.1);
+    --c-badge-case-bg: rgba(156, 176, 205, 0.12);
+    --c-badge-case: #9cb0cd;
+    --c-badge-innov-bg: rgba(248, 113, 113, 0.12);
     --c-badge-innov: #f87171;
-    --c-hero-orb-1: rgba(201, 185, 154, 0.05);
-    --c-hero-orb-2: rgba(201, 185, 154, 0.03);
-    --c-card-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
-    --c-card-shadow-hover: 0 8px 30px rgba(0,0,0,0.3);
-    --c-nav-bg: rgba(11, 11, 11, 0.85);
-    --c-metric-bg: rgba(201, 185, 154, 0.06);
+    --c-hero-orb-1: rgba(1, 78, 253, 0.16);
+    --c-hero-orb-2: rgba(3, 201, 254, 0.09);
+    --c-card-shadow: 0 1px 3px rgba(0, 6, 20, 0.35), 0 4px 12px rgba(0, 6, 20, 0.25);
+    --c-card-shadow-hover: 0 8px 30px rgba(0, 6, 20, 0.45);
+    --c-nav-bg: rgba(0, 17, 44, 0.85);
+    --c-metric-bg: rgba(53, 196, 255, 0.07);
 }
 
 /* ============================================
@@ -197,13 +201,25 @@ ul, ol { list-style: none; }
 }
 
 .nav-logo {
-    font-family: var(--f-serif);
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
     color: var(--c-text);
     transition: opacity 0.2s;
 }
-.nav-logo:hover { opacity: 0.7; }
+.nav-logo:hover { opacity: 0.75; }
+.nav-logo img {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+}
+.nav-logo span {
+    font-family: var(--f-mark);
+    font-size: 1.32rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
+}
 
 .nav-links {
     display: flex;
@@ -345,7 +361,9 @@ ul, ol { list-style: none; }
 }
 .mobile-menu-inner a {
     font-family: var(--f-serif);
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(1.8rem, 5.4vw, 2.6rem);
+    font-weight: 750;
+    letter-spacing: -0.04em;
     display: block;
     padding: 0.4em 0;
     color: var(--c-text);
@@ -398,9 +416,9 @@ ul, ol { list-style: none; }
 .section-title {
     font-family: var(--f-serif);
     font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-weight: 750;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
     margin-bottom: 1rem;
 }
 
@@ -569,6 +587,8 @@ ul, ol { list-style: none; }
 .metric-number {
     font-family: var(--f-serif);
     font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 750;
+    letter-spacing: -0.04em;
     display: block;
     color: var(--c-accent);
     line-height: 1.1;

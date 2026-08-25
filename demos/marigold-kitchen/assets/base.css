@@ -1,0 +1,104 @@
+/* Marigold Kitchen — shared demo styling (v2).
+   A generic, unbranded showroom for TrentApps' AI-ordering system, dressed as a
+   modern neighborhood restaurant. Kitchen palette (ember / herb / amber on warm
+   buttermilk + espresso ink), Bricolage Grotesque display, Inter body, monospace
+   for tickets + order numbers (authentic to receipt printers). */
+:root {
+  /* surfaces */
+  --paper: #fbf6ec;
+  --paper-2: #f3eada;
+  --surface: #ffffff;
+  --ink: #211d19;
+  --ink-soft: #6a6157;
+  --line: #e8ddc9;
+  /* kitchen accents (roles: ember=action, herb=fired/ready/fresh, amber=highlight) */
+  --ember: #c8472a;
+  --ember-deep: #a93a20;
+  --herb: #356545;
+  --amber: #e0962b;
+  --good: #356545;
+  /* type */
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  /* shape */
+  --radius: 14px;
+  --shadow: 0 8px 26px rgba(33, 29, 25, .07);
+  --shadow-lg: 0 28px 64px rgba(33, 29, 25, .16);
+
+  /* legacy aliases — keep the order/KDS pages working off the new system */
+  --bg: var(--paper);
+  --surface-2: var(--paper-2);
+  --marigold: var(--ember);
+  --marigold-deep: var(--ember-deep);
+  --sage: var(--herb);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.04;
+  margin: 0;
+  letter-spacing: -.02em;
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; border-radius: 4px; }
+
+/* ── Demo ribbon — quiet, honest, unmissable ── */
+.demo-ribbon {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; gap: 10px; align-items: center; justify-content: center;
+  flex-wrap: wrap;
+  background: var(--ink); color: #f4ead7;
+  font-size: 12.5px; letter-spacing: .005em;
+  padding: 8px 16px; text-align: center;
+}
+.demo-ribbon b { color: var(--amber); font-weight: 600; }
+.demo-ribbon .tag {
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  background: var(--ember); color: #fff; padding: 3px 8px; border-radius: 5px;
+}
+.demo-ribbon a { color: var(--amber); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: inherit; font-weight: 600; font-size: 15px; line-height: 1;
+  padding: 13px 20px; border-radius: 11px; border: 1px solid transparent;
+  cursor: pointer; text-decoration: none;
+  transition: transform .12s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 17px; height: 17px; }
+.btn-primary { background: var(--ember); color: #fff; box-shadow: 0 6px 16px rgba(200, 71, 42, .26); }
+.btn-primary:hover { background: var(--ember-deep); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { background: var(--paper-2); border-color: #d9cbb0; }
+.btn-sm { padding: 9px 14px; font-size: 13px; border-radius: 9px; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ember-deep);
+}
+.eyebrow::before { content: ""; width: 18px; height: 1.5px; background: var(--ember); display: inline-block; }
+.muted { color: var(--ink-soft); }
+/* legacy */
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ember-deep); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

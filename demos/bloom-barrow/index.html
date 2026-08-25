@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bloom &amp; Barrow — Retail Storefront &amp; Checkout Demo | TrentApps</title>
+<meta name="description" content="A working demonstration of an independent shop's storefront: catalog, filters, cart and checkout with local pickup or delivery. Built by TrentApps LLC. Bloom &amp; Barrow is an invented business.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trentapps.com/demos/bloom-barrow/">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #faf7f0;
+  --cream-2: #f0ebdf;
+  --card: #ffffff;
+  /* Clay has to carry white button text (5.9:1) and read as small caps on the
+     cream backgrounds, so it sits darker than the terracotta it's named for. */
+  --clay: #965325;
+  --clay-deep: #7a411b;
+  --leaf: #4b6b3c;
+  --leaf-lit: #6a8f56;
+  --ink: #2a2620;
+  --ink-2: #6a6255;
+  --ink-3: #77705f;
+  --line: #e3dccb;
+  --line-2: #d0c6b0;
+  --display: 'Fraunces', Georgia, serif;
+  --sans: 'Karla', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --r: 12px;
+  --maxw: 1160px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+body { font-family: var(--sans); font-size: 16px; line-height: 1.6; color: var(--ink); background: var(--cream); -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.12; letter-spacing: -.015em; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(18px, 4vw, 38px); }
+.eyebrow { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--clay); margin-bottom: 11px; }
+.note { background: var(--ink); color: #efe7d8; font-size: 13.5px; padding: 9px 18px; text-align: center; }
+.note b { color: #e2a877; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; font-size: 15px; padding: 12px 22px; border-radius: 999px; border: 1px solid transparent; cursor: pointer; transition: background .15s ease, border-color .15s ease, transform .12s ease; }
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 16px; height: 16px; }
+.btn-primary { background: var(--clay); color: #fff; }
+.btn-primary:hover { background: var(--clay-deep); }
+.btn-leaf { background: var(--leaf); color: #fff; }
+.btn-leaf:hover { background: #3d5a30; }
+.btn-ghost { border-color: var(--line-2); background: transparent; }
+.btn-ghost:hover { border-color: var(--ink-3); background: rgba(0,0,0,.03); }
+.btn-sm { padding: 8px 15px; font-size: 13.5px; }
+.btn[disabled] { opacity: .4; cursor: not-allowed; }
+
+/* ── Header ── */
+.site-head { position: sticky; top: 0; z-index: 90; background: rgba(250,247,240,.96); backdrop-filter: blur(9px); border-bottom: 1px solid var(--line); }
+.site-head .inner { max-width: var(--maxw); margin: 0 auto; padding: 13px clamp(18px,4vw,38px); display: flex; align-items: center; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand .mk { width: 32px; height: 32px; border-radius: 50%; background: var(--leaf); display: grid; place-items: center; color: #fff; font-family: var(--display); font-size: 15px; flex-shrink: 0; }
+.brand .nm { font-family: var(--display); font-size: 20px; letter-spacing: -.02em; }
+.site-nav { display: flex; align-items: center; gap: 22px; margin-left: auto; }
+.site-nav a { font-size: 14.5px; font-weight: 500; color: var(--ink-2); }
+.site-nav a:hover { color: var(--clay); }
+.site-nav a.btn-primary { color: #fff; }
+.bagbtn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line-2); border-radius: 999px; padding: 8px 15px; background: var(--card); cursor: pointer; font-size: 14px; font-weight: 600; }
+.bagbtn:hover { border-color: var(--clay); color: var(--clay); }
+.bagbtn .n { background: var(--clay); color: #fff; border-radius: 999px; min-width: 20px; height: 20px; display: grid; place-items: center; font-size: 12px; }
+.bagbtn svg { width: 17px; height: 17px; }
+@media (max-width: 800px) { .site-nav .hide-sm { display: none; } }
+
+/* ── Hero ── */
+.hero { padding: clamp(40px, 6vw, 72px) 0 clamp(30px, 4vw, 48px); }
+.hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: clamp(26px, 5vw, 56px); align-items: center; }
+.hero h1 { font-size: clamp(38px, 5.6vw, 60px); }
+.hero h1 em { font-style: italic; color: var(--clay); }
+.hero p { color: var(--ink-2); margin: 18px 0 26px; max-width: 44ch; font-size: 17px; }
+.hero-cta { display: flex; gap: 11px; flex-wrap: wrap; }
+.hero-art { border-radius: var(--r); overflow: hidden; box-shadow: 0 20px 46px rgba(42,38,32,.13); }
+.hero-art svg { width: 100%; height: 100%; display: block; }
+.hero-strip { display: flex; gap: 8px 26px; flex-wrap: wrap; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-2); }
+.hero-strip span { display: flex; align-items: center; gap: 8px; }
+.hero-strip svg { width: 16px; height: 16px; color: var(--leaf); }
+@media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } .hero-art { order: -1; } }
+
+/* ── Shop ── */
+.shop { padding: clamp(34px, 5vw, 60px) 0 clamp(56px, 8vw, 90px); }
+.shop-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+.shop-head h2 { font-size: clamp(26px, 3.6vw, 36px); }
+.shop-head p { color: var(--ink-2); font-size: 15px; margin-top: 6px; }
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 22px; }
+.cat { border: 1px solid var(--line-2); background: var(--card); border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; }
+.cat.on { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+.toolbar .spacer { flex: 1; }
+.toolbar select, .toolbar input { border: 1px solid var(--line-2); border-radius: 999px; padding: 8px 15px; font-size: 14px; background: var(--card); }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.prod { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .16s ease, transform .16s ease; }
+.prod:hover { box-shadow: 0 14px 32px rgba(42,38,32,.1); transform: translateY(-2px); }
+.prod .art { height: 168px; position: relative; }
+.prod .art svg { width: 100%; height: 100%; display: block; }
+.prod .flag { position: absolute; top: 11px; left: 11px; background: var(--card); border-radius: 999px; padding: 3px 10px; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--leaf); }
+.prod .flag.low { color: var(--clay-deep); }
+.prod .b { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
+.prod .kind { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.prod h3 { font-size: 19px; margin: 5px 0 6px; }
+.prod .ds { font-size: 14px; color: var(--ink-2); flex: 1; }
+.prod .foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 15px; }
+.prod .pr { font-family: var(--display); font-size: 21px; }
+.prod .pr s { font-size: 14px; color: var(--ink-3); margin-right: 6px; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+/* ── Bag drawer ── */
+.scrim { position: fixed; inset: 0; background: rgba(42,38,32,.45); opacity: 0; pointer-events: none; transition: opacity .22s ease; z-index: 200; }
+.scrim.on { opacity: 1; pointer-events: auto; }
+.bag {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(408px, 100%);
+  background: var(--cream); z-index: 210; transform: translateX(100%);
+  transition: transform .26s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column;
+  box-shadow: -18px 0 46px rgba(42,38,32,.2);
+}
+.bag.on { transform: none; }
+.bag header { padding: 18px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; }
+.bag header h2 { font-size: 21px; }
+.bag header .x { margin-left: auto; border: 0; background: none; cursor: pointer; font-size: 24px; line-height: 1; color: var(--ink-2); padding: 0 4px; }
+.bag .lines { flex: 1; overflow-y: auto; }
+.line { display: flex; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--line); align-items: flex-start; }
+.line .th { width: 54px; height: 54px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+.line .th svg { width: 100%; height: 100%; display: block; }
+.line .b { flex: 1; min-width: 0; }
+.line .nm { display: block; font-weight: 600; font-size: 15px; line-height: 1.3; }
+.line .mt { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.qty { display: flex; align-items: center; gap: 7px; margin-top: 7px; }
+.qty button { width: 26px; height: 26px; border-radius: 7px; border: 1px solid var(--line-2); background: var(--card); cursor: pointer; font-size: 15px; line-height: 1; }
+.qty span { min-width: 18px; text-align: center; font-weight: 600; font-size: 14px; }
+.line .pr { font-weight: 600; font-size: 15px; white-space: nowrap; }
+.bag-empty { padding: 50px 26px; text-align: center; color: var(--ink-2); }
+.bag-empty svg { width: 36px; height: 36px; color: var(--line-2); margin-bottom: 12px; }
+.bag footer { border-top: 1px solid var(--line); padding: 16px 20px calc(20px + var(--ta-demobar-h, 0px)); background: var(--cream-2); }
+.fulfil { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.fulfil button { border: 1px solid var(--line-2); background: var(--card); border-radius: 9px; padding: 10px 8px; cursor: pointer; font-size: 13.5px; font-weight: 600; text-align: center; }
+.fulfil button small { display: block; font-weight: 400; font-size: 12px; color: var(--ink-2); }
+.fulfil button.on { background: var(--leaf); border-color: var(--leaf); color: #fff; }
+.fulfil button.on small { color: rgba(255,255,255,.82); }
+.totals { font-size: 14px; }
+.totals .r { display: flex; justify-content: space-between; padding: 3px 0; color: var(--ink-2); }
+.totals .r.g { color: var(--ink); font-weight: 700; font-size: 18px; padding-top: 9px; margin-top: 6px; border-top: 1px solid var(--line-2); }
+.bag footer .btn { width: 100%; margin-top: 13px; }
+
+/* ── Checkout ── */
+.co { padding: 16px 20px; overflow-y: auto; flex: 1; }
+.co h3 { font-size: 18px; margin-bottom: 12px; }
+.cofields { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.fld { display: flex; flex-direction: column; gap: 4px; }
+.fld.wide { grid-column: 1 / -1; }
+.fld label { font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
+.fld input, .fld select { border: 1px solid var(--line-2); border-radius: 8px; padding: 10px 12px; font-size: 15px; background: var(--card); }
+.fld .err { font-size: 12px; color: #a8342a; min-height: 1em; }
+.testcard { background: #eef3e9; border: 1px dashed #b9cdac; border-radius: 8px; padding: 9px 12px; font-size: 12.5px; color: #3f5c31; margin-bottom: 13px; }
+.testcard b { font-weight: 700; }
+
+.done { padding: 34px 24px; text-align: center; }
+.done .tick { width: 56px; height: 56px; border-radius: 50%; background: #e6efdf; display: grid; place-items: center; margin: 0 auto 16px; }
+.done .tick svg { width: 27px; height: 27px; color: var(--leaf); }
+.done h3 { font-size: 25px; margin-bottom: 8px; }
+.done p { color: var(--ink-2); font-size: 15px; margin-bottom: 18px; }
+.done .rc { text-align: left; border: 1px solid var(--line); border-radius: 9px; background: var(--card); overflow: hidden; }
+.done .rc .h { background: var(--cream-2); padding: 10px 14px; font-size: 12.5px; display: flex; justify-content: space-between; color: var(--ink-2); }
+.done .rc .r { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border-top: 1px solid var(--line); font-size: 14px; }
+.done .rc .r b { text-align: right; }
+
+/* ── Visit ── */
+.visit { background: var(--cream-2); padding: clamp(48px, 7vw, 82px) 0; }
+.visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(26px, 5vw, 56px); }
+.visit h2 { font-size: clamp(26px, 3.6vw, 36px); margin-bottom: 14px; }
+.visit p { color: var(--ink-2); margin-bottom: 14px; }
+.hrs { border-top: 1px solid var(--line-2); }
+.hrs div { display: flex; justify-content: space-between; padding: 10px 2px; border-bottom: 1px solid var(--line-2); font-size: 15px; }
+.hrs dt { font-weight: 600; }
+.hrs dd { color: var(--ink-2); }
+@media (max-width: 780px) { .visit-grid { grid-template-columns: 1fr; } }
+
+footer.site { background: var(--ink); color: rgba(250,247,240,.66); padding: 40px 0 38px; font-size: 14.5px; }
+footer.site .cols { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+footer.site strong { display: block; color: var(--cream); margin-bottom: 5px; }
+footer.site a { text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) { * { transition-duration: .001ms !important; } }
+</style>
+</head>
+<body>
+
+<div class="note"><b>Live demo.</b> Add things to the bag and check out with the test card &mdash; nothing is charged, and the shop's stock counts down as you buy.</div>
+
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="#top"><span class="mk">B</span><span class="nm">Bloom &amp; Barrow</span></a>
+    <nav class="site-nav">
+      <a class="hide-sm" href="#shop">Shop</a>
+      <a class="hide-sm" href="#visit">Visit</a>
+      <button class="bagbtn" id="open-bag" aria-label="Open bag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+        Bag <span class="n" id="bag-count">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Garden &amp; home &middot; Est. 2016</span>
+      <h1>The shop, <em>online</em> &mdash; not lost in a marketplace.</h1>
+      <p>Terracotta, tools, seed and a few things you didn't come in for. Buy it here, pick it up today, or have it on the porch by Thursday.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#shop">Shop the floor</a>
+        <a class="btn btn-ghost" href="#visit">Hours &amp; directions</a>
+      </div>
+      <div class="hero-strip">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Same-day pickup, free</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Local delivery, $8</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Real stock counts</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 520 380" aria-hidden="true">
+        <rect width="520" height="380" fill="#e9e2d1"/>
+        <rect x="0" y="286" width="520" height="94" fill="#d8cdb4"/>
+        <g>
+          <path d="M96 286 L112 206 L188 206 L204 286 Z" fill="#c07a4a"/>
+          <ellipse cx="150" cy="206" rx="38" ry="9" fill="#a9663a"/>
+          <path d="M150 206 C150 160 122 148 116 118 C146 128 152 158 152 178 C158 148 182 132 206 128 C196 162 172 176 152 196 Z" fill="#5c8449"/>
+        </g>
+        <g>
+          <rect x="248" y="228" width="92" height="58" rx="5" fill="#b8713f"/>
+          <ellipse cx="294" cy="228" rx="46" ry="10" fill="#9d5c31"/>
+          <circle cx="272" cy="200" r="19" fill="#7ea45f"/><circle cx="304" cy="192" r="24" fill="#6a9150"/><circle cx="322" cy="212" r="16" fill="#7ea45f"/>
+        </g>
+        <g>
+          <rect x="380" y="188" width="14" height="98" rx="4" fill="#8a7357"/>
+          <path d="M362 188 L412 188 L400 158 L374 158 Z" fill="#9aa6ab"/>
+          <rect x="424" y="244" width="58" height="42" rx="4" fill="#c9b58e"/>
+          <rect x="434" y="232" width="38" height="12" rx="3" fill="#a68f66"/>
+        </g>
+        <g opacity=".5">
+          <circle cx="70" cy="70" r="26" fill="#c9d8bd"/><circle cx="440" cy="86" r="34" fill="#c9d8bd"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="shop-head">
+      <div>
+        <span class="eyebrow">The floor</span>
+        <h2>What's in stock right now</h2>
+        <p id="shop-sub">Counts are live &mdash; when something sells out here, it says so.</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="cat on" data-cat="">Everything</button>
+      <button class="cat" data-cat="Pots">Pots &amp; planters</button>
+      <button class="cat" data-cat="Tools">Tools</button>
+      <button class="cat" data-cat="Seed">Seed &amp; soil</button>
+      <button class="cat" data-cat="Home">Home</button>
+      <span class="spacer"></span>
+      <input type="search" id="q" placeholder="Search the shop…" aria-label="Search products">
+      <select id="sort" aria-label="Sort products">
+        <option value="feature">Featured</option>
+        <option value="low">Price: low to high</option>
+        <option value="high">Price: high to low</option>
+      </select>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap visit-grid">
+    <div>
+      <span class="eyebrow">Visit</span>
+      <h2>212 Barrow Street</h2>
+      <p>Two blocks off the square, in the old feed building. Pickup orders are on the shelf inside the door with your name on them &mdash; you don't have to wait in line.</p>
+      <p><b>(555) 016-2211</b><br>hello@bloomandbarrow.example</p>
+      <p><a class="btn btn-leaf" href="#shop">Start an order</a></p>
+    </div>
+    <div>
+      <span class="eyebrow">Hours</span>
+      <dl class="hrs">
+        <div><dt>Monday &ndash; Friday</dt><dd>9:00 &ndash; 6:00</dd></div>
+        <div><dt>Saturday</dt><dd>9:00 &ndash; 5:00</dd></div>
+        <div><dt>Sunday</dt><dd>11:00 &ndash; 4:00</dd></div>
+        <div><dt>Pickup cutoff</dt><dd>One hour before close</dd></div>
+        <div><dt>Local delivery</dt><dd>Tuesdays &amp; Thursdays</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap cols">
+    <div><strong>Bloom &amp; Barrow</strong>212 Barrow Street<br>(555) 016-2211</div>
+    <div><strong>Orders</strong>Pickup same day<br>Delivery Tuesdays &amp; Thursdays</div>
+    <div><strong>An invented business</strong>Built by <a href="/">TrentApps LLC</a><br>to demonstrate retail and checkout.</div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="bag" id="bag" role="dialog" aria-label="Your bag" aria-modal="true">
+  <header>
+    <h2 id="bag-title">Your bag</h2>
+    <button class="x" id="close-bag" aria-label="Close bag">&times;</button>
+  </header>
+
+  <div class="lines" id="bag-lines"></div>
+
+  <div class="co" id="co" hidden>
+    <div class="testcard">Test checkout &mdash; use card <b>4242 4242 4242 4242</b>, any future date, any CVC. Nothing is charged.</div>
+    <h3>Where's it going?</h3>
+    <div class="cofields">
+      <div class="fld wide"><label for="c-name">Name</label><input id="c-name" autocomplete="name"><span class="err" data-for="name"></span></div>
+      <div class="fld wide"><label for="c-email">Email</label><input id="c-email" type="email" autocomplete="email"><span class="err" data-for="email"></span></div>
+      <div class="fld wide" id="addr-fld"><label for="c-addr">Delivery address</label><input id="c-addr" autocomplete="street-address"><span class="err" data-for="addr"></span></div>
+      <div class="fld wide"><label for="c-card">Card number</label><input id="c-card" inputmode="numeric" placeholder="4242 4242 4242 4242"><span class="err" data-for="card"></span></div>
+      <div class="fld"><label for="c-exp">Expires</label><input id="c-exp" placeholder="12 / 29"></div>
+      <div class="fld"><label for="c-cvc">CVC</label><input id="c-cvc" inputmode="numeric" placeholder="123"></div>
+    </div>
+  </div>
+
+  <div class="done" id="done" hidden>
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h3>Order's in.</h3>
+    <p id="done-line">We'll text you when it's on the shelf.</p>
+    <div class="rc" id="receipt"></div>
+    <p style="margin-top:18px"><button class="btn btn-ghost btn-sm" id="keep-shopping">Keep shopping</button></p>
+  </div>
+
+  <footer id="bag-foot">
+    <div class="fulfil" id="fulfil">
+      <button type="button" class="on" data-f="pickup">Pickup<small>Free &middot; today</small></button>
+      <button type="button" data-f="deliver">Local delivery<small>$8 &middot; Tue &amp; Thu</small></button>
+    </div>
+    <div class="totals">
+      <div class="r"><span>Subtotal</span><span id="t-sub">$0.00</span></div>
+      <div class="r"><span id="t-fee-l">Pickup</span><span id="t-fee">Free</span></div>
+      <div class="r"><span>Tax (est.)</span><span id="t-tax">$0.00</span></div>
+      <div class="r g"><span>Total</span><span id="t-total">$0.00</span></div>
+    </div>
+    <button class="btn btn-primary" id="cta">Checkout</button>
+  </footer>
+</aside>
+
+<script>
+(function () {
+  'use strict';
+  var KEY = 'ta-bloom-shop';
+  var TAX = 0.0825, DELIVERY = 8;
+
+  var CATALOG = [
+    { id: 'p1', cat: 'Pots',  name: 'Hand-thrown Terracotta, 10"', price: 34, was: null, stock: 9,  ds: 'Made forty miles from here. Unglazed, so it breathes.', art: 'pot1', flag: 'Local' },
+    { id: 'p2', cat: 'Pots',  name: 'Glazed Stoneware Planter', price: 52, was: 64, stock: 4, ds: 'Deep speckled green, drainage hole, saucer included.', art: 'pot2', flag: 'Sale' },
+    { id: 'p3', cat: 'Pots',  name: 'Wall-hung Cedar Box', price: 41, was: null, stock: 0, ds: 'Built in the back room. Holds three herbs comfortably.', art: 'box', flag: null },
+    { id: 't1', cat: 'Tools', name: 'Forged Hand Trowel', price: 28, was: null, stock: 14, ds: 'One piece of steel, ash handle, will outlive you.', art: 'trowel', flag: null },
+    { id: 't2', cat: 'Tools', name: 'Bypass Pruners', price: 46, was: null, stock: 6, ds: 'Replaceable blade, and we sharpen them free forever.', art: 'pruner', flag: 'Staff pick' },
+    { id: 't3', cat: 'Tools', name: 'Long-handled Weeder', price: 33, was: 39, stock: 3, ds: 'Saves your back on dandelions and thistle.', art: 'weeder', flag: 'Sale' },
+    { id: 's1', cat: 'Seed',  name: 'Fall Cover Crop Mix, 5 lb', price: 19, was: null, stock: 22, ds: 'Rye, vetch and clover. Sow it before the first frost.', art: 'seed', flag: null },
+    { id: 's2', cat: 'Seed',  name: 'Compost Blend, 1 cu ft', price: 14, was: null, stock: 31, ds: 'Screened and hot-composted. No filler bark.', art: 'soil', flag: null },
+    { id: 's3', cat: 'Seed',  name: 'Wildflower Seed Tin', price: 22, was: null, stock: 8, ds: 'Regional mix — twenty-six species, all native.', art: 'tin', flag: 'Local' },
+    { id: 'h1', cat: 'Home',  name: 'Beeswax Taper Pair', price: 18, was: null, stock: 17, ds: 'Poured in small batches, honey smell and all.', art: 'candle', flag: null },
+    { id: 'h2', cat: 'Home',  name: 'Linen Market Apron', price: 58, was: null, stock: 5, ds: 'Heavy flax, cross-back straps, deep front pocket.', art: 'apron', flag: 'Staff pick' },
+    { id: 'h3', cat: 'Home',  name: 'Stoneware Watering Can', price: 74, was: 88, stock: 2, ds: 'More object than tool, but it does pour beautifully.', art: 'can', flag: 'Sale' }
+  ];
+
+  var ART = {
+    pot1: ['#e5dcc7', '<path d="M28 44 L34 20 L86 20 L92 44 Z" fill="#c07a4a"/><ellipse cx="60" cy="20" rx="26" ry="6" fill="#a9663a"/><path d="M60 20 C60 4 46 0 42 -8 C56 -4 60 6 61 14 C64 2 76 -4 88 -6 C82 8 70 14 62 18 Z" fill="#5c8449"/>'],
+    pot2: ['#dfe6d8', '<path d="M30 46 L36 18 L84 18 L90 46 Z" fill="#54764a"/><ellipse cx="60" cy="18" rx="24" ry="6" fill="#3f5b37"/><circle cx="48" cy="10" r="9" fill="#7ea45f"/><circle cx="66" cy="4" r="12" fill="#6a9150"/>'],
+    box: ['#e8e0cd', '<rect x="26" y="18" width="68" height="28" rx="3" fill="#a98352"/><rect x="26" y="14" width="68" height="6" rx="2" fill="#8d6b40"/><circle cx="44" cy="10" r="7" fill="#6a9150"/><circle cx="60" cy="6" r="8" fill="#7ea45f"/><circle cx="76" cy="10" r="7" fill="#6a9150"/>'],
+    trowel: ['#e2e6e8', '<rect x="52" y="6" width="10" height="24" rx="3" fill="#8a7357"/><path d="M46 30 L68 30 L62 52 L52 52 Z" fill="#9aa6ab"/>'],
+    pruner: ['#e4e7e2', '<path d="M40 10 L64 40" stroke="#9aa6ab" stroke-width="7" stroke-linecap="round"/><path d="M74 10 L50 40" stroke="#7d878b" stroke-width="7" stroke-linecap="round"/><rect x="46" y="38" width="22" height="14" rx="6" fill="#b8713f"/>'],
+    weeder: ['#e6e4dd', '<rect x="56" y="2" width="8" height="34" rx="3" fill="#8a7357"/><path d="M50 36 L70 36 L66 50 L54 50 Z" fill="#9aa6ab"/><path d="M56 50 L60 58 L64 50 Z" fill="#7d878b"/>'],
+    seed: ['#e9e3ce', '<path d="M36 16 L84 16 L88 50 L32 50 Z" fill="#cdbb92"/><rect x="44" y="24" width="32" height="12" rx="2" fill="#5c8449"/>'],
+    soil: ['#e3ddd0', '<path d="M32 18 L88 18 L92 50 L28 50 Z" fill="#6b5b45"/><rect x="42" y="26" width="36" height="10" rx="2" fill="#a8977a"/>'],
+    tin: ['#e6ead9', '<rect x="38" y="18" width="44" height="32" rx="4" fill="#7d9a5e"/><rect x="38" y="14" width="44" height="7" rx="3" fill="#5c8449"/><circle cx="60" cy="34" r="8" fill="#f0e9d4"/>'],
+    candle: ['#efe6d4', '<rect x="50" y="10" width="7" height="40" rx="3" fill="#e2b862"/><rect x="64" y="16" width="7" height="34" rx="3" fill="#e2b862"/><path d="M53.5 10 L53.5 4" stroke="#8a7357" stroke-width="2"/><path d="M67.5 16 L67.5 10" stroke="#8a7357" stroke-width="2"/>'],
+    apron: ['#e7e3d6', '<path d="M44 12 L76 12 L82 50 L38 50 Z" fill="#b9ac91"/><path d="M50 12 L54 2 M70 12 L66 2" stroke="#9c8f74" stroke-width="3"/><rect x="50" y="30" width="20" height="12" rx="2" fill="#a2957a"/>'],
+    can: ['#e0e5e4', '<rect x="40" y="20" width="38" height="28" rx="5" fill="#6f8d86"/><path d="M78 26 L96 14 L98 18 L82 32 Z" fill="#5d7a74"/><path d="M46 20 C46 10 70 10 70 20" stroke="#5d7a74" stroke-width="4" fill="none"/>']
+  };
+
+  var $ = function (s) { return document.querySelector(s); };
+  var money = function (n) { return '$' + n.toFixed(2); };
+
+  var state = load();
+  var stage = 'bag';   /* bag → checkout → done */
+
+  function load() {
+    try {
+      var raw = JSON.parse(localStorage.getItem(KEY));
+      if (raw && raw.stock) return raw;
+    } catch (e) {}
+    var stock = {};
+    CATALOG.forEach(function (p) { stock[p.id] = p.stock; });
+    return { stock: stock, cart: {}, fulfil: 'pickup' };
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function artSvg(key, w, h) {
+    var a = ART[key] || ART.pot1;
+    return '<svg viewBox="0 -16 120 78" preserveAspectRatio="xMidYMid meet">' +
+      '<rect x="-60" y="-30" width="240" height="120" fill="' + a[0] + '"/>' + a[1] + '</svg>';
+  }
+
+  function visible() {
+    var cat = document.querySelector('.cat.on').dataset.cat;
+    var q = $('#q').value.trim().toLowerCase();
+    var list = CATALOG.filter(function (p) {
+      if (cat && p.cat !== cat) return false;
+      if (!q) return true;
+      return (p.name + ' ' + p.ds + ' ' + p.cat).toLowerCase().indexOf(q) !== -1;
+    });
+    var sort = $('#sort').value;
+    if (sort === 'low') list = list.slice().sort(function (a, b) { return a.price - b.price; });
+    if (sort === 'high') list = list.slice().sort(function (a, b) { return b.price - a.price; });
+    return list;
+  }
+
+  function renderGrid() {
+    var list = visible();
+    $('#shop-sub').textContent = list.length + ' of ' + CATALOG.length +
+      ' items — counts are live, so when something sells out here it says so.';
+    $('#grid').innerHTML = list.map(function (p) {
+      var left = state.stock[p.id];
+      var inCart = state.cart[p.id] || 0;
+      var soldOut = left - inCart <= 0;
+      var flag = soldOut ? null : (left <= 3 ? { t: 'Only ' + left + ' left', c: 'low' } : (p.flag ? { t: p.flag, c: '' } : null));
+      return '<article class="prod">' +
+        '<div class="art">' + artSvg(p.art) +
+          (flag ? '<span class="flag ' + flag.c + '">' + flag.t + '</span>' : '') +
+        '</div>' +
+        '<div class="b">' +
+          '<span class="kind">' + p.cat + '</span>' +
+          '<h3>' + p.name + '</h3>' +
+          '<p class="ds">' + p.ds + '</p>' +
+          '<div class="foot">' +
+            '<span class="pr">' + (p.was ? '<s>' + money(p.was) + '</s>' : '') + money(p.price) + '</span>' +
+            (soldOut
+              ? '<button class="btn btn-ghost btn-sm" disabled>Sold out</button>'
+              : '<button class="btn btn-primary btn-sm" data-add="' + p.id + '">' +
+                (inCart ? 'In bag (' + inCart + ')' : 'Add to bag') + '</button>') +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    }).join('') || '<p style="color:var(--ink-2)">Nothing matches that. Try a different word.</p>';
+  }
+
+  function cartLines() {
+    return Object.keys(state.cart).map(function (id) {
+      var p = CATALOG.filter(function (x) { return x.id === id; })[0];
+      return { p: p, q: state.cart[id] };
+    }).filter(function (l) { return l.p && l.q > 0; });
+  }
+  function subtotal() {
+    return cartLines().reduce(function (s, l) { return s + l.p.price * l.q; }, 0);
+  }
+  function count() {
+    return cartLines().reduce(function (s, l) { return s + l.q; }, 0);
+  }
+
+  function renderBag() {
+    var lines = cartLines();
+    $('#bag-count').textContent = count();
+    $('#bag-lines').innerHTML = lines.length ? lines.map(function (l) {
+      return '<div class="line">' +
+        '<span class="th">' + artSvg(l.p.art) + '</span>' +
+        '<span class="b"><span class="nm">' + l.p.name + '</span>' +
+          '<span class="mt">' + money(l.p.price) + ' each &middot; ' + state.stock[l.p.id] + ' in stock</span>' +
+          '<span class="qty"><button data-dec="' + l.p.id + '" aria-label="One fewer">&minus;</button>' +
+            '<span>' + l.q + '</span>' +
+            '<button data-inc="' + l.p.id + '" aria-label="One more"' +
+              (l.q >= state.stock[l.p.id] ? ' disabled' : '') + '>+</button></span></span>' +
+        '<span class="pr">' + money(l.p.price * l.q) + '</span>' +
+      '</div>';
+    }).join('') :
+      '<div class="bag-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg><p>Nothing in the bag yet.</p></div>';
+
+    var sub = subtotal();
+    var fee = state.fulfil === 'deliver' ? DELIVERY : 0;
+    var tax = (sub + fee) * TAX;
+    $('#t-sub').textContent = money(sub);
+    $('#t-fee-l').textContent = state.fulfil === 'deliver' ? 'Local delivery' : 'Pickup';
+    $('#t-fee').textContent = fee ? money(fee) : 'Free';
+    $('#t-tax').textContent = money(tax);
+    $('#t-total').textContent = money(sub + fee + tax);
+    Array.prototype.forEach.call(document.querySelectorAll('#fulfil button'), function (b) {
+      b.classList.toggle('on', b.dataset.f === state.fulfil);
+    });
+    $('#addr-fld').hidden = state.fulfil !== 'deliver';
+    $('#cta').disabled = !lines.length;
+  }
+
+  function setStage(s) {
+    stage = s;
+    $('#bag-lines').hidden = s !== 'bag';
+    $('#co').hidden = s !== 'checkout';
+    $('#done').hidden = s !== 'done';
+    $('#bag-foot').hidden = s === 'done';
+    $('#bag-title').textContent = s === 'bag' ? 'Your bag' : s === 'checkout' ? 'Checkout' : 'Thank you';
+    $('#cta').textContent = s === 'checkout' ? 'Pay ' + $('#t-total').textContent : 'Checkout';
+  }
+
+  function openBag() { $('#bag').classList.add('on'); $('#scrim').classList.add('on'); }
+  function closeBag() { $('#bag').classList.remove('on'); $('#scrim').classList.remove('on'); }
+
+  function validate() {
+    var ok = true;
+    function bad(k, cond, msg) {
+      document.querySelector('[data-for="' + k + '"]').textContent = cond ? msg : '';
+      if (cond) ok = false;
+    }
+    bad('name', !$('#c-name').value.trim(), 'Who is this for?');
+    bad('email', !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('#c-email').value.trim()), 'A real email, for the receipt.');
+    if (state.fulfil === 'deliver') bad('addr', !$('#c-addr').value.trim(), 'Where are we bringing it?');
+    bad('card', $('#c-card').value.replace(/\D/g, '').length < 15, 'Use 4242 4242 4242 4242.');
+    return ok;
+  }
+
+  function placeOrder() {
+    var lines = cartLines();
+    var sub = subtotal();
+    var fee = state.fulfil === 'deliver' ? DELIVERY : 0;
+    var tax = (sub + fee) * TAX;
+
+    lines.forEach(function (l) { state.stock[l.p.id] = Math.max(0, state.stock[l.p.id] - l.q); });
+    $('#receipt').innerHTML =
+      '<div class="h"><span>BLOOM &amp; BARROW</span><span>#' + String(Date.now()).slice(-5) + '</span></div>' +
+      lines.map(function (l) {
+        return '<div class="r"><span>' + l.q + ' &times; ' + l.p.name + '</span><b>' + money(l.p.price * l.q) + '</b></div>';
+      }).join('') +
+      '<div class="r"><span>' + (fee ? 'Local delivery' : 'Pickup') + '</span><b>' + (fee ? money(fee) : 'Free') + '</b></div>' +
+      '<div class="r"><span>Tax</span><b>' + money(tax) + '</b></div>' +
+      '<div class="r"><span><b>Total</b></span><b>' + money(sub + fee + tax) + '</b></div>';
+    $('#done-line').textContent = state.fulfil === 'deliver'
+      ? 'It goes out on the next delivery run — Tuesday or Thursday, whichever comes first.'
+      : 'It’ll be on the pickup shelf inside the door with your name on it, ready in about two hours.';
+
+    state.cart = {};
+    save(); renderGrid(); renderBag(); setStage('done');
+  }
+
+  /* ── events ── */
+  document.addEventListener('click', function (e) {
+    var add = e.target.closest('[data-add]');
+    if (add) {
+      var id = add.dataset.add;
+      state.cart[id] = Math.min((state.cart[id] || 0) + 1, state.stock[id]);
+      save(); renderGrid(); renderBag(); openBag(); setStage('bag');
+      return;
+    }
+    var inc = e.target.closest('[data-inc]');
+    if (inc) { var i = inc.dataset.inc; state.cart[i] = Math.min((state.cart[i] || 0) + 1, state.stock[i]); save(); renderGrid(); renderBag(); return; }
+    var dec = e.target.closest('[data-dec]');
+    if (dec) {
+      var d = dec.dataset.dec;
+      state.cart[d] = (state.cart[d] || 0) - 1;
+      if (state.cart[d] <= 0) delete state.cart[d];
+      save(); renderGrid(); renderBag(); return;
+    }
+    var cat = e.target.closest('.cat');
+    if (cat) {
+      Array.prototype.forEach.call(document.querySelectorAll('.cat'), function (c) { c.classList.toggle('on', c === cat); });
+      renderGrid(); return;
+    }
+    var f = e.target.closest('#fulfil button');
+    if (f) { state.fulfil = f.dataset.f; save(); renderBag(); setStage(stage); return; }
+  });
+
+  $('#open-bag').addEventListener('click', function () { openBag(); if (stage === 'done') setStage('bag'); });
+  $('#close-bag').addEventListener('click', closeBag);
+  $('#scrim').addEventListener('click', closeBag);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBag(); });
+  $('#q').addEventListener('input', renderGrid);
+  $('#sort').addEventListener('change', renderGrid);
+  $('#keep-shopping').addEventListener('click', function () { setStage('bag'); closeBag(); });
+
+  $('#cta').addEventListener('click', function () {
+    if (stage === 'bag') { setStage('checkout'); return; }
+    if (stage === 'checkout' && validate()) placeOrder();
+  });
+
+  renderGrid(); renderBag(); setStage('bag');
+})();
+</script>
+<script src="/demos/assets/demobar.js" data-demo="Bloom &amp; Barrow" data-keys="ta-bloom-shop"></script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Marigold Kitchen — Restaurant Ordering Demo | TrentApps</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trentapps.com/demos/marigold-kitchen/">
+<meta name="description" content="A working demonstration of a restaurant site that takes its own orders, with a live kitchen display. Built by TrentApps LLC — Marigold Kitchen is an invented business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/demos/marigold-kitchen/assets/base.css">
+<style>
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .brand { font-family: var(--display); font-size: 21px; font-weight: 700; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; }
+  .brand .mk { width: 26px; height: 26px; border-radius: 7px; background: var(--ember); color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 700; }
+  .nav-links { display: flex; gap: 8px; align-items: center; }
+
+  /* ── Hero ── */
+  .hero { display: grid; grid-template-columns: 1.04fr .96fr; gap: 56px; align-items: center; padding: 36px 0 60px; }
+  .hero h1 { font-size: clamp(38px, 5.4vw, 62px); font-weight: 700; margin: 20px 0 0; }
+  .hero h1 em { font-style: normal; color: var(--ember); }
+  .hero .lead { font-size: 18px; color: var(--ink-soft); margin: 18px 0 28px; max-width: 34ch; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ── Signature: the live kitchen ticket ── */
+  .ticket-stage { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .ticket {
+    width: 320px; max-width: 100%;
+    background: #fff; color: var(--ink);
+    border-radius: 6px; box-shadow: var(--shadow-lg);
+    padding: 22px 22px 26px; transform: rotate(-1.4deg);
+    font-family: var(--mono); font-size: 13px; line-height: 1.5;
+    position: relative;
+  }
+  /* tractor-feed perforation down the left edge */
+  .ticket::before {
+    content: ""; position: absolute; left: 7px; top: 14px; bottom: 14px; width: 5px;
+    background: radial-gradient(circle at 50% 6px, var(--paper-2) 2px, transparent 2.4px) top/5px 14px repeat-y;
+  }
+  .t-head { text-align: center; padding-bottom: 12px; }
+  .t-shop { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .02em; }
+  .t-meta { color: var(--ink-soft); font-size: 11px; margin-top: 3px; }
+  .t-rule { border: 0; border-top: 1.5px dashed #d9cbb0; margin: 10px 0; }
+  .t-line { display: flex; justify-content: space-between; gap: 10px; padding: 2px 0; opacity: 0; }
+  .t-line .q { color: var(--ember); font-weight: 600; }
+  .t-line .nm { flex: 1; }
+  .t-total { display: flex; justify-content: space-between; font-weight: 600; padding-top: 2px; }
+  .t-stamp {
+    margin: 16px auto 0; width: max-content;
+    border: 2px solid var(--herb); color: var(--herb);
+    border-radius: 8px; padding: 6px 12px; transform: rotate(-3deg);
+    font-weight: 700; font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 7px;
+    opacity: 0;
+  }
+  .t-stamp .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--herb); }
+  .ticket-cap { font-size: 13px; color: var(--ink-soft); text-align: center; max-width: 30ch; }
+  @keyframes tickIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes stampIn { 0% { opacity: 0; transform: rotate(-3deg) scale(1.25); } 60% { opacity: 1; } 100% { opacity: 1; transform: rotate(-3deg) scale(1); } }
+  /* the three line items are children 3,4,5 (after .t-head and the first .t-rule) */
+  .ticket .t-line:nth-child(3) { animation: tickIn .4s ease both .5s; }
+  .ticket .t-line:nth-child(4) { animation: tickIn .4s ease both .85s; }
+  .ticket .t-line:nth-child(5) { animation: tickIn .4s ease both 1.2s; }
+  .ticket .t-total { animation: tickIn .4s ease both 1.6s; }
+  .t-stamp { animation: stampIn .5s ease both 2.05s; }
+  @media (prefers-reduced-motion: reduce) {
+    .ticket .t-line, .ticket .t-total, .t-stamp { opacity: 1 !important; }
+  }
+
+  /* ── Flow ── */
+  .flow { padding: 18px 0 64px; }
+  .flow-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+  .flow-head h2 { font-size: clamp(26px, 3vw, 34px); }
+  .flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+  .card .ic { width: 42px; height: 42px; border-radius: 11px; background: var(--paper-2); color: var(--ember-deep); display: grid; place-items: center; margin-bottom: 16px; }
+  .card .ic svg { width: 21px; height: 21px; }
+  .card .step { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--ink-soft); }
+  .card h3 { font-size: 19px; margin: 4px 0 7px; }
+  .card p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+
+  /* ── Menu peek ── */
+  .menu-peek { padding: 6px 0 8px; }
+  .menu-peek h2 { font-size: clamp(26px, 3vw, 34px); margin: 8px 0 4px; }
+  .peek-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px 48px; margin-top: 22px; }
+  .peek-row { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid var(--line); }
+  .peek-row .nm { font-weight: 600; font-size: 15.5px; }
+  .peek-row .ds { color: var(--ink-soft); font-size: 13.5px; margin-top: 2px; }
+  .peek-row .pr { font-family: var(--mono); font-weight: 600; font-size: 14px; white-space: nowrap; color: var(--ember-deep); }
+  .peek-cta { margin-top: 26px; }
+
+  /* ── Info strip ── */
+  .strip { margin: 48px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 26px 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .strip h4 { margin: 0 0 5px; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ember-deep); }
+  .strip p { margin: 0; font-size: 15px; }
+
+  /* ── CTA band ── */
+  .cta-band { text-align: center; padding: 22px 0 76px; }
+  .cta-band h2 { font-size: clamp(28px, 3.4vw, 40px); max-width: 18ch; margin: 0 auto; }
+  .cta-band p { color: var(--ink-soft); margin: 12px auto 24px; max-width: 46ch; }
+
+  footer { border-top: 1px solid var(--line); padding: 26px 0; color: var(--ink-soft); font-size: 13.5px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--ink-soft); }
+
+  @media (max-width: 880px) {
+    .hero { grid-template-columns: 1fr; gap: 36px; padding-bottom: 40px; }
+    .ticket-stage { order: -1; }
+    .flow-grid, .strip, .peek-grid { grid-template-columns: 1fr; }
+    .strip { gap: 18px; }
+    .nav-links .hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-ribbon">
+  <span class="tag">Live demo</span>
+  <span>Click anything. Place a real order on the <a href="/demos/marigold-kitchen/order">order page</a> and watch the ticket appear on the <a href="/demos/marigold-kitchen/kitchen">kitchen display</a>.</span>
+</div>
+
+<div class="wrap">
+  <nav class="nav">
+    <div class="brand"><span class="mk">M</span> Marigold Kitchen</div>
+    <div class="nav-links">
+      <a class="btn btn-ghost btn-sm hide-sm" href="/demos/marigold-kitchen/kitchen">Kitchen view</a>
+      <a class="btn btn-primary btn-sm" href="/demos/marigold-kitchen/order">Order online</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">AI ordering demo</span>
+      <h1>Every order, straight to&nbsp;the&nbsp;<em>line</em>.</h1>
+      <p class="lead">Guests order by tap, chat, or voice. It fires to the kitchen the second they pay — nothing scribbled on a pad, nothing missed.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/demos/marigold-kitchen/order">Start an order</a>
+        <a class="btn btn-ghost" href="/demos/marigold-kitchen/kitchen">Open kitchen view</a>
+      </div>
+    </div>
+
+    <div class="ticket-stage">
+      <div class="ticket" role="img" aria-label="A sample kitchen ticket: 2 Marigold Burgers, 1 Hand-cut Fries, 2 House Lemonades, fired to the kitchen.">
+        <div class="t-head">
+          <div class="t-shop">MARIGOLD KITCHEN</div>
+          <div class="t-meta">ONLINE · #M-1043 · 6:24 PM</div>
+        </div>
+        <hr class="t-rule">
+        <div class="t-line"><span class="q">2&times;</span><span class="nm">Marigold Burger</span><span>30.00</span></div>
+        <div class="t-line"><span class="q">1&times;</span><span class="nm">Hand-cut Fries</span><span>5.00</span></div>
+        <div class="t-line"><span class="q">2&times;</span><span class="nm">House Lemonade</span><span>8.00</span></div>
+        <hr class="t-rule">
+        <div class="t-total"><span>TOTAL</span><span>$46.55</span></div>
+        <div class="t-stamp"><span class="dot"></span> Fired to kitchen</div>
+      </div>
+      <p class="ticket-cap">The guest just tapped pay. The line already has the ticket.</p>
+    </div>
+  </header>
+</div>
+
+<div class="wrap">
+  <section class="flow">
+    <div class="flow-head">
+      <h2>How an order moves</h2>
+      <span class="muted" style="font-size:14.5px">Phone to kitchen — about 8 seconds.</span>
+    </div>
+    <div class="flow-grid">
+      <div class="card">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1-4.5a8.38 8.38 0 0 1-1-4A8.5 8.5 0 0 1 11.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></div>
+        <div class="step">Step 01</div>
+        <h3>Order by chat, voice, or tap</h3>
+        <p>The assistant knows the menu, builds the cart, and answers questions while it does.</p>
+      </div>
+      <div class="card">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/></svg></div>
+        <div class="step">Step 02</div>
+        <h3>Pay online, securely</h3>
+        <p>Card, Apple&nbsp;Pay, Google&nbsp;Pay at checkout. (Stripe test mode in this demo.)</p>
+      </div>
+      <div class="card">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.5-3.5 1.5-5C12 6 13 7.5 14 9c.93 1.4 1.5 2.62 1.5 4a4.5 4.5 0 1 1-9 0c0-.78.21-1.5.5-2.12"/></svg></div>
+        <div class="step">Step 03</div>
+        <h3>It fires to the line</h3>
+        <p>The ticket lands on the kitchen display the instant it's paid — in order, timed, impossible to lose.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-peek">
+    <span class="eyebrow">A peek at the menu</span>
+    <h2>What's cooking</h2>
+    <div class="peek-grid" id="peek"></div>
+    <div class="peek-cta"><a class="btn btn-primary" href="/demos/marigold-kitchen/order">See the full menu &amp; order</a></div>
+  </section>
+
+  <section class="strip">
+    <div class="col"><h4>Hours</h4><p>Mon–Sun · 11a–9p<br><span class="muted">Sample hours</span></p></div>
+    <div class="col"><h4>Find us</h4><p>123 Example Ave<br><span class="muted">Anytown, USA — demo address</span></p></div>
+    <div class="col"><h4>Pickup &amp; delivery</h4><p>Ready in ~20 min<br><span class="muted">Delivery within 4 miles</span></p></div>
+  </section>
+
+  <section class="cta-band">
+    <h2>This is the kind of thing TrentApps builds.</h2>
+    <p>A real ordering system — your menu, your brand, your kitchen — and an assistant that actually helps your guests order.</p>
+    <a class="btn btn-primary" href="/demos/marigold-kitchen/order">Try the ordering demo</a>
+  </section>
+</div>
+
+<footer class="wrap">
+  <span>Marigold Kitchen — a TrentApps demo. Not a real restaurant.</span>
+  <span><a href="/demos/marigold-kitchen/kitchen">Kitchen display</a> · <a href="/demos/marigold-kitchen/order">Order page</a></span>
+</footer>
+
+<script src="/demos/marigold-kitchen/assets/menu.js"></script>
+<script>
+  // Menu peek — first two items from three sections.
+  (function () {
+    var peek = document.getElementById('peek');
+    var picks = [];
+    Marigold.MENU.slice(0, 3).forEach(function (g) { g.items.slice(0, 2).forEach(function (it) { picks.push(it); }); });
+    peek.innerHTML = picks.map(function (it) {
+      return '<div class="peek-row"><div><div class="nm">' + it.name + '</div><div class="ds">' + it.desc + '</div></div><div class="pr">' + Marigold.money(it.price) + '</div></div>';
+    }).join('');
+  })();
+</script>
+<!-- Hiroi assistant widget. Set DEMO_SITE_ID to the provisioned Marigold demo
+     bot's site id to switch it on. Blank = no-op (no broken/placeholder widget). -->
+<script>
+(function () {
+  var DEMO_SITE_ID = ''; // TODO: provision a Marigold demo bot, then set its site id here
+  if (!DEMO_SITE_ID) return;
+  var s = document.createElement('script');
+  s.src = 'https://hiroi.ai/static/va-wave-widget.js';
+  s.setAttribute('data-site-id', DEMO_SITE_ID);
+  s.defer = true;
+  document.body.appendChild(s);
+})();
+</script>
+<script src="/demos/assets/demobar.js" data-demo="Marigold Kitchen" data-keys="ta-marigold-orders-board"></script>
+</body>
+</html>
