@@ -12,7 +12,7 @@
     --c-border-strong: rgba(0, 40, 100, 0.16);
     --c-text: #00112c;
     --c-text-2: #495d7e;
-    --c-text-3: #5c7090; /* tertiary text — 4.68:1 on --c-bg, WCAG AA */
+    --c-text-3: #566a89; /* tertiary text — 4.8:1 on --c-bg-alt, the tightest surface it lands on. WCAG AA */
     /* Accent and badge foregrounds are tuned to clear 4.5:1 as small text on
        --c-bg / --c-surface / their own soft tint. Lightening one breaks WCAG AA. */
     --c-accent: #0a5ccc;
@@ -623,6 +623,11 @@ ul, ol { list-style: none; }
     color: var(--c-text-3);
     font-weight: 300;
 }
+
+/* Anchor targets get tabindex="-1" so activation can move focus into them
+   (see js/shared.js). They are containers, not controls — outlining the whole
+   of <main> reads as a rendering fault, and the scroll is the feedback. */
+[tabindex="-1"]:focus { outline: none; }
 
 /* ============================================
    UTILITY

@@ -49,7 +49,21 @@ Colour comes from the logo: navy `#00112c`, electric blue `#014efd`, cyan `#03c9
 The corner assistant is the real [hiroi](https://hiroi.ai) widget, loaded from
 `https://hiroi.ai/static/va-wave-widget.js`, on the TrentApps-branded pages only (not the demos — she answers as TrentApps, which would confuse a visitor on "Marigold Kitchen").
 
-Her presentation — orb vs. panel, **colours**, greeting — comes from the hiroi dashboard for this site id. **Stored settings beat script-tag attributes** (`if (settings.primary_color) this.primaryColor = ...`), so adding `data-primary-color` to the embed does nothing while the dashboard has a value. And **do not** add `data-display-mode`: the attribute's mere presence pins the value and discards the dashboard setting.
+The embed carries `data-display-mode="widget"` **on purpose**. The attribute's presence — not its value — pins the presentation and discards the dashboard's stored `display_mode`, which is `fullscreen` and takes over the page. We want the corner orb here, so the pin is the point. `show_waves` is off in the dashboard, which is what makes it the plain orb rather than the ambient pill.
+
+**Colours are not pinnable the same way.** The widget applies script-tag attributes first, then overwrites them from the server unconditionally (`if (settings.primary_color) this.primaryColor = settings.primary_color;`). Adding `data-primary-color` to the embed does nothing while the dashboard holds a value, so the palette lives in the hiroi dashboard for this site id:
+
+| Setting | Value | Why |
+|---|---|---|
+| Primary | `#014efd` | the logo's electric blue; white button text at 6.0:1 |
+| Secondary | `#03c9fe` | the logo's cyan — the orb gradient becomes the ring mark |
+| Ring / Idle | `#35c4ff` | the dark theme's accent |
+| Listening | `#3ddc84` | deliberately off-palette, so state is readable |
+| Speaking | `#03c9fe` | |
+| Processing | `#014efd` | |
+| Glow | `0.5` | |
+
+`position` is also server-owned and currently `bottom-left`.
 
 The widget will not initialise on `localhost` — the origin is not in `allowed_domains`, so `/api/widget/init` answers 401. To preview colour changes locally, mock that one response; don't add localhost to the production allow-list.
 

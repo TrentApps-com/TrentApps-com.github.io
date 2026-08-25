@@ -118,13 +118,26 @@
     }
 
     // ── Smooth Scroll for same-page anchors ──
+    // preventDefault() stops the browser doing its own anchor navigation, which
+    // is what normally MOVES FOCUS to the target. Without restoring that, the
+    // skip link scrolls but strands focus on itself: it stays pinned on screen
+    // over the logo, and the next Tab drops the visitor back into the nav —
+    // exactly the trap a skip link exists to avoid.
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
-            var target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            var href = this.getAttribute('href');
+            if (href === '#') return;
+            var target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Headings and <main> aren't focusable on their own; -1 makes them
+            // programmatically focusable without adding them to the tab order.
+            if (!target.hasAttribute('tabindex')) {
+                target.setAttribute('tabindex', '-1');
             }
+            target.focus({ preventScroll: true });
+            if (history.replaceState) history.replaceState(null, '', href);
         });
     });
 })();

@@ -372,9 +372,11 @@
     <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 
     <!-- Maya — the real hiroi Assistant, same widget any client would get.
-         Presentation (orb vs. panel, colours, greeting) is owned by the hiroi
-         dashboard for this site id; stored settings beat script-tag attributes,
-         so do NOT add data-display-mode or data-*-color here. -->
-    <script src="https://hiroi.ai/static/va-wave-widget.js" data-site-id="d9ccd2067a1841649ddb37ac919b43fc"></script>
+         data-display-mode="widget" deliberately PINS the corner orb: the
+         attribute's presence (not its value) discards the dashboard's stored
+         display_mode, which is "fullscreen" and takes over the page. Colours
+         are NOT pinnable the same way — stored settings always win — so they
+         live in the hiroi dashboard for this site id. -->
+    <script src="https://hiroi.ai/static/va-wave-widget.js" data-site-id="d9ccd2067a1841649ddb37ac919b43fc" data-display-mode="widget"></script>
 </body>
 </html>
